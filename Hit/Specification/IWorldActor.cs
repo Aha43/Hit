@@ -1,7 +1,7 @@
 ﻿namespace Hit.Specification
 {
-    public interface IWorldActor<IWorld>
+    public interface IWorldActor<World> : IHitType<World>
     {
-        void Accept(IWorld world);
+        void Act(World world);
     }
 }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hit", "Hit\Hit.csproj", "{C9DDB64C-D2B0-4211-AEF4-E38B476DF427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hit", "Hit\Hit.csproj", "{C9DDB64C-D2B0-4211-AEF4-E38B476DF427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitUnitTests", "HitUnitTests\HitUnitTests.csproj", "{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C9DDB64C-D2B0-4211-AEF4-E38B476DF427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9DDB64C-D2B0-4211-AEF4-E38B476DF427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9DDB64C-D2B0-4211-AEF4-E38B476DF427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

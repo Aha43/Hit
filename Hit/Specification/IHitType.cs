@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Hit.Specification
 {
-    public interface IWorldCreator<World> : IHitType<World>
+    public interface IHitType<World>
     {
-        World Create();
     }
 }

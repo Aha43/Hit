@@ -1,6 +1,6 @@
 ﻿namespace Hit.Specification
 {
-    public interface IInvariant<IWorld> : IWorldActor<IWorld>
+    public interface IInvariant<World> : IWorldActor<World>
     {
     }
 }

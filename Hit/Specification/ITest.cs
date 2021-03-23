@@ -1,8 +1,8 @@
 ﻿namespace Hit.Specification
 {
-    public interface ITest<IWorld> : IWorldActor<IWorld>
+    public interface ITest<World> : IWorldActor<World>
     {
-        IWorldActor<IWorld> PreTest { get; }
-        IWorldActor<IWorld> PostTest { get; }
+        IWorldActor<World> PreTestActor { get; }
+        IWorldActor<World> PostTestActor { get; }
     }
 }
