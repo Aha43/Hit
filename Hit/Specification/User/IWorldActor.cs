@@ -1,4 +1,4 @@
-﻿namespace Hit.Specification
+﻿namespace Hit.Specification.User
 {
     public interface IWorldActor<World> : IHitType<World>
     {

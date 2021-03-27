@@ -1,4 +1,4 @@
-﻿namespace Hit.Specification
+﻿namespace Hit.Specification.Infrastructure
 {
     public enum TestStatus
     {

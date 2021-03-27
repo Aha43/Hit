@@ -1,10 +1,8 @@
 ﻿using Hit.Exceptions;
-using Hit.Specification;
+using Hit.Specification.User;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Hit.Infrastructure
+namespace Hit.Infrastructure.Visitors
 {
     internal class ActivatorTestNodeVisitor<World> : AbstractTestNodeVisitor<World>
     {
@@ -15,7 +13,7 @@ namespace Hit.Infrastructure
             _serviceProvider = serviceProvider;
         }
 
-        public override void Visit(TestNode<World> node)
+        public override void Visit(TestNode<World> node, TestNode<World> parent)
         {
             try
             {

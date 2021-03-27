@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Arne Halvorsen</Authors>
+    <Company />
+    <Description>Hierarchical Integration Test framework</Description>
   </PropertyGroup>
 
   <ItemGroup>

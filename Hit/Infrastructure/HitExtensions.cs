@@ -1,9 +1,8 @@
 ﻿using Hit.Attributes;
-using Hit.Specification;
+using Hit.Specification.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Hit.Infrastructure
 {

@@ -1,9 +1,10 @@
-﻿using Hit.Specification;
+﻿using Hit.Infrastructure.Visitors;
+using Hit.Specification.Infrastructure;
+using Hit.Specification.User;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Hit.Infrastructure
 {
@@ -44,10 +45,23 @@ namespace Hit.Infrastructure
 
             foreach (var type in types)
             {
-                services.AddSingleton(type);
+                if (WorldFactoryType.IsAssignableFrom(type))
+                {
+                    AddWorldFactory(type, services);
+                }
+                else
+                {
+                    services.AddSingleton(type);
+                }
             }
 
             return services.BuildServiceProvider();
+        }
+
+        private void AddWorldFactory(Type type, IServiceCollection services)
+        {
+            var instance = Activator.CreateInstance(type) as IWorldCreator<World>;
+            services.AddSingleton(instance);
         }
 
         private Hierarchy<World> MakeHierarchy(IEnumerable<Type> types)
@@ -72,14 +86,20 @@ namespace Hit.Infrastructure
             _hierarchy.Dfs(activatorTestNodeVisitor);
         }
 
-        IEnumerable<ITestResult> IHit<World>.RunTests()
+        public IEnumerable<ITestResultNode> RunTests()
         {
             var world = _worldCreator.Create();
 
             _hierarchy.Dfs(new NotRunTestNodeVisitor<World>());
 
-            return default;
+            _hierarchy.Dfs(new RunTestNodeVisitor<World>(world));
+
+            return _hierarchy.CreateTestResultForrest();
         }
+
+        // Type constants
+
+        internal static Type WorldFactoryType => typeof(IWorldCreator<World>);
 
     }
 

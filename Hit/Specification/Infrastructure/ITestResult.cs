@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Hit.Specification
+﻿namespace Hit.Specification.Infrastructure
 {
     public interface ITestResult
     {

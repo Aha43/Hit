@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hit.Infrastructure.Visitors;
+using Hit.Specification.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,25 +30,60 @@ namespace Hit.Infrastructure
             }
         }
 
+        private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
+
+        internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent)
+        {
+            if (_childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children))
+            {
+                return children.AsReadOnly();
+            }
+
+            return EmptyTestNodeList;
+        }
+
         internal void Dfs(AbstractTestNodeVisitor<World> visitor)
         {
             foreach (var root in _rootNodes)
             {
-                Dfs(root, visitor);
+                Dfs(root, null, visitor);
             }
         }
 
-        internal void Dfs(TestNode<World> node, AbstractTestNodeVisitor<World> visitor)
+        internal void Dfs(TestNode<World> node, TestNode<World> parent, AbstractTestNodeVisitor<World> visitor)
         {
-            visitor.Visit(node);
+            visitor.Visit(node, parent);
 
-            if (_childNodes.TryGetValue(node.TestName, out List<TestNode<World>> children))
+            foreach (var child in GetChildren(node))
             {
-                foreach (var child in children)
-                {
-                    visitor.Visit(child);
-                }
+                Dfs(child, node, visitor);
             }
+        }
+
+        internal IEnumerable<ITestResultNode> CreateTestResultForrest()
+        {
+            var forrest = new List<ITestResultNode>();
+
+            foreach (var root in _rootNodes)
+            {
+                var tree = CreateTestResultTree(root);
+                forrest.Add(tree);
+            }
+
+            return forrest.AsReadOnly();
+        }
+
+        private TestResultNode CreateTestResultTree(TestNode<World> root)
+        {
+            var retVal = new TestResultNode(root.TestResult as TestResult);
+
+            foreach (var child in GetChildren(root))
+            {
+                var tree = CreateTestResultTree(child);
+                retVal.AddChild(tree);
+            }
+
+            return retVal;
         }
 
         private List<TestNode<World>> GetSiblingList(string parentName)

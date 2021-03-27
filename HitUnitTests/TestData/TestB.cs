@@ -3,13 +3,15 @@ using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TestData
 {
-    [Test(name: "ThisIsTestA")]
-    public class TestA : TestBase<TestWorld>
+    [Parent(name: "ThisIsTestA")]
+    [Test(name: "ThisIsTestB")]
+    public class TestB : TestBase<TestWorld>
     {
         public override void Act(TestWorld world)
         {
-       
+           
         }
+
     }
 
 }

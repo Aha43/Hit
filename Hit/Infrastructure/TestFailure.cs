@@ -1,4 +1,4 @@
-﻿using Hit.Specification;
+﻿using Hit.Specification.Infrastructure;
 using System;
 
 namespace Hit.Infrastructure

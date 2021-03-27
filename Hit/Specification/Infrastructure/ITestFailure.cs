@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hit.Specification
+namespace Hit.Specification.Infrastructure
 {
     public interface ITestFailure
     {

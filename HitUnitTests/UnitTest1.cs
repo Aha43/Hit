@@ -12,6 +12,10 @@ namespace HitUnitTests
         {
             var hit = new Hit<TestWorld>();
             hit.Initialize();
+
+            var result = hit.RunTests();
         }
+
     }
+
 }

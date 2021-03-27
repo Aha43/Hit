@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hit.Specification
+﻿namespace Hit.Specification.User
 {
     public interface IWorldCreator<World> : IHitType<World>
     {

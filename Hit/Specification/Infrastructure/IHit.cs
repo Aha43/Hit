@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Hit.Specification.User;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Hit.Specification
+namespace Hit.Specification.Infrastructure
 {
     public interface IHit<World> : IHitType<World>
     {
         void Initialize();
-        IEnumerable<ITestResult> RunTests();
+        IEnumerable<ITestResultNode> RunTests();
     }
 }
