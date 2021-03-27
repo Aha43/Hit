@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Hit.Infrastructure
 {
-    public class Hit<World> : IHit<World>
+    public class HitSuite<World> : IHitSuite<World>
     {
         private IServiceProvider _serviceProvider;
 

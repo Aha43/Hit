@@ -10,7 +10,7 @@ namespace HitUnitTests
         [Fact]
         public void Test1()
         {
-            var hit = new Hit<TestWorld>();
+            var hit = new HitSuite<TestWorld>();
             hit.Initialize();
 
             var result = hit.RunTests();
