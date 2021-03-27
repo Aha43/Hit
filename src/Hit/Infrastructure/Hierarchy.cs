@@ -3,6 +3,7 @@ using Hit.Specification.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
 {
@@ -50,6 +51,14 @@ namespace Hit.Infrastructure
             }
         }
 
+        internal async Task DfsAsync(AbstractTestNodeVisitorAsync<World> visitor)
+        {
+            foreach (var root in _rootNodes)
+            {
+                await DfsAsync(root, null, visitor).ConfigureAwait(false);
+            }
+        }
+
         internal void Dfs(TestNode<World> node, TestNode<World> parent, AbstractTestNodeVisitor<World> visitor)
         {
             visitor.Visit(node, parent);
@@ -57,6 +66,16 @@ namespace Hit.Infrastructure
             foreach (var child in GetChildren(node))
             {
                 Dfs(child, node, visitor);
+            }
+        }
+
+        internal async Task DfsAsync(TestNode<World> node, TestNode<World> parent, AbstractTestNodeVisitorAsync<World> visitor)
+        {
+            await visitor.VisitAsync(node, parent);
+
+            foreach (var child in GetChildren(node))
+            {
+                await DfsAsync(child, node, visitor).ConfigureAwait(false);
             }
         }
 

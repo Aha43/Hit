@@ -1,4 +1,5 @@
 ﻿using Hit.Specification.User;
+using System.Threading.Tasks;
 
 namespace Hit.Infrastructure.User
 {
@@ -21,7 +22,13 @@ namespace Hit.Infrastructure.User
 
         public IWorldActor<World> PostTestActor => _postTestActor;
 
-        public abstract void Act(World world);
+        public virtual void Act(World world)
+        {
+
+        }
+
+        public virtual async Task ActAsync(World world) => await Task.Run(() => Act(world));
+
     }
 
 }

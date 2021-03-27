@@ -1,16 +1,17 @@
 ﻿using Hit.Specification.Infrastructure;
 using Hit.Specification.User;
 using System;
+using System.Threading.Tasks;
 
 namespace Hit.Infrastructure.Visitors
 {
-    internal class RunTestNodeVisitor<World> : AbstractTestNodeVisitor<World>
+    internal class RunTestNodeVisitor<World> : AbstractTestNodeVisitorAsync<World>
     {
         private readonly World _world;
 
         public RunTestNodeVisitor(World world) => _world = world;
 
-        public override void Visit(TestNode<World> node, TestNode<World> parent)
+        public override async Task VisitAsync(TestNode<World> node, TestNode<World> parent)
         {
             var testResult = node.TestResult as TestResult;
 
@@ -22,11 +23,11 @@ namespace Hit.Infrastructure.Visitors
 
             var test = node.Test;
 
-            if (Act(test.PreTestActor, testResult, TestFailureSource.Pre))
+            if (await ActAsync(test.PreTestActor, testResult, TestFailureSource.Pre).ConfigureAwait(false))
             {
-                if (Act(test, testResult, TestFailureSource.Test))
+                if (await ActAsync(test, testResult, TestFailureSource.Test).ConfigureAwait(false))
                 {
-                    if (Act(test.PostTestActor, testResult, TestFailureSource.Post))
+                    if (await ActAsync (test.PostTestActor, testResult, TestFailureSource.Post).ConfigureAwait(false))
                     {
                         testResult.Success();
                     }
@@ -34,20 +35,20 @@ namespace Hit.Infrastructure.Visitors
             }
         }
 
-        private bool Act(IWorldActor<World> actor, TestResult testResult, TestFailureSource source)
+        private async Task<bool> ActAsync(IWorldActor<World> actor, TestResult testResult, TestFailureSource source)
         {
-            var ex = Act(actor);
+            var ex = await ActAsync(actor).ConfigureAwait(false);
             if (ex == null) return true;
             testResult.Failed(ex, source);
             return false;
         }
 
-        private Exception Act(IWorldActor<World> actor)
+        private async Task<Exception> ActAsync(IWorldActor<World> actor)
         {
             if (actor == default) return null;
             try
             {
-                actor.Act(_world);
+                await actor.ActAsync(_world).ConfigureAwait(false);
                 return null;
             }
             catch (Exception ex)

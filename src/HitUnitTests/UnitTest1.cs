@@ -1,6 +1,6 @@
 using Hit.Infrastructure;
 using HitUnitTests.TestData;
-using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace HitUnitTests
@@ -8,12 +8,12 @@ namespace HitUnitTests
     public class UnitTest1
     {
         [Fact]
-        public void Test1()
+        public async Task Test1Async()
         {
             var hit = new HitSuite<TestWorld>();
             hit.Initialize();
 
-            var result = hit.RunTests();
+            var result = await hit.RunTestsAsync();
         }
 
     }

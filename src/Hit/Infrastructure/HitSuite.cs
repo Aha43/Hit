@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
 {
@@ -86,13 +87,13 @@ namespace Hit.Infrastructure
             _hierarchy.Dfs(activatorTestNodeVisitor);
         }
 
-        public IEnumerable<ITestResultNode> RunTests()
+        public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
         {
             var world = _worldCreator.Create();
 
             _hierarchy.Dfs(new NotRunTestNodeVisitor<World>());
 
-            _hierarchy.Dfs(new RunTestNodeVisitor<World>(world));
+            await _hierarchy.DfsAsync(new RunTestNodeVisitor<World>(world)).ConfigureAwait(false);
 
             return _hierarchy.CreateTestResultForrest();
         }
