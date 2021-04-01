@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Hit.Infrastructure.Visitors
 {
-    internal class RunTestNodeVisitor<World> : AbstractTestNodeVisitorAsync<World>
+    internal class RunTestNodeVisitorAsync<World> : AbstractTestNodeVisitorAsync<World>
     {
         private readonly World _world;
 
-        public RunTestNodeVisitor(World world) => _world = world;
+        public RunTestNodeVisitorAsync(World world) => _world = world;
 
         public override async Task VisitAsync(TestNode<World> node, TestNode<World> parent)
         {
@@ -23,15 +23,9 @@ namespace Hit.Infrastructure.Visitors
 
             var test = node.Test;
 
-            if (await ActAsync(test.PreTestActor, testResult, TestFailureSource.Pre).ConfigureAwait(false))
-            {
-                if (await ActAsync(test, testResult, TestFailureSource.Test).ConfigureAwait(false))
-                {
-                    if (await ActAsync (test.PostTestActor, testResult, TestFailureSource.Post).ConfigureAwait(false))
-                    {
-                        testResult.Success();
-                    }
-                }
+            if (await ActAsync(test, testResult, TestFailureSource.Test).ConfigureAwait(false))
+            { 
+                testResult.Success();
             }
         }
 

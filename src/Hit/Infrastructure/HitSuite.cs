@@ -17,7 +17,7 @@ namespace Hit.Infrastructure
 
         private IWorldCreator<World> _worldCreator;
 
-        public void Initialize()
+        public HitSuite()
         {
             var testTypes = FindTestTypes();
 
@@ -78,6 +78,8 @@ namespace Hit.Infrastructure
                 }
             }
 
+            retVal.Completed();
+
             return retVal;
         }
 
@@ -87,15 +89,24 @@ namespace Hit.Infrastructure
             _hierarchy.Dfs(activatorTestNodeVisitor);
         }
 
-        public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
+        public async Task<IEnumerable<ITestResultNode>> RunTestsDfsAsync()
         {
             var world = _worldCreator.Create();
 
             _hierarchy.Dfs(new NotRunTestNodeVisitor<World>());
 
-            await _hierarchy.DfsAsync(new RunTestNodeVisitor<World>(world)).ConfigureAwait(false);
+            await _hierarchy.DfsAsync(new RunTestNodeVisitorAsync<World>(world)).ConfigureAwait(false);
 
             return _hierarchy.CreateTestResultForrest();
+        }
+
+        public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
+        {
+            var testRuns = new TestRuns<World>(_hierarchy);
+
+            await testRuns.TestsAsync(_worldCreator);
+
+            return testRuns.CreateTestResultForrest();
         }
 
         // Type constants

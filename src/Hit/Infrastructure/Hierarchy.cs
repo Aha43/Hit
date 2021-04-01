@@ -9,29 +9,57 @@ namespace Hit.Infrastructure
 {
     internal class Hierarchy<World>
     {
-        private readonly IList<TestNode<World>> _rootNodes = new List<TestNode<World>>();
+        private readonly List<TestNode<World>> _rootNodes = new List<TestNode<World>>();
 
-        private readonly IDictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
+        private readonly List<TestNode<World>> _leafNodes = new List<TestNode<World>>();
+
+        private readonly Dictionary<string, TestNode<World>> _allNodes = new Dictionary<string, TestNode<World>>();
+
+        private readonly Dictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
 
         internal void Add(Type testType)
         {
-            var node = new TestNode<World>(testType);
-
             var parentNames = testType.ParentNames<World>();
             if (parentNames.Any())
             {
-                foreach (var name in parentNames)
+                foreach (var parentName in parentNames)
                 {
-                    GetSiblingList(name).Add(node);
+                    var node = new TestNode<World>(testType, parentName);
+                    GetChildrenList(parentName).Add(node);
+                    _allNodes.Add(node.TestName, node);
                 }
             }
             else
             {
+                var node = new TestNode<World>(testType, null);
                 _rootNodes.Add(node);
+                _allNodes.Add(node.TestName, node);
             }
         }
 
+        internal void Completed()
+        {
+            var leafVisitor = new FindLeafTestNodeVisitor<World>(this);
+            Dfs(leafVisitor);
+            _leafNodes.Clear();
+            _leafNodes.AddRange(leafVisitor.Leafs);
+        }
+
+        internal IEnumerable<TestNode<World>> Roots => _rootNodes.AsReadOnly();
+
+        internal IEnumerable<TestNode<World>> Leafs => _leafNodes.AsReadOnly();
+
         private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
+
+        internal TestNode<World> GetParent(TestNode<World> node)
+        {
+            if (node.ParentTestName !=null && _allNodes.TryGetValue(node.ParentTestName, out TestNode<World> parent))
+            {
+                return parent;
+            }
+
+            return null;
+        }
 
         internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent)
         {
@@ -105,7 +133,7 @@ namespace Hit.Infrastructure
             return retVal;
         }
 
-        private List<TestNode<World>> GetSiblingList(string parentName)
+        private List<TestNode<World>> GetChildrenList(string parentName)
         {
             if (_childNodes.TryGetValue(parentName, out List<TestNode<World>> retVal))
             {

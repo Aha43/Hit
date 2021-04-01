@@ -11,7 +11,6 @@ namespace HitUnitTests
         public async Task Test1Async()
         {
             var hit = new HitSuite<TestWorld>();
-            hit.Initialize();
 
             var result = await hit.RunTestsAsync();
         }

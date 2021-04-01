@@ -2,7 +2,7 @@
 
 namespace Hit.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class Parent : Attribute
     {
         public string ParentTestName { get; }

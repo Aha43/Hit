@@ -3,8 +3,6 @@
     public enum TestFailureSource
     {
         Invariant,
-        Pre,
-        Test,
-        Post
+        Test
     }
 }
