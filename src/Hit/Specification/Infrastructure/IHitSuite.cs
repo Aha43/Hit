@@ -8,5 +8,6 @@ namespace Hit.Specification.Infrastructure
     {
         Task<IEnumerable<ITestResultNode>> RunTestsAsync();
         Task<IEnumerable<ITestResultNode>> RunTestsDfsAsync();
+        ITest<World> GetTest(string name);
     }
 }

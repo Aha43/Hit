@@ -51,6 +51,16 @@ namespace Hit.Infrastructure
 
         private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
 
+        internal TestNode<World> GetNode(string name)
+        {
+            if (_allNodes.TryGetValue(name, out TestNode<World> node))
+            {
+                return node;
+            }
+
+            return null;
+        }
+
         internal TestNode<World> GetParent(TestNode<World> node)
         {
             if (node.ParentTestName !=null && _allNodes.TryGetValue(node.ParentTestName, out TestNode<World> parent))

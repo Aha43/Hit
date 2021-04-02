@@ -17,11 +17,17 @@ namespace Hit.Infrastructure
 
         private IWorldCreator<World> _worldCreator;
 
-        public HitSuite()
+        public HitSuite(Action<HitSuiteOptions> conf = null)
         {
+            var opt = new HitSuiteOptions();
+            if (conf != null)
+            {
+                conf.Invoke(opt);
+            }
+
             var testTypes = FindTestTypes();
 
-            _serviceProvider = ConfigureTestServices(testTypes);
+            _serviceProvider = ConfigureTestServices(testTypes, opt);
 
             _hierarchy = MakeHierarchy(testTypes);
 
@@ -40,9 +46,9 @@ namespace Hit.Infrastructure
             return types;
         }
 
-        private IServiceProvider ConfigureTestServices(IEnumerable<Type> types)
+        private IServiceProvider ConfigureTestServices(IEnumerable<Type> types, HitSuiteOptions opt)
         {
-            var services = new ServiceCollection();
+            var services = opt.Services;
 
             foreach (var type in types)
             {
@@ -108,6 +114,8 @@ namespace Hit.Infrastructure
 
             return testRuns.CreateTestResultForrest();
         }
+
+        public ITest<World> GetTest(string name) => _hierarchy.GetNode(name)?.Test;
 
         // Type constants
 
