@@ -3,7 +3,7 @@ using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TrivialSyncTestData
 {
-    [Parent(name: "TrivialSyncTestA")]
+    [Follows(name: "TrivialSyncTestA")]
     [Test(name: "TrivialSyncTestB")]
     public class TestB : TestBase<TrivialSyncTestWorld>
     {

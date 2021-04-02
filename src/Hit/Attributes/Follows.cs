@@ -3,11 +3,11 @@
 namespace Hit.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class Parent : Attribute
+    public class Follows : Attribute
     {
         public string ParentTestName { get; }
 
-        public Parent(string name)
+        public Follows(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {

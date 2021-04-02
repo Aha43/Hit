@@ -38,7 +38,7 @@ namespace Hit.Infrastructure
                 .FirstOrDefault();
         }
 
-        public static IEnumerable<Parent> ParentAttributes<World>(this Type type)
+        public static IEnumerable<Follows> ParentAttributes<World>(this Type type)
         {
             if (!type.IsTest<World>())
             {
@@ -46,8 +46,8 @@ namespace Hit.Infrastructure
             }
 
             return Attribute.GetCustomAttributes(type)
-                .Where(e => e is Parent)
-                .Select(e => e as Parent);
+                .Where(e => e is Follows)
+                .Select(e => e as Follows);
         }
 
         public static bool IsTest<World>(this Type type)
