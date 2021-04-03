@@ -48,35 +48,14 @@ namespace Hit.Infrastructure
 
         private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
 
-        internal TestNode<World> GetNode(string name)
-        {
-            if (_allNodes.TryGetValue(name, out TestNode<World> node))
-            {
-                return node;
-            }
+        internal TestNode<World> GetNode(string name) => 
+            _allNodes.TryGetValue(name, out TestNode<World> node) ? node : null;
 
-            return null;
-        }
+        internal TestNode<World> GetParent(TestNode<World> node) => 
+            node.ParentTestName != null && _allNodes.TryGetValue(node.ParentTestName, out TestNode<World> parent) ? parent : null;
 
-        internal TestNode<World> GetParent(TestNode<World> node)
-        {
-            if (node.ParentTestName !=null && _allNodes.TryGetValue(node.ParentTestName, out TestNode<World> parent))
-            {
-                return parent;
-            }
-
-            return null;
-        }
-
-        internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent)
-        {
-            if (_childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children))
-            {
-                return children.AsReadOnly();
-            }
-
-            return EmptyTestNodeList;
-        }
+        internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent) => 
+            _childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children) ? children.AsReadOnly() : EmptyTestNodeList;
 
         internal void Dfs(AbstractTestNodeVisitor<World> visitor)
         {
