@@ -23,26 +23,26 @@ namespace Hit.Infrastructure.Visitors
 
             var test = node.Test;
 
-            if (await ActAsync(test, testResult, TestFailureSource.Test).ConfigureAwait(false))
+            if (await TestAsync(test, node.TestOptions, testResult, TestFailureSource.Test).ConfigureAwait(false))
             { 
                 testResult.Success();
             }
         }
 
-        private async Task<bool> ActAsync(IWorldActor<World> actor, TestResult testResult, TestFailureSource source)
+        private async Task<bool> TestAsync(ITestImplementation<World> test, ITestOptions options, TestResult testResult, TestFailureSource source)
         {
-            var ex = await ActAsync(actor).ConfigureAwait(false);
+            var ex = await TestAsync(test, options).ConfigureAwait(false);
             if (ex == null) return true;
             testResult.Failed(ex, source);
             return false;
         }
 
-        private async Task<Exception> ActAsync(IWorldActor<World> actor)
+        private async Task<Exception> TestAsync(ITestImplementation<World> actor, ITestOptions options)
         {
             if (actor == default) return null;
             try
             {
-                await actor.ActAsync(_world).ConfigureAwait(false);
+                await actor.TestAsync(_world, options).ConfigureAwait(false);
                 return null;
             }
             catch (Exception ex)

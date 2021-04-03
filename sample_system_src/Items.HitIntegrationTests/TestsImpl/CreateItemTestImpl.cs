@@ -1,21 +1,22 @@
 ﻿using Hit.Attributes;
 using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
 using Items.Domain.Param;
 using Items.Specification;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Items.HitIntegrationTests
+namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "CreateItem")]
-    public class CreateItemTestImplementation : TestImplementationBase<ItemCrudWorld>
+    public class CreateItemTestImpl : TestImplementationBase<ItemCrudWorld>
     {
-        private IItemsRepository _repository;
+        private readonly IItemsRepository _repository;
 
-        public CreateItemTestImplementation(IItemsRepository repository) => _repository = repository;
+        public CreateItemTestImpl(IItemsRepository repository) => _repository = repository;
 
-        public override async Task ActAsync(ItemCrudWorld world)
+        public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
         {
             // arrange
             var param = new CreateItemParam

@@ -1,5 +1,6 @@
 ﻿using Hit.Attributes;
 using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
 
 namespace HitUnitTests.TestData
 {
@@ -14,11 +15,6 @@ namespace HitUnitTests.TestData
         }
 
         public ServiceForTest Service => _service;
-
-        public override void Act(TestWorld world)
-        {
-       
-        }
     }
 
 }

@@ -9,6 +9,8 @@ namespace Hit.Attributes
 
         public string Follows { get; }
 
+        public string Options { get; set; }
+
         public UseAs(string test) => Name = test;
 
         public UseAs(string test, string followingTest)
