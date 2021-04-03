@@ -3,8 +3,8 @@ using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TrivialSyncTestData
 {
-    [Test(name: "TrivialSyncTestA")]
-    public class TestA : TestBase<TrivialSyncTestWorld>
+    [UseAs(test: "TrivialSyncTestA")]
+    public class TestA : TestImplementationBase<TrivialSyncTestWorld>
     {
         public override void Act(TrivialSyncTestWorld world)
         {

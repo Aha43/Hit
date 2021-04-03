@@ -3,9 +3,8 @@ using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TrivialSyncTestData
 {
-    [Follows(name: "TrivialSyncTestA")]
-    [Test(name: "TrivialSyncTestB")]
-    public class TestB : TestBase<TrivialSyncTestWorld>
+    [UseAs(test: "TrivialSyncTestB", followingTest: "TrivialSyncTestA")]
+    public class TestB : TestImplementationBase<TrivialSyncTestWorld>
     {
         public override void Act(TrivialSyncTestWorld world)
         {

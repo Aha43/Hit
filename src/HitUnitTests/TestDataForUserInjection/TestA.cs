@@ -3,8 +3,8 @@ using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TestData
 {
-    [Test(name: "ThisIsTestA")]
-    public class TestA : TestBase<TestWorld>
+    [UseAs(test: "ThisIsTestA")]
+    public class TestA : TestImplementationBase<TestWorld>
     {
         private ServiceForTest _service;
 

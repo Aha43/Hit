@@ -17,22 +17,19 @@ namespace Hit.Infrastructure
 
         private readonly Dictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
 
-        internal void Add(Type testType)
+        internal void Add(Type testImplementation)
         {
-            var parentNames = testType.ParentNames<World>();
-            if (parentNames.Any())
+            var testNodes = testImplementation.CreateTestNodes<World>();
+            foreach (var node in testNodes)
             {
-                foreach (var parentName in parentNames)
+                if (!string.IsNullOrWhiteSpace(node.ParentTestName))
                 {
-                    var node = new TestNode<World>(testType, parentName);
-                    GetChildrenList(parentName).Add(node);
-                    _allNodes.Add(node.TestName, node);
+                    GetChildrenList(node.ParentTestName).Add(node);
                 }
-            }
-            else
-            {
-                var node = new TestNode<World>(testType, null);
-                _rootNodes.Add(node);
+                else
+                {
+                    _rootNodes.Add(node);
+                }
                 _allNodes.Add(node.TestName, node);
             }
         }

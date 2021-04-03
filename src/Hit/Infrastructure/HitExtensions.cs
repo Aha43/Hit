@@ -1,31 +1,25 @@
 ﻿using Hit.Attributes;
 using Hit.Specification.User;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Hit.Infrastructure
 {
-    public static class HitExtensions
+    internal static class HitExtensions
     {
-        public static string TestName<World>(this Type type)
+        internal static TestNode<World>[] CreateTestNodes<World>(this Type type)
         {
-            var retVal = default(string);
-            var attr = type.TestAttribute<World>();
-            if (attr != default)
+            var attrs = type.TestAttribute<World>();
+            int n = attrs.Count();
+            var retVal = new TestNode<World>[n];
+            for (int i = 0; i < n; i++)
             {
-                retVal = attr.TestName;
+                retVal[i] = new TestNode<World>(type, attrs[i].Name, attrs[i].Follows);
             }
-
-            return string.IsNullOrWhiteSpace(retVal) ? type.FullName : retVal.Trim();
+            return retVal;
         }
 
-        public static IEnumerable<string> ParentNames<World>(this Type type)
-        {
-            return type.ParentAttributes<World>().Select(e => e.ParentTestName);
-        }
-
-        public static Test TestAttribute<World>(this Type type)
+        internal static UseAs[] TestAttribute<World>(this Type type)
         {
             if (!type.IsTest<World>())
             {
@@ -33,26 +27,13 @@ namespace Hit.Infrastructure
             }
 
             return Attribute.GetCustomAttributes(type)
-                .Where(e => e is Test)
-                .Select(e => e as Test)
-                .FirstOrDefault();
-        }
-
-        public static IEnumerable<Follows> ParentAttributes<World>(this Type type)
-        {
-            if (!type.IsTest<World>())
-            {
-                throw new Exception("Not test type");
-            }
-
-            return Attribute.GetCustomAttributes(type)
-                .Where(e => e is Follows)
-                .Select(e => e as Follows);
+                .Where(e => e is UseAs)
+                .Select(e => e as UseAs).ToArray();
         }
 
         public static bool IsTest<World>(this Type type)
         {
-            var tt = typeof(ITest<World>);
+            var tt = typeof(ITestImplementation<World>);
             return tt.IsAssignableFrom(type);
         }
 

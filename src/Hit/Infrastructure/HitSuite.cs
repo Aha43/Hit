@@ -75,7 +75,7 @@ namespace Hit.Infrastructure
         {
             var retVal = new Hierarchy<World>();
 
-            var testType = typeof(ITest<World>);
+            var testType = typeof(ITestImplementation<World>);
             foreach (var type in types)
             {
                 if (testType.IsAssignableFrom(type))
@@ -115,7 +115,7 @@ namespace Hit.Infrastructure
             return testRuns.CreateTestResultForrest();
         }
 
-        public ITest<World> GetTest(string name) => _hierarchy.GetNode(name)?.Test;
+        public ITestImplementation<World> GetTest(string name) => _hierarchy.GetNode(name)?.Test;
 
         // Type constants
 

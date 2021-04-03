@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Hit.Infrastructure.User
 {
-    public abstract class TestBase<World> : ITest<World>
+    public abstract class TestImplementationBase<World> : ITestImplementation<World>
     {
         public virtual void Act(World world)
         {
