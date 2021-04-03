@@ -15,7 +15,7 @@ namespace Hit.Infrastructure
 
         private Hierarchy<World> _hierarchy;
 
-        private IWorldCreator<World> _worldCreator;
+        private IWorldProvider<World> _worldProvider;
 
         public HitSuite(Action<HitSuiteOptions> conf = null)
         {
@@ -33,7 +33,7 @@ namespace Hit.Infrastructure
 
             ActivateTests();
 
-            _worldCreator = _serviceProvider.GetRequiredService<IWorldCreator<World>>();
+            _worldProvider = _serviceProvider.GetRequiredService<IWorldProvider<World>>();
         }
 
         private IEnumerable<Type> FindTestTypes()
@@ -52,9 +52,9 @@ namespace Hit.Infrastructure
 
             foreach (var type in types)
             {
-                if (WorldFactoryType.IsAssignableFrom(type))
+                if (WorldProviderType.IsAssignableFrom(type))
                 {
-                    AddWorldFactory(type, services);
+                    AddWorldProvider(type, services);
                 }
                 else
                 {
@@ -65,9 +65,9 @@ namespace Hit.Infrastructure
             return services.BuildServiceProvider();
         }
 
-        private void AddWorldFactory(Type type, IServiceCollection services)
+        private void AddWorldProvider(Type type, IServiceCollection services)
         {
-            var instance = Activator.CreateInstance(type) as IWorldCreator<World>;
+            var instance = Activator.CreateInstance(type) as IWorldProvider<World>;
             services.AddSingleton(instance);
         }
 
@@ -97,7 +97,7 @@ namespace Hit.Infrastructure
 
         public async Task<IEnumerable<ITestResultNode>> RunTestsDfsAsync()
         {
-            var world = _worldCreator.Create();
+            var world = _worldProvider.Get();
 
             _hierarchy.Dfs(new NotRunTestNodeVisitor<World>());
 
@@ -110,7 +110,7 @@ namespace Hit.Infrastructure
         {
             var testRuns = new TestRuns<World>(_hierarchy);
 
-            await testRuns.TestsAsync(_worldCreator);
+            await testRuns.TestsAsync(_worldProvider);
 
             return testRuns.CreateTestResultForrest();
         }
@@ -119,7 +119,7 @@ namespace Hit.Infrastructure
 
         // Type constants
 
-        internal static Type WorldFactoryType => typeof(IWorldCreator<World>);
+        internal static Type WorldProviderType => typeof(IWorldProvider<World>);
 
     }
 

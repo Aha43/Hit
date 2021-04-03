@@ -2,9 +2,9 @@
 
 namespace HitUnitTests.TrivialSyncTestData
 {
-    public class TestWorldCreator : IWorldCreator<TrivialSyncTestWorld>
+    public class TestWorldProvider : IWorldProvider<TrivialSyncTestWorld>
     {
-        public TrivialSyncTestWorld Create()
+        public TrivialSyncTestWorld Get()
         {
             return new TrivialSyncTestWorld();
         }

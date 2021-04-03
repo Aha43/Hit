@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Hit\Hit.csproj" />
+    <ProjectReference Include="..\Items.Domain\Items.Domain.csproj" />
+    <ProjectReference Include="..\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj" />
+    <ProjectReference Include="..\Items.Specification\Items.Specification.csproj" />
+  </ItemGroup>
+
+</Project>

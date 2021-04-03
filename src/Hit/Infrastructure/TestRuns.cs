@@ -41,12 +41,12 @@ namespace Hit.Infrastructure
 
         private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
 
-        internal async Task TestsAsync(IWorldCreator<World> worldCreator)
+        internal async Task TestsAsync(IWorldProvider<World> worldCreator)
         {
             Visit(_notRunTestNodeVisitor);
             for (var i = 0; i < _runs.Length; i++)
             {
-                var world = worldCreator.Create();
+                var world = worldCreator.Get();
                 var testVisitor = new RunTestNodeVisitorAsync<World>(world);
                 await _runs[i].VisitAsync(testVisitor).ConfigureAwait(false);
             }

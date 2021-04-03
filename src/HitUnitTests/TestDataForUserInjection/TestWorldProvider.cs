@@ -2,9 +2,9 @@
 
 namespace HitUnitTests.TestData
 {
-    public class TestWorldCreator : IWorldCreator<TestWorld>
+    public class TestWorldProvider : IWorldProvider<TestWorld>
     {
-        public TestWorld Create()
+        public TestWorld Get()
         {
             return new TestWorld();
         }
