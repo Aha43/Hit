@@ -95,17 +95,6 @@ namespace Hit.Infrastructure
             _hierarchy.Dfs(activatorTestNodeVisitor);
         }
 
-        public async Task<IEnumerable<ITestResultNode>> RunTestsDfsAsync()
-        {
-            var world = _worldProvider.Get();
-
-            _hierarchy.Dfs(new NotRunTestNodeVisitor<World>());
-
-            await _hierarchy.DfsAsync(new RunTestNodeVisitorAsync<World>(world)).ConfigureAwait(false);
-
-            return _hierarchy.CreateTestResultForrest();
-        }
-
         public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
         {
             var testRuns = new TestRuns<World>(_hierarchy);

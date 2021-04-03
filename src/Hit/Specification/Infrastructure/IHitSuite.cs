@@ -7,7 +7,6 @@ namespace Hit.Specification.Infrastructure
     public interface IHitSuite<World> : IHitType<World>
     {
         Task<IEnumerable<ITestResultNode>> RunTestsAsync();
-        Task<IEnumerable<ITestResultNode>> RunTestsDfsAsync();
         ITestImplementation<World> GetTest(string name);
     }
 }
