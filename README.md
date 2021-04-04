@@ -102,8 +102,10 @@ var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
 {
     o.Services.ConfigureInMemoryRepositoryServices();
 
-    o.Name = "InMemoryRepository test";
-    o.Description = "Testing CRUD with " + typeof(Items.Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+    o.Services.ConfigureInMemoryRepositoryServices();
+
+    o.Name = "In memory repository test";
+    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
 });
 
 var result = await inMemoryRepositoryTestSuite.RunTestsAsync().ConfigureAwait(false);
@@ -126,3 +128,4 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
           Test: DeleteItem Status: Success
             Test: ReadItemAfterDelete Status: Success
 ```
+### Testing multiple system configuration with same test setup
