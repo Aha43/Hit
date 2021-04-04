@@ -129,7 +129,7 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
 ### Testing multiple system configuration with same test setup
 
 The sample system also provides a repository implementation that consumes the api. To also test this implementation one can of course just instantiate a second suite configured for testing the REST repository but as the following code snippet shows use the HitSuites type to work with a collection of suites:
-```
+```csharp
 var repositoryTestSuites = new HitSuites<ItemCrudWorld>()
     .AddSuite(o =>
     {
