@@ -114,6 +114,7 @@ System.Console.WriteLine(report);
 What to notice in above example code:
 * It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registrers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
 * Suite can be given a name and a description, optional but nice to have.
+* `ResultsReporter` is an utility that generates an report of test runs, output in case all tests *green*:
 
 ```
 Suite: InMemoryRepository test
