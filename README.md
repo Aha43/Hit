@@ -45,4 +45,40 @@ What to notice in above example code:
     * Test implementers must implement an `IWorldProvider` to provide *World* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
 * HIT does not provide an assert framework, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
 
-The next 
+The next code snippet shows implmentation of tests that test reading of items from repositories:
+```csharp
+[UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
+[UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
+[UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false")]
+public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
+{
+    private readonly IItemsRepository _repository;
+
+    public ReadItemTestImpl(IItemsRepository repository) => _repository = repository;
+
+    public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+    {
+        // arange
+        var param = new ReadItemParam
+        {
+            Id = world.Id
+        };
+
+        // act
+        var read = await _repository.ReadAsync(param, CancellationToken.None);
+
+        // assert
+        if (options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
+        {
+            read.ShouldNotBe(null);
+            read.Id.ShouldBe(world.Id);
+            read.Name.ShouldBe(world.Name);
+        }
+        else
+        {
+            read.ShouldBeNull();
+        }
+    }
+
+}
+```
