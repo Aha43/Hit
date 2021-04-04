@@ -10,7 +10,7 @@ namespace Hit.Infrastructure
     {
         private readonly TestNode<World>[] _testNodes;
 
-        internal TestRun(Hierarchy<World> hierarchy, TestNode<World> last)
+        internal TestRun(TestHierarchy<World> hierarchy, TestNode<World> last)
         {
             var stack = new Stack<TestNode<World>>();
 

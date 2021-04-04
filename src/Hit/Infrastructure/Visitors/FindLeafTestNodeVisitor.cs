@@ -7,9 +7,9 @@ namespace Hit.Infrastructure.Visitors
     {
         private readonly List<TestNode<World>> _leafs = new List<TestNode<World>>();
 
-        private readonly Hierarchy<World> _hierarchy;
+        private readonly TestHierarchy<World> _hierarchy;
 
-        public FindLeafTestNodeVisitor(Hierarchy<World> hierarchy)
+        public FindLeafTestNodeVisitor(TestHierarchy<World> hierarchy)
         {
             _hierarchy = hierarchy;
         }

@@ -12,7 +12,7 @@ namespace Hit.Infrastructure
     {
         private TestRun<World>[] _runs;
 
-        internal TestRuns(Hierarchy<World> hierarchy)
+        internal TestRuns(TestHierarchy<World> hierarchy)
         {
             var leafs = hierarchy.Leafs;
             _runs = new TestRun<World>[leafs.Count()];

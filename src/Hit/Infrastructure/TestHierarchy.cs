@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
 {
-    internal class Hierarchy<World>
+    internal class TestHierarchy<World>
     {
         private readonly List<TestNode<World>> _rootNodes = new List<TestNode<World>>();
 
@@ -17,7 +17,7 @@ namespace Hit.Infrastructure
 
         private readonly Dictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
 
-        internal void Add(Type testImplementation)
+        internal void AddTestImplType(Type testImplementation)
         {
             var testNodes = testImplementation.CreateTestNodes<World>();
             foreach (var node in testNodes)
@@ -34,7 +34,7 @@ namespace Hit.Infrastructure
             }
         }
 
-        internal void Completed()
+        internal void AllTestImplTypesAdded()
         {
             var leafVisitor = new FindLeafTestNodeVisitor<World>(this);
             Dfs(leafVisitor);

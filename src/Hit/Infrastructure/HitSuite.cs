@@ -13,7 +13,7 @@ namespace Hit.Infrastructure
     {
         private IServiceProvider _serviceProvider;
 
-        private Hierarchy<World> _hierarchy;
+        private readonly TestHierarchy<World> _testHierarchy;
 
         private IWorldProvider<World> _worldProvider;
 
@@ -25,18 +25,18 @@ namespace Hit.Infrastructure
                 conf.Invoke(opt);
             }
 
-            var testTypes = FindTestTypes();
+            var testImplTypes = FindTestImplTypes();
 
-            _serviceProvider = ConfigureTestServices(testTypes, opt);
+            _serviceProvider = ConfigureTestServices(testImplTypes, opt);
 
-            _hierarchy = MakeHierarchy(testTypes);
+            _testHierarchy = TestHierarchyBuilder<World>.Create().WithTestImplTypes(testImplTypes).Build();
 
             ActivateTests();
 
             _worldProvider = _serviceProvider.GetRequiredService<IWorldProvider<World>>();
         }
 
-        private IEnumerable<Type> FindTestTypes()
+        private IEnumerable<Type> FindTestImplTypes()
         {
             var hitType = typeof(IHitType<World>);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -45,6 +45,8 @@ namespace Hit.Infrastructure
 
             return types;
         }
+
+        private static Type WorldProviderType => typeof(IWorldProvider<World>);
 
         private IServiceProvider ConfigureTestServices(IEnumerable<Type> types, HitSuiteOptions opt)
         {
@@ -71,44 +73,22 @@ namespace Hit.Infrastructure
             services.AddSingleton(instance);
         }
 
-        private Hierarchy<World> MakeHierarchy(IEnumerable<Type> types)
-        {
-            var retVal = new Hierarchy<World>();
-
-            var testType = typeof(ITestImplementation<World>);
-            foreach (var type in types)
-            {
-                if (testType.IsAssignableFrom(type))
-                {
-                    retVal.Add(type);
-                }
-            }
-
-            retVal.Completed();
-
-            return retVal;
-        }
-
         private void ActivateTests()
         {
             var activatorTestNodeVisitor = new ActivatorTestNodeVisitor<World>(_serviceProvider);
-            _hierarchy.Dfs(activatorTestNodeVisitor);
+            _testHierarchy.Dfs(activatorTestNodeVisitor);
         }
 
         public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
         {
-            var testRuns = new TestRuns<World>(_hierarchy);
+            var testRuns = new TestRuns<World>(_testHierarchy);
 
             await testRuns.TestsAsync(_worldProvider);
 
             return testRuns.CreateTestResultForrest();
         }
 
-        public ITestImplementation<World> GetTest(string name) => _hierarchy.GetNode(name)?.Test;
-
-        // Type constants
-
-        internal static Type WorldProviderType => typeof(IWorldProvider<World>);
+        public ITestImplementation<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
 
     }
 
