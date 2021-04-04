@@ -84,9 +84,9 @@ public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
 ```
 What to notice in above example code:
 * The implementation is used to realize three tests all following another test (use of the `UseAs` attribute's `followingTest` argument):
-    * First to (reading attributes from top to bottom) follow the test that creates an item, it expect to read the created item. Test is named appropriately *ReadItemAfterCreate*
-    * Second to follow a test that updates an item, it expect to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
-    * Third to follow a test that deletes an item, it expect to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
+    * First to (reading attributes from top to bottom) follow the test that creates an item. it expects to read the created item. Test is named appropriately *ReadItemAfterCreate*
+    * Second to follow a test that updates an item. It expects to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
+    * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 
 See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestsImpl/UpdateItemTestImpl.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestsImpl/DeleteItemTestImpl.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) that
 1. Create an item (test named *CreateItem*).
