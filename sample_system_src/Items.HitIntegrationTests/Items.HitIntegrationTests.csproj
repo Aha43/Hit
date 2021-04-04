@@ -13,6 +13,7 @@
     <ProjectReference Include="..\..\src\Hit\Hit.csproj" />
     <ProjectReference Include="..\Items.Domain\Items.Domain.csproj" />
     <ProjectReference Include="..\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj" />
+    <ProjectReference Include="..\Items.Infrastructure.Repository.Rest\Items.Infrastructure.Repository.Rest.csproj" />
     <ProjectReference Include="..\Items.Specification\Items.Specification.csproj" />
   </ItemGroup>
 

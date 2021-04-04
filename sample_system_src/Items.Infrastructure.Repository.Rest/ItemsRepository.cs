@@ -10,11 +10,16 @@ using System.Threading.Tasks;
 
 namespace Items.Infrastructure.Repository.Rest
 {
-    public class ItemRepository : IItemsRepository
+    public class ItemsRepository : IItemsRepository
     {
         private readonly ApiUri _apiUri;
 
-        public ItemRepository(ApiUri apiUri) => _apiUri = apiUri;
+        private readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true,
+        };
+
+        public ItemsRepository(ApiUri apiUri) => _apiUri = apiUri;
 
         public async Task<Item> CreateAsync(CreateItemParam param, CancellationToken cancellationToken) => await PerformAsync(param, "CreateItem", cancellationToken);
         public async Task<Item> ReadAsync(ReadItemParam param, CancellationToken cancellationToken) => await PerformAsync(param, "ReadItem", cancellationToken);
@@ -25,7 +30,8 @@ namespace Items.Infrastructure.Repository.Rest
         {
             var paramJson = JsonSerializer.Serialize(param);
             using var httpClient = new HttpClient();
-            var response = await httpClient.PostAsync(_apiUri + "/api/" + method, new StringContent(paramJson, Encoding.UTF8, "application/json"), cancellationToken);
+            httpClient.BaseAddress = new Uri(_apiUri.Uri);
+            var response = await httpClient.PostAsync("/api/" + method, new StringContent(paramJson, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 switch (response.StatusCode)
@@ -34,7 +40,8 @@ namespace Items.Infrastructure.Repository.Rest
                         return null;
                     default:
                         var content = await response.Content.ReadAsStringAsync(cancellationToken);
-                        return JsonSerializer.Deserialize<Item>(content);
+                        var retVal = JsonSerializer.Deserialize<Item>(content, _jsonOptions);
+                        return retVal;
                 }
             }
 

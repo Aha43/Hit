@@ -7,7 +7,7 @@ namespace Items.Infrastructure.Repository.Rest
     {
         public static IServiceCollection ConfigureRestRepositoryServices(this IServiceCollection services, string apiUri)
         {
-            return services.AddSingleton<IItemsRepository, ItemRepository>()
+            return services.AddSingleton<IItemsRepository, ItemsRepository>()
                 .AddSingleton(new ApiUri { Uri = apiUri });
         }
     }
