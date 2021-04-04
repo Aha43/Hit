@@ -82,3 +82,4 @@ public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
 
 }
 ```
+What to notice in above example code:
