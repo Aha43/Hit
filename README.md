@@ -98,4 +98,11 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 
 The next code snippet show how to test a system configuration with the defined test run:
 ```csharp
+var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
+{
+    o.Name = "InMemoryRepository test";
+    o.Description = "Testing CRUD with " + typeof(Items.Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+    o.Services.ConfigureInMemoryRepositoryServices();
+});
+var result = await inMemoryRepositoryTestSuite.RunTestsAsync();
 ```
