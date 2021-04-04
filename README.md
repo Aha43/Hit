@@ -151,3 +151,23 @@ var result = await repositoryTestSuites.RunTestsAsync().ConfigureAwait(false);
 var report = new ResultsReporter().Report(result);
 System.Console.WriteLine(report);
 ```
+An 'all green' output from the above look like this:
+```
+Suite: REST consuming repository test
+Description: Testing CRUD with Items.Infrastructure.Repository.Rest.ItemsRepository
+  Test: CreateItem Status: Success
+    Test: ReadItemAfterCreate Status: Success
+      Test: UpdateItem Status: Success
+        Test: ReadItemAfterUpdate Status: Success
+          Test: DeleteItem Status: Success
+            Test: ReadItemAfterDelete Status: Success
+
+Suite: In memory repository test
+Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRepository
+  Test: CreateItem Status: Success
+    Test: ReadItemAfterCreate Status: Success
+      Test: UpdateItem Status: Success
+        Test: ReadItemAfterUpdate Status: Success
+          Test: DeleteItem Status: Success
+            Test: ReadItemAfterDelete Status: Success
+```
