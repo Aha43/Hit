@@ -95,3 +95,7 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 4. Read updated item (test named *ReadItemAfterUpdate*)
 5. Delete the item (test named *DeleteItem*)
 6. Read the deleted item and expect not to find it (test named *ReadItemAfterDelete*)
+
+The next code snippet show how to test a system configuration with the defined test run:
+```csharp
+```
