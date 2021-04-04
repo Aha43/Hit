@@ -87,3 +87,11 @@ What to notice in above example code:
     * First to (reading attributes from top to bottom) follow the test that creates an item, it expect to read the created item. Test is named appropriately *ReadItemAfterCreate*
     * Second to follow a test that updates an item, it expect to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
     * Third to follow a test that deletes an item, it expect to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
+
+See []() and []() for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) that
+1. Create an item (test nemaed *CreateItem*).
+2. Read created item (test named *ReadItemAfterCreate*)
+3. Update the item (test named *UpdateItem*)
+4. Read updated item (test named *ReadItemAfterUpdate*)
+5. Delete the item (test named *DeleteItem*)
+6. Read the deleted item and expect not to find it (test named *ReadItemAfterDelete*)
