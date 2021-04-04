@@ -100,9 +100,10 @@ The next code snippet show how to test a system configuration with the defined t
 ```csharp
 var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
 {
+    o.Services.ConfigureInMemoryRepositoryServices();
+    
     o.Name = "InMemoryRepository test";
     o.Description = "Testing CRUD with " + typeof(Items.Infrastructure.Repository.InMemory.ItemsRepository).FullName;
-    o.Services.ConfigureInMemoryRepositoryServices();
 });
 var result = await inMemoryRepositoryTestSuite.RunTestsAsync();
 ```
