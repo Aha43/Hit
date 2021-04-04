@@ -4,7 +4,7 @@ A framework for integration tests where the work of one test can be the build up
 
 ### Example of testing CRUD operations using HIT
 
-HIT tests have an implementation class decorated with the `UseAs` attribute that tells how it is used to realize tests in a suite. Here is a test implementation that test creating an item given a repository for items:
+HIT tests are defined by `UseAs` attributes that decorates the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository for items:
 ```csharp
 [UseAs(test: "CreateItem")]
 public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
