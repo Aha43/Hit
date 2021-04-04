@@ -42,5 +42,5 @@ What to notice in above example code:
 * Dependency injection pattern can be used to inject part of the system tested, here the repository implmentation specified by the interface `IItemRepository`.
 * Tests communicate state through a *World* object. In the example we are going through here tests reads what is to be expected before the test and write to be expected after the test to the *World* object.
     * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *World* type.
-    * Test implementers must implement an `IWorldProvider` to provide *World* instances to the test framework, the sample system's integration test implemented [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
+    * Test implementers must implement an `IWorldProvider` to provide *World* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
 * HIT does not provide an assert framework, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
