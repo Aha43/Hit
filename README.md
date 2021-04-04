@@ -86,4 +86,4 @@ What to notice in above example code:
 * The implementation is used to realize three test all following another test (use of the `UseAs` attribute's `followingTest` argument):
     * First to (reading attributes from top to bottom) follow the test that creates an item, it expect to read the created item. Test is named appropriately *ReadItemAfterCreate*
     * Second to follow a test that updates an item, it expect to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
-    * Third to follow a test that deletes an item, it expect to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the logic of a test from the default.
+    * Third to follow a test that deletes an item, it expect to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
