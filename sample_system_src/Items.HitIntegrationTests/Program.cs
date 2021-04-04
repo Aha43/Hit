@@ -12,17 +12,17 @@ namespace Items.HitIntegrationTests
             var repositoryTestSuites = new HitSuites<ItemCrudWorld>()
                 .AddSuite(o =>
                 {
-                    o.Services.ConfigureInMemoryRepositoryServices();
-
-                    o.Name = "In memory repository test";
-                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
-                })
-                .AddSuite(o => 
-                {
                     o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
 
                     o.Name = "REST consuming repository test";
                     o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
+                })
+                .AddSuite(o =>
+                {
+                    o.Services.ConfigureInMemoryRepositoryServices();
+
+                    o.Name = "In memory repository test";
+                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
                 });
 
             var result = await repositoryTestSuites.RunTestsAsync().ConfigureAwait(false);

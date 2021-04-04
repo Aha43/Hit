@@ -16,7 +16,11 @@ namespace Hit.Infrastructure
         public string Report(IEnumerable<IHitSuiteTestResults> results)
         {
             var sb = new StringBuilder();
-            foreach (var res in results) Report(res, sb);
+            foreach (var res in results)
+            {
+                Report(res, sb);
+                sb.AppendLine();
+            }
             return sb.ToString();
         }
 
@@ -67,14 +71,16 @@ namespace Hit.Infrastructure
 
         private void Report(ITestFailure failure, StringBuilder sb)
         {
+            sb.AppendLine("!!!");
             if (failure.Exception != null)
             {
-                sb.Append(failure.Exception.ToString());
+                sb.AppendLine(failure.Exception.ToString());
             }
             else
             {
-                sb.Append("Test failed with no catched exception!");
+                sb.AppendLine("Test failed with no catched exception!");
             }
+            sb.AppendLine("!!!");
         }
 
     }
