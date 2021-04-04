@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "CreateItem")]
-    public class CreateItemTestImpl : TestImplementationBase<ItemCrudWorld>
+    public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 

@@ -1,12 +1,13 @@
 ﻿using Hit.Specification.User;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hit.Specification.Infrastructure
 {
     public interface IHitSuite<World> : IHitType<World>
     {
-        Task<IEnumerable<ITestResultNode>> RunTestsAsync();
+        string Name { get; }
+        string Description { get; }
+        Task<IHitSuiteTestResults> RunTestsAsync();
         ITestImplementation<World> GetTest(string name);
     }
 }

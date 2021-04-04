@@ -1,6 +1,5 @@
 ﻿using Hit.Infrastructure;
 using Items.Infrastructure.Repository.InMemory;
-using System;
 using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests
@@ -9,12 +8,20 @@ namespace Items.HitIntegrationTests
     {
         static async Task Main(string[] args)
         {
-            var testInMemoryRepositorySuite = new HitSuite<ItemCrudWorld>(o =>
+            var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
             {
                 o.Services.ConfigureInMemoryRepositoryServices();
-            });
-            var result = await testInMemoryRepositorySuite.RunTestsAsync();
 
+                o.Name = "InMemoryRepository test";
+                o.Description = "Testing CRUD with " + typeof(Items.Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+            });
+            
+            var result = await inMemoryRepositoryTestSuite.RunTestsAsync().ConfigureAwait(false);
+
+            var report = new ResultsReporter().Report(result);
+            System.Console.WriteLine(report);
+
+            System.Console.ReadLine();
         }
 
     }

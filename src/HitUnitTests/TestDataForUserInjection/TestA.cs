@@ -5,7 +5,7 @@ using Hit.Specification.Infrastructure;
 namespace HitUnitTests.TestData
 {
     [UseAs(test: "ThisIsTestA")]
-    public class TestA : TestImplementationBase<TestWorld>
+    public class TestA : TestImplBase<TestWorld>
     {
         private ServiceForTest _service;
 

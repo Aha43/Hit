@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "DeleteItem", followingTest: "ReadItemAfterUpdate")]
-    public class DeleteItemTestImpl : TestImplementationBase<ItemCrudWorld>
+    public class DeleteItemTestImpl : TestImplBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 

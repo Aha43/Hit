@@ -15,7 +15,7 @@ namespace HitUnitTests
 
             var result = await hit.RunTestsAsync();
 
-            var resultRoot = Assert.Single(result);
+            var resultRoot = Assert.Single(result.Results);
             
             Assert.Equal("TrivialSyncTestA", resultRoot.TestResult.TestName);
             Assert.True(resultRoot.TestResult.Status == TestStatus.Success);

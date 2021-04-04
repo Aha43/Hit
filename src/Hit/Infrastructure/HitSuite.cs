@@ -17,13 +17,16 @@ namespace Hit.Infrastructure
 
         private IWorldProvider<World> _worldProvider;
 
+        public string Name { get; }
+        public string Description { get; }
+
         public HitSuite(Action<HitSuiteOptions> conf = null)
         {
             var opt = new HitSuiteOptions();
-            if (conf != null)
-            {
-                conf.Invoke(opt);
-            }
+            conf?.Invoke(opt);
+
+            Name = opt.Name;
+            Description = opt.Description;
 
             var testImplTypes = FindTestImplTypes();
 
@@ -79,17 +82,20 @@ namespace Hit.Infrastructure
             _testHierarchy.Dfs(activatorTestNodeVisitor);
         }
 
-        public async Task<IEnumerable<ITestResultNode>> RunTestsAsync()
+        public async Task<IHitSuiteTestResults> RunTestsAsync()
         {
             var testRuns = new TestRuns<World>(_testHierarchy);
 
             await testRuns.TestsAsync(_worldProvider);
 
-            return testRuns.CreateTestResultForrest();
+            var forrest = testRuns.CreateTestResultForrest();
+
+            return new HitSuiteTestResults(Name, Description, forrest);
         }
 
         public ITestImplementation<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
 
+        
     }
 
 }

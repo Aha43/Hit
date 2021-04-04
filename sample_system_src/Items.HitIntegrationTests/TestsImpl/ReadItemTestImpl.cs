@@ -12,7 +12,7 @@ namespace Items.HitIntegrationTests.TestsImpl
     [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
     [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
     [UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false")]
-    public class ReadItemTestImpl : TestImplementationBase<ItemCrudWorld>
+    public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 
