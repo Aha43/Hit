@@ -171,3 +171,45 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
           Test: DeleteItem Status: Success
             Test: ReadItemAfterDelete Status: Success
 ```
+Testing an repository consuming an API makes it easy to demonstrate output when a test fails without messing around with source code by running the test with service down:
+```
+Suite: REST consuming repository test
+Description: Testing CRUD with Items.Infrastructure.Repository.Rest.ItemsRepository
+  Test: CreateItem Status: Failed
+!!!
+System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it. (localhost:44356)
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|283_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.DefaultConnectAsync(SocketsHttpConnectionContext context, CancellationToken cancellationToken)
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(Func`3 callback, DnsEndPoint endPoint, HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.SendAsyncCore(HttpRequestMessage request, HttpCompletionOption completionOption, Boolean async, Boolean emitTelemetryStartStop, CancellationToken cancellationToken)
+   at Items.Infrastructure.Repository.Rest.ItemsRepository.PerformAsync(Object param, String method, CancellationToken cancellationToken) in D:\rep\Hit\sample_system_src\Items.Infrastructure.Repository.Rest\ItemsRepository.cs:line 34
+   at Items.Infrastructure.Repository.Rest.ItemsRepository.CreateAsync(CreateItemParam param, CancellationToken cancellationToken) in D:\rep\Hit\sample_system_src\Items.Infrastructure.Repository.Rest\ItemsRepository.cs:line 24
+   at Items.HitIntegrationTests.TestsImpl.CreateItemTestImpl.TestAsync(ItemCrudWorld world, ITestOptions options) in D:\rep\Hit\sample_system_src\Items.HitIntegrationTests\TestsImpl\CreateItemTestImpl.cs:line 28
+   at Hit.Infrastructure.Visitors.RunTestNodeVisitorAsync`1.TestAsync(ITestImplementation`1 actor, ITestOptions options) in D:\rep\Hit\src\Hit\Infrastructure\Visitors\RunTestNodeVisitorAsync.cs:line 45
+!!!
+    Test: ReadItemAfterCreate Status: NotReached
+      Test: UpdateItem Status: NotReached
+        Test: ReadItemAfterUpdate Status: NotReached
+          Test: DeleteItem Status: NotReached
+            Test: ReadItemAfterDelete Status: NotReached
+
+Suite: In memory repository test
+Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRepository
+  Test: CreateItem Status: Success
+    Test: ReadItemAfterCreate Status: Success
+      Test: UpdateItem Status: Success
+        Test: ReadItemAfterUpdate Status: Success
+          Test: DeleteItem Status: Success
+            Test: ReadItemAfterDelete Status: Success
+```
