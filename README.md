@@ -38,7 +38,7 @@ public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
 ```
 What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
-* Since a `followingTest` argument is not passed to the UseAs attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a *test run*.
+* Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a *test run*.
 * Dependency injection pattern can be used to inject part of the system tested, here the repository implmentation specified by the interface `IItemRepository`.
 * Tests communicate state through a *World* object. In the example we are going through here tests reads what is to be expected before the test and write to be expected after the test to the *World* object.
 * HIT does not provide an assert framework, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
