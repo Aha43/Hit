@@ -59,6 +59,22 @@ namespace Hit.Infrastructure
               .Append(" Status: ")
               .Append(result.Status.ToString())
               .AppendLine();
+            if (result.Failure != null)
+            {
+                Report(result.Failure, sb);
+            }
+        }
+
+        private void Report(ITestFailure failure, StringBuilder sb)
+        {
+            if (failure.Exception != null)
+            {
+                sb.Append(failure.Exception.ToString());
+            }
+            else
+            {
+                sb.Append("Test failed with no catched exception!");
+            }
         }
 
     }
