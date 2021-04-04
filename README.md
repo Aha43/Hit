@@ -40,8 +40,8 @@ What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
 * Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a *test run*.
 * Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implmentation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestsImpl) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
-* Tests communicate state through a *World* object. In this example tests read from the *World* what is to be expected before the test and write what to be expected after the test to the *World* object.
-    * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *World* type.
+* Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
+    * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
     * Test implementers must implement an `IWorldProvider` to provide *World* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
 * HIT does not provide an assert framework, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
 
