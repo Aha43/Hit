@@ -16,7 +16,7 @@ namespace Hit.Attributes
         {
             if (string.IsNullOrWhiteSpace(test))
             {
-                throw new TestNameNullOrSpaces();
+                throw new TestNameNullOrSpacesException();
             }
 
             Name = test.Trim();
@@ -26,11 +26,11 @@ namespace Hit.Attributes
         {
             if (string.IsNullOrWhiteSpace(test))
             {
-                throw new TestNameNullOrSpaces();
+                throw new TestNameNullOrSpacesException();
             }
             if (string.IsNullOrWhiteSpace(followingTest))
             {
-                throw new FollowingTestNameNullOrSpaces();
+                throw new FollowingTestNameNullOrSpacesException();
             }
 
             Name = test.Trim();
