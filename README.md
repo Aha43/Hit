@@ -22,7 +22,7 @@ public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
         };
 
         // act
-        var created = await _repository.CreateAsync(param, CancellationToken.None);
+        var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
         // assert
         created.ShouldNotBe(null);
@@ -65,7 +65,7 @@ public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
         };
 
         // act
-        var read = await _repository.ReadAsync(param, CancellationToken.None);
+        var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
 
         // assert
         if (options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
