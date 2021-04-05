@@ -229,47 +229,47 @@ What to notice in above example output:
 ### Using unit test frameworks to run HIT integration tests
 
 Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test framework (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each:
-```
+```csharp
 public class CrudTests
+{
+    private readonly HitSuites<ItemCrudWorld> _repositoryTestSuites;
+
+    public CrudTests()
     {
-        private readonly HitSuites<ItemCrudWorld> _repositoryTestSuites;
+        _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
+            .AddSuite(o =>
+            {
+                o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
 
-        public CrudTests()
-        {
-            _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
-                .AddSuite(o =>
-                {
-                    o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
+                o.Name = "REST consuming repository test";
+                o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
+            })
+            .AddSuite(o =>
+            {
+                o.Services.ConfigureInMemoryRepositoryServices();
 
-                    o.Name = "REST consuming repository test";
-                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
-                })
-                .AddSuite(o =>
-                {
-                    o.Services.ConfigureInMemoryRepositoryServices();
-
-                    o.Name = "In memory repository test";
-                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
-                });
-        }
-
-        [Fact]
-        public async Task CrudShouldWorkForRestRepositoryAsync()
-        {
-            var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
-            var results = await suite.RunTestRunAsync("CRUDTestRun");
-            results.ShouldBeenSuccessful();
-        }
-
-        [Fact]
-        public async Task CrudShouldWorkForInMemoryRepositoryAsync()
-        {
-            var suite = _repositoryTestSuites.GetNamedSuite("In memory repository test");
-            var results = await suite.RunTestRunAsync("CRUDTestRun");
-            results.ShouldBeenSuccessful();
-        }
-
+                o.Name = "In memory repository test";
+                o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+            });
     }
+
+    [Fact]
+    public async Task CrudShouldWorkForRestRepositoryAsync()
+    {
+        var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
+        var results = await suite.RunTestRunAsync("CRUDTestRun");
+        results.ShouldBeenSuccessful();
+    }
+
+    [Fact]
+    public async Task CrudShouldWorkForInMemoryRepositoryAsync()
+    {
+        var suite = _repositoryTestSuites.GetNamedSuite("In memory repository test");
+        var results = await suite.RunTestRunAsync("CRUDTestRun");
+        results.ShouldBeenSuccessful();
+    }
+
+}
 ```
 
 
