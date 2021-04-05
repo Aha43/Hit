@@ -4,7 +4,7 @@ A framework for integration tests where the work of one test can be the build up
 
 ### Example of testing CRUD operations using HIT
 
-HIT tests are defined by `UseAs` attributes that decorates the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
+HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
 ```csharp
 [UseAs(test: "CreateItem")]
 public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
@@ -39,13 +39,13 @@ public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
 What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
 * Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a *test run*.
-* Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implmentation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestsImpl) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
+* Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implementation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestsImpl) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
 * Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
     * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
     * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
-* HIT does not provide an assert library, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
+* HIT does not provide an assert library, that's been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
 
-The next code snippet shows implmentation of tests that test reading of items from repositories:
+The next code snippet shows implementation of tests that test reading of items from repositories:
 ```csharp
 [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
 [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
@@ -112,7 +112,7 @@ var report = new ResultsReporter().Report(result);
 System.Console.WriteLine(report);
 ```
 What to notice in above example code:
-* It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registrers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
+* It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
 * Suite can be given a name and a description, optional but nice to have.
 * `ResultsReporter` is an utility that generates an report of test runs, output in case all tests *green*:
 
@@ -215,7 +215,7 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
 ```
 What to notice in above example output:
 * Test that fail get status `Failed`
-* Exception details is of course provided in the report output.
+* Exception details are of course provided in the report output.
 * All tests that follows the test that failed get status `NotReached`: They are not run because an *up the river* test failed.
 * Independent *test runs* are run even if a *test run* fails. 
 
@@ -223,4 +223,4 @@ What to notice in above example output:
 
 * The same instance of a test implementation is used by all tests defined by its `UseAs` attributes. Because of this test classes should not maintain any internal state but operate only on passed state (the *world* argument and `ITestOptions` argument).
 * In the examples shown here all the test logic has tested asynchronous methods and so overrides the method `TestAsync`, to test synchronous code override the `Test` method.
-* In general `UseAs` attributes can define a forrest of possible complex tests trees. It is important to understand that these trees defines *test runs* and not a *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (back tracking to it's root) that are run independently of each other with a world object provided separately for each *test run*.  
+* In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not a *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*.  
