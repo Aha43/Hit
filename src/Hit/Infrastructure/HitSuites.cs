@@ -18,6 +18,12 @@ namespace Hit.Infrastructure
 
         public IEnumerable<IHitSuite<World>> Suites => _suites.AsReadOnly();
 
+        public IHitSuite<World> GetNamedSuite(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            return _suites.Find(e => name.Equals(e.Name));
+        }
+
         public async Task<IEnumerable<IHitSuiteTestResults>> RunTestsAsync()
         {
             var suites = _suites.ToArray();

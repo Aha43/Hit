@@ -1,6 +1,5 @@
 ﻿using Hit.Exceptions;
 using Hit.Infrastructure.Visitors;
-using Hit.Specification.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +16,8 @@ namespace Hit.Infrastructure
         private readonly Dictionary<string, TestNode<World>> _allNodes = new Dictionary<string, TestNode<World>>();
 
         private readonly Dictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
+
+        private readonly Dictionary<string, TestNode<World>> _testRunNodes = new Dictionary<string, TestNode<World>>();
 
         internal void AddTestImplType(Type testImplementation)
         {
@@ -36,6 +37,12 @@ namespace Hit.Infrastructure
                 {
                     _rootNodes.Add(node);
                 }
+
+                if (!string.IsNullOrWhiteSpace(node.TestRun))
+                {
+                    _testRunNodes.Add(node.TestRun, node);
+                }
+
                 _allNodes.Add(node.TestName, node);
             }
         }
@@ -77,6 +84,16 @@ namespace Hit.Infrastructure
         internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent) => 
             _childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children) ? children.AsReadOnly() : EmptyTestNodeList;
 
+        internal TestRun<World> GetNamedTestRun(string name)
+        {
+            if (_testRunNodes.TryGetValue(name, out TestNode<World> lastNode))
+            {
+                return new TestRun<World>(this, lastNode);
+            }
+
+            throw new UnknownNamedTestRunException(name);
+        }
+
         internal void Dfs(AbstractTestNodeVisitor<World> visitor)
         {
             foreach (var root in _rootNodes)
@@ -111,32 +128,6 @@ namespace Hit.Infrastructure
             {
                 await DfsAsync(child, node, visitor).ConfigureAwait(false);
             }
-        }
-
-        internal IEnumerable<ITestResultNode> CreateTestResultForrest()
-        {
-            var forrest = new List<ITestResultNode>();
-
-            foreach (var root in _rootNodes)
-            {
-                var tree = CreateTestResultTree(root);
-                forrest.Add(tree);
-            }
-
-            return forrest.AsReadOnly();
-        }
-
-        private TestResultNode CreateTestResultTree(TestNode<World> root)
-        {
-            var retVal = new TestResultNode(root.TestResult as TestResult);
-
-            foreach (var child in GetChildren(root))
-            {
-                var tree = CreateTestResultTree(child);
-                retVal.AddChild(tree);
-            }
-
-            return retVal;
         }
 
         private List<TestNode<World>> GetChildrenList(string parentName)

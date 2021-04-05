@@ -12,6 +12,8 @@ namespace Hit.Attributes
 
         public string Options { get; set; }
 
+        public string TestRun { get; set; }
+
         public UseAs(string test)
         {
             if (string.IsNullOrWhiteSpace(test))

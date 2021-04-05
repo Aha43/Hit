@@ -11,6 +11,8 @@ namespace Hit.Infrastructure
 
         internal ITestOptions TestOptions { get; }
 
+        internal string TestRun { get; }
+
         internal string ParentTestName { get; }
 
         internal string TestName { get; }
@@ -19,13 +21,30 @@ namespace Hit.Infrastructure
 
         internal ITestResult TestResult { get; }
 
-        internal TestNode(Type testImplementationType, string testName, string parentTestName, string testOptionsSpec)
+        internal TestNode(
+            Type testImplementationType, 
+            string testName, 
+            string parentTestName, 
+            string testOptionsSpec,
+            string testRun)
         {
             TestImplementationType = testImplementationType;
             TestName = testName;
             ParentTestName = parentTestName;
             TestResult = new TestResult(TestName);
             TestOptions = (testOptionsSpec == null) ? TestOptionsImpl.Empty : new TestOptionsImpl(testOptionsSpec);
+            TestRun = testRun;
+        }
+
+        internal TestNode(TestNode<World> other)
+        {
+            TestImplementationType = other.TestImplementationType;
+            TestName = other.TestName;
+            ParentTestName = other.ParentTestName;
+            TestResult = new TestResult(TestName);
+            TestOptions = other.TestOptions;
+            TestRun = other.TestRun;
+            Test = other.Test;
         }
 
     }

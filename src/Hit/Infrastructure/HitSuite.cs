@@ -86,16 +86,26 @@ namespace Hit.Infrastructure
         {
             var testRuns = new TestRuns<World>(_testHierarchy);
 
-            await testRuns.TestsAsync(_worldProvider).ConfigureAwait(false);
+            await testRuns.RunTestsAsync(_worldProvider).ConfigureAwait(false);
 
-            var forrest = testRuns.CreateTestResultForrest();
+            var results = testRuns.CreateTestResults();
 
-            return new HitSuiteTestResults(Name, Description, forrest);
+            return new HitSuiteTestResults(Name, Description, results);
+        }
+
+        public async Task<IHitSuiteTestResults> RunTestRunAsync(string name)
+        {
+            var testRun = _testHierarchy.GetNamedTestRun(name);
+
+            await testRun.RunTestsAsync(_worldProvider);
+
+            var results = testRun.GetTestResult();
+
+            return new HitSuiteTestResults(Name, Description, results);
         }
 
         public ITestImpl<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
 
-        
     }
 
 }

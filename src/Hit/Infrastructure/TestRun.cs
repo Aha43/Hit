@@ -1,7 +1,6 @@
 ﻿using Hit.Infrastructure.Visitors;
-using System;
+using Hit.Specification.User;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
@@ -17,7 +16,7 @@ namespace Hit.Infrastructure
             var current = last;
             while (current != null)
             {
-                stack.Push(current);
+                stack.Push(new TestNode<World>(current));
                 current = hierarchy.GetParent(current);
             }
 
@@ -46,6 +45,16 @@ namespace Hit.Infrastructure
             }
         }
 
+        private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
+
+        internal async Task RunTestsAsync(IWorldProvider<World> worldProvider)
+        {
+            Visit(_notRunTestNodeVisitor);
+            var world = worldProvider.Get();
+            var testVisitor = new RunTestNodeVisitorAsync<World>(world);
+            await VisitAsync(testVisitor).ConfigureAwait(false);
+        }
+
         internal TestResultNode GetTestResult()
         {
             int n = _testNodes.Length;
@@ -55,7 +64,7 @@ namespace Hit.Infrastructure
             for (var i = 1; i < n; i++)
             {
                 var current = new TestResultNode(_testNodes[i].TestResult as TestResult);
-                parent.AddChild(current);
+                parent.Next = current;
                 parent = current;
             }
             return retVal;

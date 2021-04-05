@@ -20,11 +20,12 @@ namespace HitUnitTests
             Assert.Equal("TrivialSyncTestA", resultRoot.TestResult.TestName);
             Assert.True(resultRoot.TestResult.Status == TestStatus.Success);
 
-            var resultLeaf = Assert.Single(resultRoot.Children);
+            var resultLeaf = resultRoot.Next;
+            Assert.NotNull(resultLeaf);
 
             Assert.Equal("TrivialSyncTestB", resultLeaf.TestResult.TestName);
             Assert.True(resultLeaf.TestResult.Status == TestStatus.Success);
-            Assert.Empty(resultLeaf.Children);
+            Assert.Null(resultLeaf.Next);
         }
 
     }

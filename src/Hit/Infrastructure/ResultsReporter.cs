@@ -49,10 +49,9 @@ namespace Hit.Infrastructure
         {
             for (var i = 0; i < level; i++) sb.Append(Indent);
             Report(resultNode.TestResult, sb);
-            foreach (var childNode in resultNode.Children)
+            if (resultNode.Next != null)
             {
-                var nextLevel = level + 1;
-                Report(childNode, nextLevel, sb);
+                Report(resultNode.Next, level + 1, sb);
             }
         }
 

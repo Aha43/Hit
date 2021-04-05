@@ -7,5 +7,6 @@ namespace Hit.Specification.Infrastructure
         public string Name { get; }
         public string Description { get; }
         public IEnumerable<ITestResultNode> Results { get; }
+        public bool Success();
     }
 }
