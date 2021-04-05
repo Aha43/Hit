@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hit.Exceptions;
+using System;
 
 namespace Hit.Attributes
 {
@@ -11,12 +12,29 @@ namespace Hit.Attributes
 
         public string Options { get; set; }
 
-        public UseAs(string test) => Name = test;
+        public UseAs(string test)
+        {
+            if (string.IsNullOrWhiteSpace(test))
+            {
+                throw new TestNameNullOrSpaces();
+            }
+
+            Name = test.Trim();
+        }
 
         public UseAs(string test, string followingTest)
         {
-            Name = test;
-            Follows = followingTest;
+            if (string.IsNullOrWhiteSpace(test))
+            {
+                throw new TestNameNullOrSpaces();
+            }
+            if (string.IsNullOrWhiteSpace(followingTest))
+            {
+                throw new FollowingTestNameNullOrSpaces();
+            }
+
+            Name = test.Trim();
+            Follows = followingTest.Trim();
         }
 
     }
