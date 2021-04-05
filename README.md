@@ -219,8 +219,10 @@ What to notice in above example output:
 * Independent *test runs* are run even if a *test run* fails. 
 * Exception details are of course provided in the report output.
 
+### Named *test runs* and automatic testing with HIT
+
 ### More important details about the framework
 
 * The same instance of a test implementation is used by all tests defined by its `UseAs` attributes. Because of this test classes should not maintain any internal state but operate only on passed state (the *world* argument and `ITestOptions` argument).
 * In the examples shown here all the test logic has tested asynchronous methods and so overrides the method `TestAsync`, to test synchronous code override the `Test` method.
-* In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not **a** *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*.  
+* In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not **a** *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*. 
