@@ -275,3 +275,5 @@ We can now for example use Visual Studio's test explorer to run the tests, again
 
 ![](images/test-explorer-output.png?raw=true)
 
+What to notice in above output:
+* The `ShouldBeenSuccessful` assertion produces for failed test result an exception which message is produced in same way as in previous console output example.
