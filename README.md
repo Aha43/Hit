@@ -273,6 +273,7 @@ public class CrudTests
 }
 ```
 What to notice in above example code:
+* Each unit test uses the `GetNamedSuite` to get the suite with the system configuration to test then uses the `RunTestRunAsync` to run the one *test run* (named using the `TestRun` parameter to a `UseAs` attribute) the test is about.
 * While HIT does not implement yet another general assertion API it does provide an assertion method `ShouldBeenSuccessful` for use in unit test to assert the result from a HIT *test run* has been successful.
 
 We can now for example use Visual Studio's test explorer to run the tests, again provoking a failed tests to make the result more interesting:
