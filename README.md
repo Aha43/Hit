@@ -49,7 +49,7 @@ The next code snippet shows implementation of tests that test reading of items f
 ```csharp
 [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
 [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
-[UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false")]
+[UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", TestRun = "CRUDTestRun")]
 public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
 {
     private readonly IItemsRepository _repository;
