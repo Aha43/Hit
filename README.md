@@ -258,7 +258,7 @@ public class CrudTests
     public async Task CrudShouldWorkForRestRepositoryAsync()
     {
         var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
-        var results = await suite.RunTestRunAsync("CRUDTestRun");
+        var results = await suite.RunTestRunAsync("CRUDTestRun").ConfigureAwait(false);
         results.ShouldBeenSuccessful();
     }
 
@@ -266,7 +266,7 @@ public class CrudTests
     public async Task CrudShouldWorkForInMemoryRepositoryAsync()
     {
         var suite = _repositoryTestSuites.GetNamedSuite("In memory repository test");
-        var results = await suite.RunTestRunAsync("CRUDTestRun");
+        var results = await suite.RunTestRunAsync("CRUDTestRun").ConfigureAwait(false);
         results.ShouldBeenSuccessful();
     }
 
