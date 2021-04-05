@@ -271,5 +271,6 @@ public class CrudTests
 
 }
 ```
+We can now for example use Visual Studio's test explorer to run the tests, again provoking a failed tests to make the result more interesting:
 ![](images/test-explorer-output.png?raw=true)
 
