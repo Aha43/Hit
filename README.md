@@ -214,10 +214,10 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
             Test: ReadItemAfterDelete Status: Success
 ```
 What to notice in above example output:
-* Test that fail get status `Failed`
-* Exception details are of course provided in the report output.
+* Test that fail get status `Failed`.
 * All tests that follows the test that failed get status `NotReached`: They are not run because an *up the river* test failed.
 * Independent *test runs* are run even if a *test run* fails. 
+* Exception details are of course provided in the report output.
 
 ### More important details about the framework
 
