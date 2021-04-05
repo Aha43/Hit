@@ -228,7 +228,7 @@ What to notice in above example output:
 
 ### Using unit test frameworks to run HIT integration tests
 
-Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test framework (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each:
+Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test frameworks (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each:
 ```csharp
 public class CrudTests
 {
