@@ -26,7 +26,7 @@ namespace Items.HitIntegrationTests.TestsImpl
             };
 
             // act
-            var updated = await _repository.UpdateAsync(param, CancellationToken.None);
+            var updated = await _repository.UpdateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
             // assert
             updated.ShouldNotBe(null);

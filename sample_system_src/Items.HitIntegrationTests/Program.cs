@@ -29,22 +29,6 @@ namespace Items.HitIntegrationTests
 
             var report = new ResultsReporter().Report(result);
             System.Console.WriteLine(report);
-
-
-            //var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
-            //{
-            //    //o.Services.ConfigureInMemoryRepositoryServices();
-            //    o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
-
-            //    o.Name = "InMemoryRepository test";
-            //    o.Description = "Testing CRUD with " + typeof(Items.Infrastructure.Repository.InMemory.ItemsRepository).FullName;
-            //});
-
-            //var result = await inMemoryRepositoryTestSuite.RunTestsAsync().ConfigureAwait(false);
-
-            //var report = new ResultsReporter().Report(result);
-            //System.Console.WriteLine(report);
-
             System.Console.ReadLine();
         }
 

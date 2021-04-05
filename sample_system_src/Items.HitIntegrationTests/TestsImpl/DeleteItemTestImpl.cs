@@ -25,7 +25,7 @@ namespace Items.HitIntegrationTests.TestsImpl
             };
 
             // act
-            var deleted = await _repository.DeleteAsync(param, CancellationToken.None);
+            var deleted = await _repository.DeleteAsync(param, CancellationToken.None).ConfigureAwait(false);
 
             // assert
             deleted.ShouldNotBe(null);

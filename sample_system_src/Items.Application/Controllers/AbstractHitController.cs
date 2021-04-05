@@ -18,7 +18,7 @@ namespace Items.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<Item> GetAsync([FromBody] Param param) => await _delegate.Invoke(param, CancellationToken.None);
+        public async Task<Item> GetAsync([FromBody] Param param) => await _delegate.Invoke(param, CancellationToken.None).ConfigureAwait(false);
 
     }
 

@@ -25,7 +25,7 @@ namespace Items.HitIntegrationTests.TestsImpl
             };
 
             // act
-            var created = await _repository.CreateAsync(param, CancellationToken.None);
+            var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
             // assert
             created.ShouldNotBe(null);

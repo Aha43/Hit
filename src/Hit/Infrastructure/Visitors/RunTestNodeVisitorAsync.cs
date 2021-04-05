@@ -29,7 +29,7 @@ namespace Hit.Infrastructure.Visitors
             }
         }
 
-        private async Task<bool> TestAsync(ITestImplementation<World> test, ITestOptions options, TestResult testResult, TestFailureSource source)
+        private async Task<bool> TestAsync(ITestImpl<World> test, ITestOptions options, TestResult testResult, TestFailureSource source)
         {
             var ex = await TestAsync(test, options).ConfigureAwait(false);
             if (ex == null) return true;
@@ -37,7 +37,7 @@ namespace Hit.Infrastructure.Visitors
             return false;
         }
 
-        private async Task<Exception> TestAsync(ITestImplementation<World> actor, ITestOptions options)
+        private async Task<Exception> TestAsync(ITestImpl<World> actor, ITestOptions options)
         {
             if (actor == default) return null;
             try

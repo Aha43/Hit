@@ -17,7 +17,7 @@ namespace Hit.Infrastructure.Visitors
         {
             try
             {
-                node.Test = _serviceProvider.GetService(node.TestImplementationType) as ITestImplementation<World>;
+                node.Test = _serviceProvider.GetService(node.TestImplementationType) as ITestImpl<World>;
             }
             catch (Exception ex)
             {

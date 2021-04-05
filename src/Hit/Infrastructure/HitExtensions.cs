@@ -33,7 +33,7 @@ namespace Hit.Infrastructure
 
         public static bool IsTest<World>(this Type type)
         {
-            var tt = typeof(ITestImplementation<World>);
+            var tt = typeof(ITestImpl<World>);
             return tt.IsAssignableFrom(type);
         }
 

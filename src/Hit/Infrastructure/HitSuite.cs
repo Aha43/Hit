@@ -86,14 +86,14 @@ namespace Hit.Infrastructure
         {
             var testRuns = new TestRuns<World>(_testHierarchy);
 
-            await testRuns.TestsAsync(_worldProvider);
+            await testRuns.TestsAsync(_worldProvider).ConfigureAwait(false);
 
             var forrest = testRuns.CreateTestResultForrest();
 
             return new HitSuiteTestResults(Name, Description, forrest);
         }
 
-        public ITestImplementation<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
+        public ITestImpl<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
 
         
     }

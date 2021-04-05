@@ -85,7 +85,7 @@ namespace Hit.Infrastructure
 
         internal async Task DfsAsync(TestNode<World> node, TestNode<World> parent, AbstractTestNodeVisitorAsync<World> visitor)
         {
-            await visitor.VisitAsync(node, parent);
+            await visitor.VisitAsync(node, parent).ConfigureAwait(false);
 
             foreach (var child in GetChildren(node))
             {

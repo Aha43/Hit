@@ -45,7 +45,7 @@ namespace Hit.Infrastructure
             return retVal;
         }
 
-        private static Type TestImplType => typeof(ITestImplementation<World>);
+        private static Type TestImplType => typeof(ITestImpl<World>);
 
     }
 
