@@ -1,4 +1,5 @@
-﻿using Hit.Infrastructure.Visitors;
+﻿using Hit.Exceptions;
+using Hit.Infrastructure.Visitors;
 using Hit.Specification.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace Hit.Infrastructure
             var testNodes = testImplementation.CreateTestNodes<World>();
             foreach (var node in testNodes)
             {
+                if (_allNodes.ContainsKey(node.TestName))
+                {
+                    throw new TestNameCollisionException(node.TestName);
+                }
+
                 if (!string.IsNullOrWhiteSpace(node.ParentTestName))
                 {
                     GetChildrenList(node.ParentTestName).Add(node);
@@ -40,6 +46,20 @@ namespace Hit.Infrastructure
             Dfs(leafVisitor);
             _leafNodes.Clear();
             _leafNodes.AddRange(leafVisitor.Leafs);
+
+            Validate();
+        }
+
+        private void Validate()
+        {
+            // checks if all parent named exists
+            foreach (var e in _childNodes)
+            {
+                if (!_allNodes.ContainsKey(e.Key))
+                {
+                    throw new MissingTestException(e.Key, e.Value.First().TestName);
+                }
+            }
         }
 
         internal IEnumerable<TestNode<World>> Roots => _rootNodes.AsReadOnly();
