@@ -222,3 +222,4 @@ What to notice in above example output:
 ### More details about the framework
 
 * The same instance of a test implementation is used by all tests defined by its `UseAs` attributes. Because of this test classes should not maintain any internal state but operate only on passed state (the *world* argument and `ITestOptions` argument).
+* In the examples shown here all the test logic has tested asynchronous methods and so overriden the method `TestAsync`, to test synchronous code override the `Test` method. 
