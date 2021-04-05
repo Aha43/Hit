@@ -226,6 +226,50 @@ What to notice in above example output:
 * In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not **a** *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*.
 * *Test runs* can be named by using the `TestRun` parameter of the `UseAs` attribute. If *test runs* have been named one can use the `IHitSuite` method `RunTestRunAsync` to run the named *test run*. Next section show how this can be used to take advantage the tooling around unit test frameworks for running HIT integration tests.  
 
-### Named *test runs* and automatic testing with HIT
+### Using unit test frameworks to run HIT integration tests
+
+Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test framework (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each:
+```
+public class CrudTests
+    {
+        private readonly HitSuites<ItemCrudWorld> _repositoryTestSuites;
+
+        public CrudTests()
+        {
+            _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
+                .AddSuite(o =>
+                {
+                    o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
+
+                    o.Name = "REST consuming repository test";
+                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
+                })
+                .AddSuite(o =>
+                {
+                    o.Services.ConfigureInMemoryRepositoryServices();
+
+                    o.Name = "In memory repository test";
+                    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+                });
+        }
+
+        [Fact]
+        public async Task CrudShouldWorkForRestRepositoryAsync()
+        {
+            var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
+            var results = await suite.RunTestRunAsync("CRUDTestRun");
+            results.ShouldBeenSuccessful();
+        }
+
+        [Fact]
+        public async Task CrudShouldWorkForInMemoryRepositoryAsync()
+        {
+            var suite = _repositoryTestSuites.GetNamedSuite("In memory repository test");
+            var results = await suite.RunTestRunAsync("CRUDTestRun");
+            results.ShouldBeenSuccessful();
+        }
+
+    }
+```
 
 
