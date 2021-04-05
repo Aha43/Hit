@@ -4,7 +4,7 @@ A framework for integration tests where the work of one test can be the build up
 
 ### Example of testing CRUD operations using HIT
 
-HIT tests are defined by `UseAs` attributes that decorates the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository for items:
+HIT tests are defined by `UseAs` attributes that decorates the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
 ```csharp
 [UseAs(test: "CreateItem")]
 public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
@@ -22,7 +22,7 @@ public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
         };
 
         // act
-        var created = await _repository.CreateAsync(param, CancellationToken.None);
+        var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
         // assert
         created.ShouldNotBe(null);
@@ -40,10 +40,10 @@ What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
 * Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a *test run*.
 * Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implmentation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestsImpl) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
-* Tests communicate state through a *World* object. In this example tests read from the *World* what is to be expected before the test and write what to be expected after the test to the *World* object.
-    * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *World* type.
-    * Test implementers must implement an `IWorldProvider` to provide *World* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
-* HIT does not provide an assert framework, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
+* Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
+    * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
+    * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
+* HIT does not provide an assert library, thats been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
 
 The next code snippet shows implmentation of tests that test reading of items from repositories:
 ```csharp
@@ -65,7 +65,7 @@ public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
         };
 
         // act
-        var read = await _repository.ReadAsync(param, CancellationToken.None);
+        var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
 
         // assert
         if (options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
@@ -218,3 +218,8 @@ What to notice in above example output:
 * Exception details is of course provided in the report output.
 * All tests that follows the test that failed get status `NotReached`: They are not run because an *up the river* test failed.
 * Independent *test runs* are run even if a *test run* fails. 
+
+### More details about the framework
+
+* The same instance of a test implementation is used by all tests defined by its `UseAs` attributes. Because of this test classes should not maintain any internal state but operate only on passed state (the *world* argument and `ITestOptions` argument).
+* In the examples shown here all the test logic has tested asynchronous methods and so overrides the method `TestAsync`, to test synchronous code override the `Test` method. 
