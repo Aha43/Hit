@@ -171,7 +171,7 @@ Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRep
           Test: DeleteItem Status: Success
             Test: ReadItemAfterDelete Status: Success
 ```
-Testing an repository consuming an API makes it easy to demonstrate output when a test fails without messing around with source code by running the tests with service down:
+Testing an repository consuming an API makes it easy to demonstrate output when a test fails without messing around with source code by running the tests with the service down:
 ```
 Suite: REST consuming repository test
 Description: Testing CRUD with Items.Infrastructure.Repository.Rest.ItemsRepository
