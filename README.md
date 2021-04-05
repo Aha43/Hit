@@ -43,7 +43,7 @@ What to notice in above example code:
 * Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
     * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
     * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
-* HIT does not provide an assert library, that's been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
+* HIT does not provide a genaerally assert API, that's been done, I like [Shouldly](https://github.com/shouldly/shouldly). 
 
 The next code snippet shows implementation of tests that test reading of items from repositories:
 ```csharp
@@ -219,8 +219,10 @@ What to notice in above example output:
 * Independent *test runs* are run even if a *test run* fails. 
 * Exception details are of course provided in the report output.
 
+### Named *test runs* and automatic testing with HIT
+
 ### More important details about the framework
 
 * The same instance of a test implementation is used by all tests defined by its `UseAs` attributes. Because of this test classes should not maintain any internal state but operate only on passed state (the *world* argument and `ITestOptions` argument).
 * In the examples shown here all the test logic has tested asynchronous methods and so overrides the method `TestAsync`, to test synchronous code override the `Test` method.
-* In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not **a** *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*.  
+* In general `UseAs` attributes can define a forest of possible complex test trees. It is important to understand that these trees defines *test runs* and not **a** *test run*. That is, one would for example be wrong if one assumed tests was executed in say a *depth first search* order. All the leaf test nodes represent a *test run* (backtracking to its root) that are run independently of each other with a world object provided separately for each *test run*. 
