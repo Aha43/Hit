@@ -228,7 +228,7 @@ What to notice in above example output:
 
 ### Using unit test frameworks to run HIT integration tests
 
-Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test frameworks (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each:
+Since *test runs* are run independentely they can be test in a unit test framework and so take advantage of the existing tools around unit test frameworks (continues integration, IDE test runner integration,...). The following code snippet shows testing of the CRUD operations for both repository implementations using XUnit, one test for each system configuration:
 ```csharp
 public class CrudTests
 {
@@ -271,6 +271,9 @@ public class CrudTests
 
 }
 ```
+What to notice in above example code:
+* While HIT does not implement yet another general assertion API it does provide an assertion method `ShouldBeenSuccessful` for use in unit test to assert the result from a HIT *test run* has been successful.
+
 We can now for example use Visual Studio's test explorer to run the tests, again provoking a failed tests to make the result more interesting:
 
 ![](images/test-explorer-output.png?raw=true)
