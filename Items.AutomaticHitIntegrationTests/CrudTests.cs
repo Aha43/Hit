@@ -31,7 +31,9 @@ namespace Items.AutomaticHitIntegrationTests
                 });
         }
 
-        [Fact]
+#pragma warning disable xUnit1004 // Test methods should not be skipped
+        [Fact(Skip = "Need api service running, activate for demo")]
+#pragma warning restore xUnit1004 // Test methods should not be skipped
         public async Task CrudShouldWorkForRestRepositoryAsync()
         {
             var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
