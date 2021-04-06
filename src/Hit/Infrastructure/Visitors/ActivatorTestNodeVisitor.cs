@@ -1,4 +1,4 @@
-﻿using Hit.Exceptions;
+﻿using Hit.Infrastructure.Exceptions;
 using Hit.Specification.User;
 using System;
 

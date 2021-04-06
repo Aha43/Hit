@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hit.Exceptions
+namespace Hit.Infrastructure.Exceptions
 {
     public class FollowingTestNameNullOrSpacesException : ArgumentException
     {

@@ -1,4 +1,4 @@
-﻿using Hit.Attributes;
+﻿using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
 
 namespace HitUnitTests.TrivialSyncTestData

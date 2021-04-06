@@ -1,4 +1,4 @@
-﻿using Hit.Attributes;
+﻿using Hit.Infrastructure.Attributes;
 using Hit.Specification.User;
 using System;
 using System.Linq;

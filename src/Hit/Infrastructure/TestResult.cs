@@ -31,12 +31,11 @@ namespace Hit.Infrastructure
             Status = status;
         }
 
-        internal void Failed(Exception ex, TestFailureSource source)
+        internal void Failed(Exception ex)
         {
             Failure = new TestFailure
             {
-                Exception = ex,
-                Source = source
+                Exception = ex
             };
 
             Status = TestStatus.Failed;

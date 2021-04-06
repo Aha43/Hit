@@ -23,17 +23,17 @@ namespace Hit.Infrastructure.Visitors
 
             var test = node.Test;
 
-            if (await TestAsync(test, node.TestOptions, testResult, TestFailureSource.Test).ConfigureAwait(false))
+            if (await TestAsync(test, node.TestOptions, testResult).ConfigureAwait(false))
             { 
                 testResult.Success();
             }
         }
 
-        private async Task<bool> TestAsync(ITestImpl<World> test, ITestOptions options, TestResult testResult, TestFailureSource source)
+        private async Task<bool> TestAsync(ITestImpl<World> test, ITestOptions options, TestResult testResult)
         {
             var ex = await TestAsync(test, options).ConfigureAwait(false);
             if (ex == null) return true;
-            testResult.Failed(ex, source);
+            testResult.Failed(ex);
             return false;
         }
 

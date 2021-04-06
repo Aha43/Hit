@@ -1,4 +1,4 @@
-﻿using Hit.Attributes;
+﻿using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
 using Hit.Specification.Infrastructure;
 using Items.Domain.Param;

@@ -1,7 +1,7 @@
-﻿using Hit.Exceptions;
+﻿using Hit.Infrastructure.Exceptions;
 using System;
 
-namespace Hit.Attributes
+namespace Hit.Infrastructure.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class UseAs : Attribute

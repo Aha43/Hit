@@ -1,5 +1,5 @@
-﻿using Hit.Exceptions;
-using Hit.Infrastructure;
+﻿using Hit.Infrastructure;
+using Hit.Infrastructure.Exceptions;
 using HitUnitTests.TestDataWithMissingParent;
 using HitUnitTests.TestDataWithTestNameCollision;
 using Xunit;

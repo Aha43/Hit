@@ -1,6 +1,5 @@
-﻿using Hit.Attributes;
+﻿using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
-using Hit.Specification.Infrastructure;
 
 namespace HitUnitTests.TestData
 {
