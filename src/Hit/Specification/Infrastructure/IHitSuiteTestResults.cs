@@ -4,9 +4,9 @@ namespace Hit.Specification.Infrastructure
 {
     public interface IHitSuiteTestResults
     {
-        public string Name { get; }
-        public string Description { get; }
-        public IEnumerable<ITestResultNode> Results { get; }
-        public bool Success();
+        string Name { get; }
+        string Description { get; }
+        IEnumerable<ITestResultNode> Results { get; }
+        bool Success();
     }
 }
