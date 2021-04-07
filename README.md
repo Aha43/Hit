@@ -2,6 +2,8 @@
 
 A  dotnet / c# framework for integration testing where the work of one test can be the build up for the next test.
 
+* [NuGet Package](https://www.nuget.org/packages/Hit/)
+
 ### Example of testing CRUD operations using HIT
 
 HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
