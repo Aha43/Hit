@@ -5,7 +5,7 @@
     <Authors>Arne Halvorsen</Authors>
     <Company />
     <Description>Hierarchical Integration Test framework</Description>
-    <PackageReleaseNotes>Beta</PackageReleaseNotes>
+    <PackageReleaseNotes>Alpha</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/Aha43/Hit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Aha43/Hit</RepositoryUrl>
