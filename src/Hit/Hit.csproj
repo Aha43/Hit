@@ -5,6 +5,13 @@
     <Authors>Arne Halvorsen</Authors>
     <Company />
     <Description>Hierarchical Integration Test framework</Description>
+    <PackageReleaseNotes>Beta</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/Aha43/Hit</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Aha43/Hit</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>testing test-framework integration-testing hierarchically-testing</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
