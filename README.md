@@ -1,3 +1,5 @@
+![](images/logo.png?raw=true)
+
 # HIT - Hierarchically Integration Test framework
 
 A  dotnet / c# framework for integration testing where the work of one test can be the build up for the next test.
