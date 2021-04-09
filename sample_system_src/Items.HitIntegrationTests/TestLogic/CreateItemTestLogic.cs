@@ -7,7 +7,7 @@ using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Items.HitIntegrationTests.TestsImpl
+namespace Items.HitIntegrationTests.TestLogic
 {
     [UseAs(test: "CreateItem")]
     public class CreateItemTestLogic : TestLogicBase<ItemCrudWorld>
