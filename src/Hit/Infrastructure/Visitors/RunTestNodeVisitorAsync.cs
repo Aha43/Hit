@@ -7,13 +7,19 @@ namespace Hit.Infrastructure.Visitors
 {
     internal class RunTestNodeVisitorAsync<World> : AbstractTestNodeVisitorAsync<World>
     {
-        private readonly World _world;
+        private readonly TestContext<World> _context;
 
-        public RunTestNodeVisitorAsync(World world) => _world = world;
+        public RunTestNodeVisitorAsync(TestContext<World> context) => _context = context;
 
         public override async Task VisitAsync(TestNode<World> node, TestNode<World> parent)
         {
             var testResult = node.TestResult as TestResult;
+
+            // Updating test context
+            _context.TestName = node.TestName;
+            _context.ParentTestName = node.ParentTestName;
+            _context.TestResult = testResult;
+            _context.Options = node.TestOptions;
 
             if (parent != null && parent.TestResult.Status != TestStatus.Success)
             {
@@ -23,26 +29,26 @@ namespace Hit.Infrastructure.Visitors
 
             var test = node.Test;
 
-            if (await TestAsync(test, node.TestOptions, testResult).ConfigureAwait(false))
+            if (await TestAsync(test, _context).ConfigureAwait(false))
             { 
                 testResult.Success();
             }
         }
 
-        private async Task<bool> TestAsync(ITestImpl<World> test, ITestOptions options, TestResult testResult)
+        private async Task<bool> TestAsync(ITestLogic<World> test, ITestContext<World> context)
         {
-            var ex = await TestAsync(test, options).ConfigureAwait(false);
+            var ex = await PerformTestAsync(test, context).ConfigureAwait(false);
             if (ex == null) return true;
-            testResult.Failed(ex);
+            (context.TestResult as TestResult)?.Failed(ex);
             return false;
         }
 
-        private async Task<Exception> TestAsync(ITestImpl<World> actor, ITestOptions options)
+        private async Task<Exception> PerformTestAsync(ITestLogic<World> test, ITestContext<World> context)
         {
-            if (actor == default) return null;
+            if (test == default) return null;
             try
             {
-                await actor.TestAsync(_world, options).ConfigureAwait(false);
+                await test.TestAsync(context).ConfigureAwait(false);
                 return null;
             }
             catch (Exception ex)

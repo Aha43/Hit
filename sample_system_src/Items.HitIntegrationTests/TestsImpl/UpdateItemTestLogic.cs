@@ -10,19 +10,21 @@ using System.Threading.Tasks;
 namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "UpdateItem", followingTest: "ReadItemAfterCreate")]
-    public class UpdateItemTestImpl : TestImplBase<ItemCrudWorld>
+    public class UpdateItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 
-        public UpdateItemTestImpl(IItemsRepository repository) => _repository = repository;
+        public UpdateItemTestLogic(IItemsRepository repository) => _repository = repository;
 
-        public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+        public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
             // arrange
+            var newName = "Dragonfly";
+
             var param = new UpdateItemParam
             {
-                Id = world.Id,
-                Name = "DragonFly"
+                Id = testContext.World.Id,
+                Name = newName
             };
 
             // act
@@ -30,11 +32,11 @@ namespace Items.HitIntegrationTests.TestsImpl
 
             // assert
             updated.ShouldNotBe(null);
-            updated.Id.ShouldBe(world.Id);
-            updated.Name.ShouldBe("DragonFly");
+            updated.Id.ShouldBe(testContext.World.Id);
+            updated.Name.ShouldBe(newName);
 
             // change world state
-            world.Name = "DragonFly";
+            testContext.World.Name = newName;
         }
 
     }

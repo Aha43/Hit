@@ -4,7 +4,7 @@ using Hit.Infrastructure.User;
 namespace HitUnitTests.TrivialSyncTestData
 {
     [UseAs(test: "TrivialSyncTestB", followingTest: "TrivialSyncTestA")]
-    public class TestB : TestImplBase<TrivialSyncTestWorld>
+    public class TestB : TestLogicBase<TrivialSyncTestWorld>
     {
     }
 

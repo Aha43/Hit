@@ -1,5 +1,4 @@
 ﻿using Hit.Infrastructure.Visitors;
-using Hit.Specification.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -47,11 +46,10 @@ namespace Hit.Infrastructure
 
         private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
 
-        internal async Task RunTestsAsync(IWorldProvider<World> worldProvider)
+        internal async Task RunTestsAsync(TestContext<World> context)
         {
             Visit(_notRunTestNodeVisitor);
-            var world = worldProvider.Get();
-            var testVisitor = new RunTestNodeVisitorAsync<World>(world);
+            var testVisitor = new RunTestNodeVisitorAsync<World>(context);
             await VisitAsync(testVisitor).ConfigureAwait(false);
         }
 

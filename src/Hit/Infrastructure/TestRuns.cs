@@ -1,9 +1,6 @@
 ﻿using Hit.Infrastructure.Visitors;
-using Hit.Specification.User;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
@@ -31,21 +28,11 @@ namespace Hit.Infrastructure
             }
         }
 
-        internal async Task VisitAsync(AbstractTestNodeVisitorAsync<World> visitor)
-        {
-            foreach (var run in _runs)
-            {
-                await run.VisitAsync(visitor).ConfigureAwait(false);
-            }
-        }
-
-        private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
-
-        internal async Task RunTestsAsync(IWorldProvider<World> worldProvider)
+        internal async Task RunTestsAsync(TestContext<World> testContext)
         {
             for (var i = 0; i < _runs.Length; i++)
             {
-                await _runs[i].RunTestsAsync(worldProvider);
+                await _runs[i].RunTestsAsync(testContext);
             }
         }
 

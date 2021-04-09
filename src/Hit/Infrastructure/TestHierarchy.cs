@@ -69,8 +69,6 @@ namespace Hit.Infrastructure
             }
         }
 
-        internal IEnumerable<TestNode<World>> Roots => _rootNodes.AsReadOnly();
-
         internal IEnumerable<TestNode<World>> Leafs => _leafNodes.AsReadOnly();
 
         private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
@@ -99,14 +97,6 @@ namespace Hit.Infrastructure
             foreach (var root in _rootNodes)
             {
                 Dfs(root, null, visitor);
-            }
-        }
-
-        internal async Task DfsAsync(AbstractTestNodeVisitorAsync<World> visitor)
-        {
-            foreach (var root in _rootNodes)
-            {
-                await DfsAsync(root, null, visitor).ConfigureAwait(false);
             }
         }
 

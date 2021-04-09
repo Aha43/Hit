@@ -4,7 +4,7 @@ using Hit.Infrastructure.User;
 namespace HitUnitTests.TestData
 {
     [UseAs(test: "ThisIsTestA")]
-    public class TestA : TestImplBase<TestWorld>
+    public class TestA : TestLogicBase<TestWorld>
     {
         private ServiceForTest _service;
 

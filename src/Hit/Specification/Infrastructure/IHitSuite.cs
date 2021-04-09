@@ -9,6 +9,6 @@ namespace Hit.Specification.Infrastructure
         string Description { get; }
         Task<IHitSuiteTestResults> RunTestsAsync();
         Task<IHitSuiteTestResults> RunTestRunAsync(string name);
-        ITestImpl<World> GetTest(string name);
+        ITestLogic<World> GetTest(string name);
     }
 }

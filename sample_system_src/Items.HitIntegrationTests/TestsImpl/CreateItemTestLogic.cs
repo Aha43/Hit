@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "CreateItem")]
-    public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
+    public class CreateItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 
-        public CreateItemTestImpl(IItemsRepository repository) => _repository = repository;
+        public CreateItemTestLogic(IItemsRepository repository) => _repository = repository;
 
-        public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+        public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
             // arrange
             var param = new CreateItemParam
@@ -32,8 +32,8 @@ namespace Items.HitIntegrationTests.TestsImpl
             created.Name.ShouldBe("Dragon");
 
             // change world state
-            world.Id = created.Id;
-            world.Name = created.Name;
+            testContext.World.Id = created.Id;
+            testContext.World.Name = created.Name;
         }
 
     }

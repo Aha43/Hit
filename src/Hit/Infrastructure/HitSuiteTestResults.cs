@@ -40,7 +40,7 @@ namespace Hit.Infrastructure
                 return false;
             }
 
-            return node.Next == null ? true : Success(node.Next);
+            return node.Next == null || Success(node.Next);
         }
 
     }

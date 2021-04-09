@@ -1,6 +1,7 @@
 ﻿using Hit.Specification.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Hit.Infrastructure
 {
@@ -20,6 +21,19 @@ namespace Hit.Infrastructure
                 var (name, val) = ParseOptPair(token, s);
                 _opts[name] = val;
             }
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            bool first = true;
+            foreach (var pair in _opts)
+            {
+                if (!first) sb.Append(", ");
+                first = false;
+                sb.Append(pair.Key).Append(" = ").Append(pair.Value);
+            }
+            return sb.ToString();
         }
 
         private (string name, string val) ParseOptPair(string ps, string s)
@@ -47,6 +61,8 @@ namespace Hit.Infrastructure
                 throw new ArgumentException(s, ex);
             }
         }
+
+        public bool None => _opts.Count == 0;
 
         public string Get(string name, string def = null)
         {

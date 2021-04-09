@@ -86,7 +86,13 @@ namespace Hit.Infrastructure
         {
             var testRuns = new TestRuns<World>(_testHierarchy);
 
-            await testRuns.RunTestsAsync(_worldProvider).ConfigureAwait(false);
+            var testContext = new TestContext<World>
+            {
+                SuiteName = Name,
+                World = _worldProvider.Get()
+            };
+
+            await testRuns.RunTestsAsync(testContext).ConfigureAwait(false);
 
             var results = testRuns.CreateTestResults();
 
@@ -97,14 +103,21 @@ namespace Hit.Infrastructure
         {
             var testRun = _testHierarchy.GetNamedTestRun(name);
 
-            await testRun.RunTestsAsync(_worldProvider);
+            var testContext = new TestContext<World>
+            {
+                SuiteName = Name,
+                TestRunName = name,
+                World = _worldProvider.Get()
+            };
+
+            await testRun.RunTestsAsync(testContext);
 
             var results = testRun.GetTestResult();
 
             return new HitSuiteTestResults(Name, Description, results);
         }
 
-        public ITestImpl<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
+        public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
 
     }
 

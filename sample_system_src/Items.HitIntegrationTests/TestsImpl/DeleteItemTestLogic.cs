@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 namespace Items.HitIntegrationTests.TestsImpl
 {
     [UseAs(test: "DeleteItem", followingTest: "ReadItemAfterUpdate")]
-    public class DeleteItemTestImpl : TestImplBase<ItemCrudWorld>
+    public class DeleteItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 
-        public DeleteItemTestImpl(IItemsRepository repository) => _repository = repository;
+        public DeleteItemTestLogic(IItemsRepository repository) => _repository = repository;
 
-        public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+        public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
             // arrange
             var param = new DeleteItemParam
             {
-                Id = world.Id
+                Id = testContext.World.Id
             };
 
             // act
@@ -29,8 +29,8 @@ namespace Items.HitIntegrationTests.TestsImpl
 
             // assert
             deleted.ShouldNotBe(null);
-            deleted.Id.ShouldBe(world.Id);
-            deleted.Name.ShouldBe(world.Name);
+            deleted.Id.ShouldBe(testContext.World.Id);
+            deleted.Name.ShouldBe(testContext.World.Name);
         }
 
     }

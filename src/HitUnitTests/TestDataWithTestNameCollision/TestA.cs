@@ -4,7 +4,7 @@ using Hit.Infrastructure.User;
 namespace HitUnitTests.TestDataWithTestNameCollision
 {
     [UseAs(test: "TestA")]
-    public class TestA : TestImplBase<TestDataWithTestNameCollisionWorld>
+    public class TestA : TestLogicBase<TestDataWithTestNameCollisionWorld>
     {
     }
 

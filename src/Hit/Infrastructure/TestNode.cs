@@ -17,7 +17,7 @@ namespace Hit.Infrastructure
 
         internal string TestName { get; }
 
-        internal ITestImpl<World> Test { get; set; }
+        internal ITestLogic<World> Test { get; set; }
 
         internal ITestResult TestResult { get; }
 

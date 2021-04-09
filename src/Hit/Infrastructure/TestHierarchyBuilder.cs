@@ -27,12 +27,6 @@ namespace Hit.Infrastructure
             return this;
         }
 
-        internal TestHierarchyBuilder<World> Clear()
-        {
-            _types.Clear();
-            return this;
-        }
-
         internal TestHierarchy<World> Build()
         {
             var retVal = new TestHierarchy<World>();
@@ -45,7 +39,7 @@ namespace Hit.Infrastructure
             return retVal;
         }
 
-        private static Type TestImplType => typeof(ITestImpl<World>);
+        private static Type TestImplType => typeof(ITestLogic<World>);
 
     }
 
