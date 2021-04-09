@@ -9,7 +9,7 @@ A  dotnet / c# framework for integration testing where the work of one test can 
 
 ### Example of testing CRUD operations using HIT
 
-HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
+HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test logic implementation that test the creating an item given a repository of items:
 ```csharp
 using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
