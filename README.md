@@ -4,6 +4,7 @@
 
 A  dotnet / c# framework for integration testing where the work of one test can be the build up for the next test.
 
+* [Changelog]()
 * [NuGet Package](https://www.nuget.org/packages/Hit/)
 
 ### Example of testing CRUD operations using HIT
