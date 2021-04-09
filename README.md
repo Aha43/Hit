@@ -66,37 +66,50 @@ What to notice in above example code:
 
 The next code snippet shows implementation of tests that test reading of items from repositories:
 ```csharp
-[UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
-[UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
-[UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", TestRun = "CRUDTestRun")]
-public class ReadItemTestImpl : TestImplBase<ItemCrudWorld>
+using Hit.Infrastructure.Attributes;
+using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
+using Items.Domain.Param;
+using Items.Specification;
+using Shouldly;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Items.HitIntegrationTests.TestLogic
 {
-    private readonly IItemsRepository _repository;
-
-    public ReadItemTestImpl(IItemsRepository repository) => _repository = repository;
-
-    public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+    [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
+    [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
+    [UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", TestRun = "CRUDTestRun")]
+    public class ReadItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
-        // arange
-        var param = new ReadItemParam
-        {
-            Id = world.Id
-        };
+        private readonly IItemsRepository _repository;
 
-        // act
-        var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
+        public ReadItemTestLogic(IItemsRepository repository) => _repository = repository;
 
-        // assert
-        if (options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
+        public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            read.ShouldNotBe(null);
-            read.Id.ShouldBe(world.Id);
-            read.Name.ShouldBe(world.Name);
+            // arange
+            var param = new ReadItemParam
+            {
+                Id = testContext.World.Id
+            };
+
+            // act
+            var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
+
+            // assert
+            if (testContext.Options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
+            {
+                read.ShouldNotBe(null);
+                read.Id.ShouldBe(testContext.World.Id);
+                read.Name.ShouldBe(testContext.World.Name);
+            }
+            else
+            {
+                read.ShouldBeNull();
+            }
         }
-        else
-        {
-            read.ShouldBeNull();
-        }
+
     }
 
 }
