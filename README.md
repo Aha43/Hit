@@ -11,35 +11,47 @@ A  dotnet / c# framework for integration testing where the work of one test can 
 
 HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test implementation that test creating an item given a repository of items:
 ```csharp
-[UseAs(test: "CreateItem")]
-public class CreateItemTestImpl : TestImplBase<ItemCrudWorld>
+using Hit.Infrastructure.Attributes;
+using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
+using Items.Domain.Param;
+using Items.Specification;
+using Shouldly;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Items.HitIntegrationTests.TestsImpl
 {
-    private readonly IItemsRepository _repository;
-
-    public CreateItemTestImpl(IItemsRepository repository) => _repository = repository;
-
-    public override async Task TestAsync(ItemCrudWorld world, ITestOptions options)
+    [UseAs(test: "CreateItem")]
+    public class CreateItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
-        // arrange
-        var param = new CreateItemParam
+        private readonly IItemsRepository _repository;
+
+        public CreateItemTestLogic(IItemsRepository repository) => _repository = repository;
+
+        public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            Name = "Dragon"
-        };
+            // arrange
+            var param = new CreateItemParam
+            {
+                Name = "Dragon"
+            };
 
-        // act
-        var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
+            // act
+            var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
-        // assert
-        created.ShouldNotBe(null);
-        created.Name.ShouldBe("Dragon");
+            // assert
+            created.ShouldNotBe(null);
+            created.Name.ShouldBe("Dragon");
 
-        // change world state
-        world.Id = created.Id;
-        world.Name = created.Name;
+            // change world state
+            testContext.World.Id = created.Id;
+            testContext.World.Name = created.Name;
+        }
+
     }
 
 }
-
 ```
 What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
