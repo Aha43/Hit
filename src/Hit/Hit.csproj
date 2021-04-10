@@ -15,6 +15,7 @@
     <Version>2.0.0</Version>
     <PackageVersion>2.0.0-alpha</PackageVersion>
     <PackageIcon>logo.png</PackageIcon>
+    <Copyright>Copyright © Arne Halvorsen 2021</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
