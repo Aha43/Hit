@@ -6,6 +6,7 @@ namespace Hit.Infrastructure
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string EnvironmentType { get; set; }
         public IServiceCollection Services { get; }
 
         internal HitSuiteOptions()

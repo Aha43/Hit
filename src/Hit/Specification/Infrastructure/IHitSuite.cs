@@ -7,6 +7,7 @@ namespace Hit.Specification.Infrastructure
     {
         string Name { get; }
         string Description { get; }
+        string EnvironmentType { get; }
         Task<IHitSuiteTestResults> RunTestsAsync();
         Task<IHitSuiteTestResults> RunTestRunAsync(string name);
         ITestLogic<World> GetTest(string name);

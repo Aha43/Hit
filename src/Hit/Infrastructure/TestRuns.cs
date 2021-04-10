@@ -1,4 +1,5 @@
 ﻿using Hit.Infrastructure.Visitors;
+using Hit.Specification.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,11 +29,12 @@ namespace Hit.Infrastructure
             }
         }
 
-        internal async Task RunTestsAsync(TestContext<World> testContext)
+        internal async Task RunTestsAsync(TestContext<World> testContext, ITestRunEventHandler<World> testRunEventHandler)
         {
             for (var i = 0; i < _runs.Length; i++)
             {
-                await _runs[i].RunTestsAsync(testContext);
+                var run = _runs[i];
+                await run.RunTestsAsync(testContext, testRunEventHandler).ConfigureAwait(false);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Hit.Infrastructure.Visitors;
+using Hit.Specification.Infrastructure;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -46,11 +47,56 @@ namespace Hit.Infrastructure
 
         private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
 
-        internal async Task RunTestsAsync(TestContext<World> context)
+        internal async Task RunTestsAsync(TestContext<World> context, ITestRunEventHandler<World> testRunEventHandler)
         {
             Visit(_notRunTestNodeVisitor);
             var testVisitor = new RunTestNodeVisitorAsync<World>(context);
+
+            if (testRunEventHandler != null)
+            {
+                await testRunEventHandler.RunStarts(context);
+            }
+
             await VisitAsync(testVisitor).ConfigureAwait(false);
+            
+            if (testRunEventHandler != null)
+            {
+                var handlersContext = ContextForHandler(context);
+                if (handlersContext.TestResult != null && handlersContext.TestResult.Status == TestStatus.Failed)
+                {
+                    await testRunEventHandler.RunFailed(handlersContext);
+                }
+                else
+                {
+                    await testRunEventHandler.RunEnded(handlersContext);
+                }
+            }
+        }
+
+        private TestContext<World> ContextForHandler(TestContext<World> context)
+        {
+            var retVal = new TestContext<World>
+            {
+                World = context.World,
+                EnvironmentType = context.EnvironmentType,
+                SuiteName = context.SuiteName,
+                TestRunName = context.TestRunName
+            };
+
+            foreach (var node in _testNodes)
+            {
+                if (node.TestResult.Status == TestStatus.Failed)
+                {
+                    retVal.ParentTestName = node.ParentTestName;
+                    retVal.TestName = node.TestName;
+                    retVal.TestResult = node.TestResult;
+                    retVal.Options = node.TestOptions;
+                }
+
+                return retVal;
+            }
+
+            return retVal;
         }
 
         internal TestResultNode GetTestResult()

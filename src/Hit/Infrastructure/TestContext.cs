@@ -7,11 +7,12 @@ namespace Hit.Infrastructure
     {
         public TheWorld World { get; set; }
 
-        public string SuiteName { get; set; } //
-        public string TestRunName { get; set; } //
-        public string ParentTestName { get; set; } //
-        public string TestName { get; set; } //
-        public ITestResult TestResult { get; set; } //
+        public string SuiteName { get; set; } 
+        public string EnvironmentType { get; set; }
+        public string TestRunName { get; set; } 
+        public string ParentTestName { get; set; } 
+        public string TestName { get; set; } 
+        public ITestResult TestResult { get; set; } 
 
         public ITestOptions Options { get; set; }
 
@@ -22,6 +23,11 @@ namespace Hit.Infrastructure
             if (!string.IsNullOrWhiteSpace(SuiteName))
             {
                 sb.Append(nameof(SuiteName)).Append(" = ").Append(SuiteName);
+            }
+            if (!string.IsNullOrWhiteSpace(EnvironmentType))
+            {
+                if (sb.Length > 0) sb.Append(", ");
+                sb.Append(nameof(EnvironmentType)).Append(" = ").Append(EnvironmentType);
             }
             if (!string.IsNullOrWhiteSpace(TestRunName))
             {

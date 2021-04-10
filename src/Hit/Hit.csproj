@@ -12,8 +12,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>testing test-framework integration-testing hierarchically-testing</PackageTags>
-    <Version>1.0.2</Version>
-    <PackageVersion>1.0.2-alpha</PackageVersion>
+    <Version>2.0.0</Version>
+    <PackageVersion>2.0.0-alpha</PackageVersion>
     <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
