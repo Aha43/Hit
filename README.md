@@ -79,7 +79,7 @@ namespace Items.HitIntegrationTests.TestLogic
 {
     [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
     [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
-    [UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", TestRun = "CRUDTestRun")]
+    [UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", TestRun = "crud_test_run")]
     public class ReadItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
@@ -269,19 +269,19 @@ public class CrudTests
 
     public CrudTests()
     {
-        _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
+       _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
             .AddSuite(o =>
             {
                 o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
-
-                o.Name = "REST consuming repository test";
+                o.EnvironmentType = "test_env";
+                o.Name = "rest_consuming_repository_test";
                 o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
             })
             .AddSuite(o =>
             {
                 o.Services.ConfigureInMemoryRepositoryServices();
-
-                o.Name = "In memory repository test";
+                o.EnvironmentType = "test_env";
+                o.Name = "in_memory_repository_test";
                 o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
             });
     }
@@ -289,16 +289,16 @@ public class CrudTests
     [Fact]
     public async Task CrudShouldWorkForRestRepositoryAsync()
     {
-        var suite = _repositoryTestSuites.GetNamedSuite("REST consuming repository test");
-        var results = await suite.RunTestRunAsync("CRUDTestRun").ConfigureAwait(false);
+        var suite = _repositoryTestSuites.GetNamedSuite("rest_consuming_repository_test");
+        var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
         results.ShouldBeenSuccessful();
     }
 
     [Fact]
     public async Task CrudShouldWorkForInMemoryRepositoryAsync()
     {
-        var suite = _repositoryTestSuites.GetNamedSuite("In memory repository test");
-        var results = await suite.RunTestRunAsync("CRUDTestRun").ConfigureAwait(false);
+        var suite = _repositoryTestSuites.GetNamedSuite("in_memory_repository_test");
+        var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
         results.ShouldBeenSuccessful();
     }
 
