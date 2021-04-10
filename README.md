@@ -121,7 +121,7 @@ What to notice in above example code:
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 * The `TestRun` parameter to the `UseAs` can be used to name a *test run* that ends at that test, section [Using unit test frameworks to run HIT integration tests](https://github.com/Aha43/Hit/blob/main/README.md#using-unit-test-frameworks-to-run-hit-integration-tests) will show the usefulness of this when using a unit test framework to run HIT integration *test runs*.
 
-See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestsLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) that
+See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) that
 1. Create an item (test named *CreateItem*).
 2. Read created item (test named *ReadItemAfterCreate*)
 3. Update the item (test named *UpdateItem*)
