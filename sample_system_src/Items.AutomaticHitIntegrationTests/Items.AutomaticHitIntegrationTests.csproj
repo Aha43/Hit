@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\sample_system_src\Items.HitIntegrationTests\Items.HitIntegrationTests.csproj" />
+    <ProjectReference Include="..\Items.HitIntegrationTests\Items.HitIntegrationTests.csproj" />
   </ItemGroup>
 
 </Project>

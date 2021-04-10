@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HitIntegrationTests", "HitI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.HitIntegrationTests", "sample_system_src\Items.HitIntegrationTests\Items.HitIntegrationTests.csproj", "{8152E79A-E390-48F0-A539-B215F89AFE07}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.AutomaticHitIntegrationTests", "Items.AutomaticHitIntegrationTests\Items.AutomaticHitIntegrationTests.csproj", "{37264311-A015-4C45-B564-B0F5C5269881}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.AutomaticHitIntegrationTests", "sample_system_src\Items.AutomaticHitIntegrationTests\Items.AutomaticHitIntegrationTests.csproj", "{37264311-A015-4C45-B564-B0F5C5269881}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{271AFA08-AF10-4C89-9E00-857172C49DA8}"
 EndProject
