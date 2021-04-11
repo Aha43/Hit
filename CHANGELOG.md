@@ -1,7 +1,17 @@
 
 # Changelog
 
+<!--
 ## Unreleased
+-->
+## 3.0.1-alpha
+
+### Fix
+
+* Fix that dependency injection do not work for IWorldProvider and ITestRunEventHandler implementations
+* Fix that TestRun property not sat in TestContext passed to test and event handler
+
+## 3.0.0-alpha
 
 ### Change
 
