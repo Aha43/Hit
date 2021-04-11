@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 3.1.0-alpha
+
+### New
+
+* Made TestRun UseAs attribute value "!" mean use test name as run test name
+
 ## 3.0.1-alpha
 
 ### Fix
