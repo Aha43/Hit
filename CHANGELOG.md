@@ -1,9 +1,6 @@
 
 # Changelog
 
-<!--
-## Unreleased
--->
 ## 3.0.1-alpha
 
 ### Fix
