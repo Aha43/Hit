@@ -10,6 +10,8 @@
 ### New
 
 * Adapter class for ITestRunEventHandler (TestRunEventHandlerAdapter) so need only implement wanted callbacks
+* In an IHitSuites suites must have unique name
+* IHitSuites.GetNamedSuite throws exception if suite not found, better for automatic testing
 
 ## 2.0.0-alpha
 
