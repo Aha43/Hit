@@ -1,21 +1,17 @@
-﻿using Hit.Specification.Infrastructure;
+﻿using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
 using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests
 {
-    public class CrudTestRunEventHandler : ITestRunEventHandler<ItemCrudWorld>
+    public class CrudTestRunEventHandler : TestRunEventHandlerAdapter<ItemCrudWorld>
     {
-        public Task RunEnded(ITestContext<ItemCrudWorld> context)
+        public override async Task RunFailed(ITestContext<ItemCrudWorld> context)
         {
-            return Task.CompletedTask;
+            await DoSomethingAsync();
         }
 
-        public Task RunFailed(ITestContext<ItemCrudWorld> context)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task RunStarts(ITestContext<ItemCrudWorld> context)
+        private static Task DoSomethingAsync()
         {
             return Task.CompletedTask;
         }

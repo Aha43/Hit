@@ -1,7 +1,8 @@
-﻿using Hit.Specification.User;
+﻿using Hit.Specification.Infrastructure;
+using Hit.Specification.User;
 using System.Threading.Tasks;
 
-namespace Hit.Specification.Infrastructure
+namespace Hit.Specification.User
 {
     public interface ITestRunEventHandler<World> : IHitType<World>
     {

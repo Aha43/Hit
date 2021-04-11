@@ -1,4 +1,4 @@
-﻿namespace Hit.Specification.User
+﻿namespace Hit.Specification.Infrastructure
 {
     public interface IHitType<World>
     {

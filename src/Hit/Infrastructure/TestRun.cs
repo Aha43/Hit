@@ -1,5 +1,6 @@
 ﻿using Hit.Infrastructure.Visitors;
 using Hit.Specification.Infrastructure;
+using Hit.Specification.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
