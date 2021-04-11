@@ -1,6 +1,16 @@
 
 # Changelog
 
+## Unreleased
+
+### Change
+
+* IHitType and ITestRunEventHandler changed namespace
+
+### New
+
+* Adapter class for ITestRunEventHandler (TestRunEventHandlerAdapter) so need only implement wanted callbacks
+
 ## 2.0.0-alpha
 
 ### Change
