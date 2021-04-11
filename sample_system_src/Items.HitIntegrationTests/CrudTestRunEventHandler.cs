@@ -1,11 +1,19 @@
 ﻿using Hit.Infrastructure.User;
 using Hit.Specification.Infrastructure;
+using Items.Specification;
 using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests
 {
     public class CrudTestRunEventHandler : TestRunEventHandlerAdapter<ItemCrudWorld>
     {
+        private IItemsRepository _repo;
+
+        public CrudTestRunEventHandler(IItemsRepository repo)
+        {
+            _repo = repo; // just to show injection works :)
+        }
+
         public override async Task RunFailed(ITestContext<ItemCrudWorld> context)
         {
             await DoSomethingAsync();

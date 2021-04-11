@@ -10,8 +10,12 @@ namespace Hit.Infrastructure
     {
         private readonly TestNode<World>[] _testNodes;
 
+        internal string Name { get; private set; }
+
         internal TestRun(TestHierarchy<World> hierarchy, TestNode<World> last)
         {
+            Name = last.TestRun;
+
             var stack = new Stack<TestNode<World>>();
 
             var current = last;
@@ -50,6 +54,8 @@ namespace Hit.Infrastructure
 
         internal async Task RunTestsAsync(TestContext<World> context, ITestRunEventHandler<World> testRunEventHandler)
         {
+            context.TestRunName = Name;
+
             Visit(_notRunTestNodeVisitor);
             var testVisitor = new RunTestNodeVisitorAsync<World>(context);
 

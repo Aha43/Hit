@@ -67,11 +67,11 @@ namespace Hit.Infrastructure
             {
                 if (WorldProviderType.IsAssignableFrom(type))
                 {
-                    AddWorldProvider(type, services);
+                    services.AddSingleton(typeof(IWorldProvider<World>), type);
                 }
                 if (TestRunEventHandlerType.IsAssignableFrom(type))
                 {
-                    AddTestRunEventHandler(type, services);
+                    services.AddSingleton(typeof(ITestRunEventHandler<World>), type);
                 }
                 else
                 {
@@ -80,18 +80,6 @@ namespace Hit.Infrastructure
             }
 
             return services.BuildServiceProvider();
-        }
-
-        private void AddWorldProvider(Type type, IServiceCollection services)
-        {
-            var instance = Activator.CreateInstance(type) as IWorldProvider<World>;
-            services.AddSingleton(instance);
-        }
-
-        private void AddTestRunEventHandler(Type type, IServiceCollection services)
-        {
-            var instance = Activator.CreateInstance(type) as ITestRunEventHandler<World>;
-            services.AddSingleton(instance);
         }
 
         private void ActivateTests()
