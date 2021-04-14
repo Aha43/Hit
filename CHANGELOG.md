@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 4.0.0-alpha
+
+## Changes
+
+* Lot of breaking changes relating to only support running of named run in named suite.
+
 ## 3.1.0-alpha
 
 ### New
