@@ -5,7 +5,7 @@
 
 ## Changes
 
-* Lot of breaking changes relating to only support running of named run in named suite.
+* Lot of breaking changes relating to only support running of a named run in a named suite.
 
 ## 3.1.0-alpha
 
