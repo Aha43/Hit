@@ -5,6 +5,7 @@ using Items.Infrastructure.Repository.InMemory;
 using Items.Infrastructure.Repository.Rest;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Items.AutomaticHitIntegrationTests
 {
@@ -12,8 +13,12 @@ namespace Items.AutomaticHitIntegrationTests
     {
         private readonly HitSuites<ItemCrudWorld> _repositoryTestSuites;
 
-        public CrudTests()
+        private readonly ITestOutputHelper _testOutput;
+
+        public CrudTests(ITestOutputHelper testOutput)
         {
+            _testOutput = testOutput;
+
             _repositoryTestSuites = new HitSuites<ItemCrudWorld>()
                 .AddSuite(o =>
                 {
@@ -39,7 +44,7 @@ namespace Items.AutomaticHitIntegrationTests
         {
             var suite = _repositoryTestSuites.GetNamedSuite("rest_consuming_repository_test");
             var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
-            results.ShouldBeenSuccessful();
+            results.ShouldBeenSuccessful(_testOutput.WriteLine);
         }
 
         [Fact]
@@ -47,7 +52,7 @@ namespace Items.AutomaticHitIntegrationTests
         {
             var suite = _repositoryTestSuites.GetNamedSuite("in_memory_repository_test");
             var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
-            results.ShouldBeenSuccessful();
+            results.ShouldBeenSuccessful(_testOutput.WriteLine);
         }
 
     }
