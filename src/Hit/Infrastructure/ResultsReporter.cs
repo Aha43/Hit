@@ -8,12 +8,7 @@ namespace Hit.Infrastructure
         public static string Report(ITestRunResult results)
         {
             var sb = new StringBuilder();
-            Report(results, sb);
-            return sb.ToString();
-        }
 
-        private static void Report(ITestRunResult results, StringBuilder sb)
-        {
             if (!string.IsNullOrWhiteSpace(results.SuiteName))
             {
                 sb.Append("Suite: ")
@@ -21,14 +16,21 @@ namespace Hit.Infrastructure
             }
             if (!string.IsNullOrWhiteSpace(results.SuiteDescription))
             {
-                sb.Append("Description: ")
+                sb.Append("Suite description: ")
                   .AppendLine(results.SuiteDescription);
+            }
+            if (!string.IsNullOrWhiteSpace(results.RunName))
+            {
+                sb.Append("Run name: ")
+                  .AppendLine(results.RunName);
             }
 
             foreach (var resultNode in results.Results)
             {
                 Report(resultNode, 1, sb);
             }
+
+            return sb.ToString();
         }
 
         private const string Indent = "  ";

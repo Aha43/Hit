@@ -7,6 +7,22 @@ namespace Items.HitIntegrationTests
 {
     class Program
     {
+        // The single suite example
+        //static async Task Main(string[] args)
+        //{
+        //    var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o => {
+        //        o.Services.ConfigureInMemoryRepositoryServices();
+
+        //        o.Name = "in_memory_repository_test";
+        //        o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
+        //    });
+
+        //    var result = await inMemoryRepositoryTestSuite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
+        //    var report = ResultsReporterUtil.Report(result);
+        //    System.Console.WriteLine(report);
+        //    System.Console.ReadLine();
+        //}
+
         static async Task Main(string[] args)
         {
             var repositoryTestSuites = new HitSuites<ItemCrudWorld>()
