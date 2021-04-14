@@ -166,20 +166,23 @@ var repositoryTestSuites = new HitSuites<ItemCrudWorld>()
     {
         o.Services.ConfigureRestRepositoryServices("https://localhost:44356/");
 
-        o.Name = "REST consuming repository test";
+        o.Name = "rest_consuming_repository_test";
         o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.Rest.ItemsRepository).FullName;
     })
     .AddSuite(o =>
     {
         o.Services.ConfigureInMemoryRepositoryServices();
 
-        o.Name = "In memory repository test";
+        o.Name = "in_memory_repository_test";
         o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
     });
 
-var result = await repositoryTestSuites.RunTestsAsync().ConfigureAwait(false);
+var result = await repositoryTestSuites.RunTestRunAsync("rest_consuming_repository_test", "crud_test_run").ConfigureAwait(false);
+var report = ResultsReporterUtil.Report(result);
+System.Console.WriteLine(report);
 
-var report = new ResultsReporter().Report(result);
+result = await repositoryTestSuites.RunTestRunAsync("in_memory_repository_test", "crud_test_run").ConfigureAwait(false);
+report = ResultsReporterUtil.Report(result);
 System.Console.WriteLine(report);
 ```
 An 'all green' output from the above look like this:
