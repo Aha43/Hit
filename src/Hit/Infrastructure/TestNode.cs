@@ -1,5 +1,4 @@
-﻿using Hit.Specification;
-using Hit.Specification.Infrastructure;
+﻿using Hit.Specification.Infrastructure;
 using Hit.Specification.User;
 using System;
 

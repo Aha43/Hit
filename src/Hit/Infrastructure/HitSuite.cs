@@ -98,22 +98,9 @@ namespace Hit.Infrastructure
             };
         }
 
-        public async Task<IHitSuiteTestResults> RunTestsAsync()
+        public async Task<ITestRunResult> RunTestRunAsync(string runName)
         {
-            var testRuns = new TestRuns<World>(_testHierarchy);
-
-            var testContext = CreateContextForSuite();
-
-            await testRuns.RunTestsAsync(testContext, _testRunEventHandler).ConfigureAwait(false);
-
-            var results = testRuns.CreateTestResults();
-
-            return new HitSuiteTestResults(Name, Description, results);
-        }
-
-        public async Task<IHitSuiteTestResults> RunTestRunAsync(string name)
-        {
-            var testRun = _testHierarchy.GetNamedTestRun(name);
+            var testRun = _testHierarchy.GetNamedTestRun(runName);
 
             var testContext = CreateContextForSuite();
 
@@ -121,7 +108,7 @@ namespace Hit.Infrastructure
 
             var results = testRun.GetTestResult();
 
-            return new HitSuiteTestResults(Name, Description, results);
+            return new TestRunResult(Name, Description, runName, results);
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;

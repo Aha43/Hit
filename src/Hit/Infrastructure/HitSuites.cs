@@ -2,7 +2,6 @@
 using Hit.Specification.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
@@ -27,8 +26,6 @@ namespace Hit.Infrastructure
             _suites.Add(suite.Name, suite);
             return this;
         }
-
-        public IEnumerable<IHitSuite<World>> Suites => _suites.Values;
         
         public IHitSuite<World> GetNamedSuite(string name)
         {
@@ -40,16 +37,11 @@ namespace Hit.Infrastructure
             throw new SuiteNotFoundException(name);
         }
 
-        public async Task<IEnumerable<IHitSuiteTestResults>> RunTestsAsync()
+        public async Task<ITestRunResult> RunTestRunAsync(string suiteName, string runName)
         {
-            var suites = Suites.ToArray();
-            var n = suites.Length;
-            var retVal = new IHitSuiteTestResults[n];
-            for (var i = 0; i < n; i++)
-            {
-                retVal[i] = await suites[i].RunTestsAsync().ConfigureAwait(false);
-            }
-            return retVal;
+            var suite = GetNamedSuite(suiteName);
+            var results = await suite.RunTestRunAsync(runName).ConfigureAwait(false);
+            return results;
         }
 
     }

@@ -6,14 +6,12 @@ namespace Hit.Infrastructure
     public class TestContext<TheWorld> : ITestContext<TheWorld>
     {
         public TheWorld World { get; set; }
-
         public string SuiteName { get; set; } 
         public string EnvironmentType { get; set; }
         public string TestRunName { get; set; } 
         public string ParentTestName { get; set; } 
         public string TestName { get; set; } 
         public ITestResult TestResult { get; set; } 
-
         public ITestOptions Options { get; set; }
 
         public override string ToString()

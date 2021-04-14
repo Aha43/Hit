@@ -13,10 +13,10 @@ namespace HitUnitTests
         {
             var hit = new HitSuite<TrivialSyncTestWorld>();
 
-            var result = await hit.RunTestsAsync().ConfigureAwait(false);
+            var result = await hit.RunTestRunAsync("TrivialSyncTestB").ConfigureAwait(false);
 
             var resultRoot = Assert.Single(result.Results);
-            
+
             Assert.Equal("TrivialSyncTestA", resultRoot.TestResult.TestName);
             Assert.True(resultRoot.TestResult.Status == TestStatus.Success);
 

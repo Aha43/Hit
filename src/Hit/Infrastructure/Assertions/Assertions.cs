@@ -5,11 +5,11 @@ namespace Hit.Infrastructure.Assertions
 {
     public static class Assertions
     {
-        public static void ShouldBeenSuccessful(this IHitSuiteTestResults results)
+        public static void ShouldBeenSuccessful(this ITestRunResult results)
         {
             if (!results.Success())
             {
-                var rapport = new ResultsReporter().Report(results);
+                var rapport = ResultsReporterUtil.Report(results);
                 throw new HitTestsFailedException(rapport);
             }
         }

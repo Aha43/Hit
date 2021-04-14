@@ -1,4 +1,6 @@
-﻿namespace Hit.Specification.Infrastructure
+﻿using System;
+
+namespace Hit.Specification.Infrastructure
 {
     public interface ITestContext<TheWorld>
     {

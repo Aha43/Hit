@@ -1,40 +1,28 @@
 ﻿using Hit.Specification.Infrastructure;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Hit.Infrastructure
 {
-    public class ResultsReporter : IResultsReporter
+    public static class ResultsReporterUtil
     {
-        public string Report(IHitSuiteTestResults results)
+        public static string Report(ITestRunResult results)
         {
             var sb = new StringBuilder();
             Report(results, sb);
             return sb.ToString();
         }
 
-        public string Report(IEnumerable<IHitSuiteTestResults> results)
+        private static void Report(ITestRunResult results, StringBuilder sb)
         {
-            var sb = new StringBuilder();
-            foreach (var res in results)
-            {
-                Report(res, sb);
-                sb.AppendLine();
-            }
-            return sb.ToString();
-        }
-
-        private void Report(IHitSuiteTestResults results, StringBuilder sb)
-        {
-            if (!string.IsNullOrWhiteSpace(results.Name))
+            if (!string.IsNullOrWhiteSpace(results.SuiteName))
             {
                 sb.Append("Suite: ")
-                  .AppendLine(results.Name);
+                  .AppendLine(results.SuiteName);
             }
-            if (!string.IsNullOrWhiteSpace(results.Description))
+            if (!string.IsNullOrWhiteSpace(results.SuiteDescription))
             {
                 sb.Append("Description: ")
-                  .AppendLine(results.Description);
+                  .AppendLine(results.SuiteDescription);
             }
 
             foreach (var resultNode in results.Results)
@@ -45,7 +33,7 @@ namespace Hit.Infrastructure
 
         private const string Indent = "  ";
 
-        private void Report(ITestResultNode resultNode, int level, StringBuilder sb)
+        private static void Report(ITestResultNode resultNode, int level, StringBuilder sb)
         {
             for (var i = 0; i < level; i++) sb.Append(Indent);
             Report(resultNode.TestResult, sb);
@@ -55,7 +43,7 @@ namespace Hit.Infrastructure
             }
         }
 
-        private void Report(ITestResult result, StringBuilder sb)
+        private static void Report(ITestResult result, StringBuilder sb)
         {
             sb.Append("Test: ")
               .Append(result.TestName)
@@ -68,7 +56,7 @@ namespace Hit.Infrastructure
             }
         }
 
-        private void Report(ITestFailure failure, StringBuilder sb)
+        private static void Report(ITestFailure failure, StringBuilder sb)
         {
             sb.AppendLine("!!!");
             if (failure.Exception != null)

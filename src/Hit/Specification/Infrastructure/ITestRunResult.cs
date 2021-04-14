@@ -2,10 +2,11 @@
 
 namespace Hit.Specification.Infrastructure
 {
-    public interface IHitSuiteTestResults
+    public interface ITestRunResult
     {
-        string Name { get; }
-        string Description { get; }
+        string SuiteName { get; }
+        string SuiteDescription { get; }
+        string RunName { get; }
         IEnumerable<ITestResultNode> Results { get; }
         bool Success();
     }
