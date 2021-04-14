@@ -133,7 +133,6 @@ The next code snippet show how to test a system configuration with the defined t
 ```csharp
 var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o => {
     o.Services.ConfigureInMemoryRepositoryServices();
-
     o.Name = "in_memory_repository_test";
     o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
 });
