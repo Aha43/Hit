@@ -121,7 +121,7 @@ What to notice in above example code:
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 * The `TestRun` parameter to the `UseAs` names a *test run* that ends at that test, here ends at the test named *ReadItemAfterDelete* and the run is named *crud_test_run* (if is is ok to name the test run the same as the last test in the run the this can be done by giving the `TestRun` parameter the value `'!'`).
 
-See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) that
+See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) named *crud_test_run* that
 1. Create an item (test named *CreateItem*).
 2. Read created item (test named *ReadItemAfterCreate*)
 3. Update the item (test named *UpdateItem*)
