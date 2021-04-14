@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 4.0.0-alpha
+
+## Changes
+
+* Lot of breaking changes relating to only support running of named run in named suite.
+
 ## 3.1.0-alpha
 
 ### New
@@ -11,7 +17,7 @@
 
 ### Fix
 
-* Fix that dependency injection do not work for IWorldProvider and ITestRunEventHandler implementations
+* Fix that dependency injection did not work for IWorldProvider and ITestRunEventHandler implementations
 * Fix that TestRun property not sat in TestContext passed to test and event handler
 
 ## 3.0.0-alpha
