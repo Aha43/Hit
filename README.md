@@ -131,18 +131,17 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 
 The next code snippet show how to test a system configuration with the defined test run:
 ```csharp
-var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o =>
-{
+var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o => {
     o.Services.ConfigureInMemoryRepositoryServices();
 
-    o.Name = "In memory repository test";
+    o.Name = "in_memory_repository_test";
     o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
 });
 
-var result = await inMemoryRepositoryTestSuite.RunTestsAsync().ConfigureAwait(false);
-
-var report = new ResultsReporter().Report(result);
+var result = await inMemoryRepositoryTestSuite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
+var report = ResultsReporterUtil.Report(result);
 System.Console.WriteLine(report);
+System.Console.ReadLine();
 ```
 What to notice in above example code:
 * It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
