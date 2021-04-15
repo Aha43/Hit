@@ -20,7 +20,7 @@ using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Items.HitIntegrationTests.TestLogic
+namespace Items.HitIntegrationTests.TestLogic 
 {
     [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
     [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
