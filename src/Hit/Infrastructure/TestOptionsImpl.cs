@@ -62,17 +62,41 @@ namespace Hit.Infrastructure
             }
         }
 
-        public bool None => _opts.Count == 0;
-
-        public string Get(string name, string def = null)
+        public string Get(string name)
         {
             if (_opts.TryGetValue(name, out string val)) return val;
-            return def;
+            return null;
         }
 
-        public bool Equals(string name, string val, string def = null) => val.Equals(Get(name, def), StringComparison.Ordinal);
+        public bool GetAsBoolean(string name, bool def = false)
+        {
+            var o = Get(name);
+            return (o == null) ? def : bool.Parse(o);
+        }
 
-        public bool EqualsIgnoreCase(string name, string val, string def = null) => val.Equals(Get(name, def), StringComparison.OrdinalIgnoreCase);
+        public int GetAsInt(string name, int def = 0)
+        {
+            var o = Get(name);
+            return (o == null) ? def : int.Parse(o);
+        }
+
+        public decimal GetAsDecimal(string name, decimal def = 0.0M)
+        {
+            var o = Get(name);
+            return (o == null) ? def : decimal.Parse(o);
+        }
+
+        public bool None => _opts.Count == 0;
+
+        //public string Get(string name, string def = null)
+        //{
+        //    if (_opts.TryGetValue(name, out string val)) return val;
+        //    return def;
+        //}
+
+        //public bool Equals(string name, string val, string def = null) => val.Equals(Get(name, def), StringComparison.Ordinal);
+
+        //public bool EqualsIgnoreCase(string name, string val, string def = null) => val.Equals(Get(name, def), StringComparison.OrdinalIgnoreCase);
 
     }
 

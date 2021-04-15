@@ -30,16 +30,15 @@ namespace Items.HitIntegrationTests.TestLogic
             var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
 
             // assert
-            if (testContext.Options.EqualsIgnoreCase("expectToFind", "true", def: "true"))
+            if (testContext.Options.GetAsBoolean("expectToFind", true))
             {
                 read.ShouldNotBe(null);
                 read.Id.ShouldBe(testContext.World.Id);
                 read.Name.ShouldBe(testContext.World.Name);
+                return;   
             }
-            else
-            {
-                read.ShouldBeNull();
-            }
+
+            read.ShouldBeNull();
         }
 
     }
