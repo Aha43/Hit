@@ -18,20 +18,16 @@ namespace Items.HitIntegrationTests.TestLogic
 
         public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            // arrange
             var param = new CreateItemParam
             {
                 Name = "Dragon"
             };
 
-            // act
             var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
-            // assert
             created.ShouldNotBe(null);
             created.Name.ShouldBe("Dragon");
 
-            // change world state
             testContext.World.Id = created.Id;
             testContext.World.Name = created.Name;
         }

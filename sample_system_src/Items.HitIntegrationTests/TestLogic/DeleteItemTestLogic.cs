@@ -18,16 +18,13 @@ namespace Items.HitIntegrationTests.TestLogic
 
         public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            // arrange
             var param = new DeleteItemParam
             {
                 Id = testContext.World.Id
             };
 
-            // act
             var deleted = await _repository.DeleteAsync(param, CancellationToken.None).ConfigureAwait(false);
 
-            // assert
             deleted.ShouldNotBe(null);
             deleted.Id.ShouldBe(testContext.World.Id);
             deleted.Name.ShouldBe(testContext.World.Name);

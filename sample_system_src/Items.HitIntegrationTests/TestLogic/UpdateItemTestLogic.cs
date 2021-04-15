@@ -18,7 +18,6 @@ namespace Items.HitIntegrationTests.TestLogic
 
         public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            // arrange
             var newName = "Dragonfly";
 
             var param = new UpdateItemParam
@@ -27,17 +26,15 @@ namespace Items.HitIntegrationTests.TestLogic
                 Name = newName
             };
 
-            // act
             var updated = await _repository.UpdateAsync(param, CancellationToken.None).ConfigureAwait(false);
 
-            // assert
             updated.ShouldNotBe(null);
             updated.Id.ShouldBe(testContext.World.Id);
             updated.Name.ShouldBe(newName);
 
-            // change world state
             testContext.World.Name = newName;
         }
 
     }
+
 }
