@@ -8,7 +8,7 @@ namespace Hit.Specification.Infrastructure
         ITestOptions Options { get; }
         ITestResult TestResult { get; }
         string SuiteName { get; }
-        string TestRunName { get; }
+        string UnitTest { get; }
         string ParentTestName { get; }
         string TestName { get; }
     }

@@ -6,12 +6,12 @@ namespace Hit.Infrastructure.Assertions
 {
     public static class Assertions
     {
-        public static void ShouldBeenSuccessful(this ITestRunResult results, Action<string> logIfSuccessful = null)
+        public static void ShouldBeenSuccessful(this IUnitTestResult results, Action<string> logIfSuccessful = null)
         {
             if (!results.Success())
             {
                 var report = ResultsReporterUtil.Report(results);
-                throw new TestRunFailedException(report);   
+                throw new UnitTestFailedException(report);   
             }
             if (logIfSuccessful != null)
             {

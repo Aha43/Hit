@@ -5,7 +5,7 @@ namespace Hit.Infrastructure
 {
     public static class ResultsReporterUtil
     {
-        public static string Report(ITestRunResult results)
+        public static string Report(IUnitTestResult results)
         {
             var sb = new StringBuilder();
 
@@ -19,10 +19,10 @@ namespace Hit.Infrastructure
                 sb.Append("Suite description: ")
                   .AppendLine(results.SuiteDescription);
             }
-            if (!string.IsNullOrWhiteSpace(results.RunName))
+            if (!string.IsNullOrWhiteSpace(results.UnitTest))
             {
-                sb.Append("Run name: ")
-                  .AppendLine(results.RunName);
+                sb.Append("Unit test name: ")
+                  .AppendLine(results.UnitTest);
             }
 
             foreach (var resultNode in results.Results)

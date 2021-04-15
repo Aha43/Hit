@@ -10,7 +10,7 @@ namespace Hit.Infrastructure
 
         internal ITestOptions TestOptions { get; }
 
-        internal string TestRun { get; }
+        internal string UnitTest { get; }
 
         internal string ParentTestName { get; }
 
@@ -25,14 +25,14 @@ namespace Hit.Infrastructure
             string testName, 
             string parentTestName, 
             string testOptionsSpec,
-            string testRun)
+            string unitTest)
         {
             TestImplementationType = testImplementationType;
             TestName = testName;
             ParentTestName = parentTestName;
             TestResult = new TestResult(TestName);
             TestOptions = (testOptionsSpec == null) ? TestOptionsImpl.Empty : new TestOptionsImpl(testOptionsSpec);
-            TestRun = testRun;
+            UnitTest = unitTest;
         }
 
         internal TestNode(TestNode<World> other)
@@ -42,7 +42,7 @@ namespace Hit.Infrastructure
             ParentTestName = other.ParentTestName;
             TestResult = new TestResult(TestName);
             TestOptions = other.TestOptions;
-            TestRun = other.TestRun;
+            UnitTest = other.UnitTest;
             Test = other.Test;
         }
 

@@ -17,7 +17,7 @@ namespace Hit.Infrastructure
 
         private readonly IWorldProvider<World> _worldProvider;
 
-        private readonly ITestRunEventHandler<World> _testRunEventHandler;
+        private readonly IUnitTestEventHandler<World> _unitTestEventHandler;
 
         public string Name { get; }
         public string Description { get; }
@@ -41,7 +41,7 @@ namespace Hit.Infrastructure
             ActivateTests();
 
             _worldProvider = _serviceProvider.GetRequiredService<IWorldProvider<World>>();
-            _testRunEventHandler = _serviceProvider.GetService<ITestRunEventHandler<World>>();
+            _unitTestEventHandler = _serviceProvider.GetService<IUnitTestEventHandler<World>>();
         }
 
         private IEnumerable<Type> FindTestImplTypes()
@@ -57,7 +57,7 @@ namespace Hit.Infrastructure
         }
 
         private static Type WorldProviderType => typeof(IWorldProvider<World>);
-        private static Type TestRunEventHandlerType => typeof(ITestRunEventHandler<World>);
+        private static Type UnitTestEventHandlerType => typeof(IUnitTestEventHandler<World>);
 
         private IServiceProvider ConfigureTestServices(IEnumerable<Type> types, HitSuiteOptions opt)
         {
@@ -69,9 +69,9 @@ namespace Hit.Infrastructure
                 {
                     services.AddSingleton(typeof(IWorldProvider<World>), type);
                 }
-                if (TestRunEventHandlerType.IsAssignableFrom(type))
+                if (UnitTestEventHandlerType.IsAssignableFrom(type))
                 {
-                    services.AddSingleton(typeof(ITestRunEventHandler<World>), type);
+                    services.AddSingleton(typeof(IUnitTestEventHandler<World>), type);
                 }
                 else
                 {
@@ -98,17 +98,17 @@ namespace Hit.Infrastructure
             };
         }
 
-        public async Task<ITestRunResult> RunTestRunAsync(string runName)
+        public async Task<IUnitTestResult> RunUnitTestAsync(string unitTestName)
         {
-            var testRun = _testHierarchy.GetNamedTestRun(runName);
+            var unitTest = _testHierarchy.GetUnitTest(unitTestName);
 
             var testContext = CreateContextForSuite();
 
-            await testRun.RunTestsAsync(testContext, _testRunEventHandler);
+            await unitTest.RunUnitTestAsync(testContext, _unitTestEventHandler);
 
-            var results = testRun.GetTestResult();
+            var results = unitTest.GetTestResult();
 
-            return new TestRunResult(Name, Description, runName, results);
+            return new UnitTestResult(Name, Description, unitTestName, results);
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;

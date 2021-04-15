@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 
 namespace Hit.Infrastructure.User
 {
-    public abstract class TestRunEventHandlerAdapter<World> : ITestRunEventHandler<World>
+    public abstract class UnitTestEventHandlerAdapter<World> : IUnitTestEventHandler<World>
     {
-        public virtual Task RunEnded(ITestContext<World> context)
+        public virtual Task UnitTestEnded(ITestContext<World> context)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task RunFailed(ITestContext<World> context)
+        public virtual Task UnitTestRunFailed(ITestContext<World> context)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task RunStarts(ITestContext<World> context)
+        public virtual Task UnitTestStarts(ITestContext<World> context)
         {
             return Task.CompletedTask;
         }

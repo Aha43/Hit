@@ -43,7 +43,7 @@ namespace Items.AutomaticHitIntegrationTests
         public async Task CrudShouldWorkForRestRepositoryAsync()
         {
             var suite = _repositoryTestSuites.GetNamedSuite("rest_consuming_repository_test");
-            var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
+            var results = await suite.RunUnitTestAsync("crud_test_run").ConfigureAwait(false);
             results.ShouldBeenSuccessful(_testOutput.WriteLine);
         }
 
@@ -51,7 +51,7 @@ namespace Items.AutomaticHitIntegrationTests
         public async Task CrudShouldWorkForInMemoryRepositoryAsync()
         {
             var suite = _repositoryTestSuites.GetNamedSuite("in_memory_repository_test");
-            var results = await suite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
+            var results = await suite.RunUnitTestAsync("crud_test_run").ConfigureAwait(false);
             results.ShouldBeenSuccessful(_testOutput.WriteLine);
         }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests
 {
-    public class CrudTestRunEventHandler : TestRunEventHandlerAdapter<ItemCrudWorld>
+    public class CrudTestRunEventHandler : UnitTestEventHandlerAdapter<ItemCrudWorld>
     {
         private IItemsRepository _repo;
 
@@ -14,7 +14,7 @@ namespace Items.HitIntegrationTests
             _repo = repo; // just to show injection works :)
         }
 
-        public override async Task RunFailed(ITestContext<ItemCrudWorld> context)
+        public override async Task UnitTestRunFailed(ITestContext<ItemCrudWorld> context)
         {
             await DoSomethingAsync();
         }

@@ -17,7 +17,7 @@ namespace Hit.Infrastructure
 
         private readonly Dictionary<string, List<TestNode<World>>> _childNodes = new Dictionary<string, List<TestNode<World>>>();
 
-        private readonly Dictionary<string, TestNode<World>> _testRunNodes = new Dictionary<string, TestNode<World>>();
+        private readonly Dictionary<string, TestNode<World>> _unitTestNodes = new Dictionary<string, TestNode<World>>();
 
         internal void AddTestImplType(Type testImplementation)
         {
@@ -38,9 +38,9 @@ namespace Hit.Infrastructure
                     _rootNodes.Add(node);
                 }
 
-                if (!string.IsNullOrWhiteSpace(node.TestRun))
+                if (!string.IsNullOrWhiteSpace(node.UnitTest))
                 {
-                    _testRunNodes.Add(node.TestRun, node);
+                    _unitTestNodes.Add(node.UnitTest, node);
                 }
 
                 _allNodes.Add(node.TestName, node);
@@ -69,8 +69,6 @@ namespace Hit.Infrastructure
             }
         }
 
-        internal IEnumerable<TestNode<World>> Leafs => _leafNodes.AsReadOnly();
-
         private static readonly IEnumerable<TestNode<World>> EmptyTestNodeList = new TestNode<World>[] { };
 
         internal TestNode<World> GetNode(string name) => 
@@ -82,14 +80,14 @@ namespace Hit.Infrastructure
         internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent) => 
             _childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children) ? children.AsReadOnly() : EmptyTestNodeList;
 
-        internal TestRun<World> GetNamedTestRun(string name)
+        internal UnitTest<World> GetUnitTest(string unitTest)
         {
-            if (_testRunNodes.TryGetValue(name, out TestNode<World> lastNode))
+            if (_unitTestNodes.TryGetValue(unitTest, out TestNode<World> lastNode))
             {
-                return new TestRun<World>(this, lastNode);
+                return new UnitTest<World>(this, lastNode);
             }
 
-            throw new UnknownNamedTestRunException(name);
+            throw new UnknownNamedUnitTestException(unitTest);
         }
 
         internal void Dfs(AbstractTestNodeVisitor<World> visitor)

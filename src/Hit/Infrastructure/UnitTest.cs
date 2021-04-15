@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
 {
-    internal class TestRun<World>
+    internal class UnitTest<World>
     {
         private readonly TestNode<World>[] _testNodes;
 
         internal string Name { get; private set; }
 
-        internal TestRun(TestHierarchy<World> hierarchy, TestNode<World> last)
+        internal UnitTest(TestHierarchy<World> hierarchy, TestNode<World> last)
         {
-            Name = last.TestRun;
+            Name = last.UnitTest;
 
             var stack = new Stack<TestNode<World>>();
 
@@ -52,30 +52,30 @@ namespace Hit.Infrastructure
 
         private readonly static NotRunTestNodeVisitor<World> _notRunTestNodeVisitor = new NotRunTestNodeVisitor<World>();
 
-        internal async Task RunTestsAsync(TestContext<World> context, ITestRunEventHandler<World> testRunEventHandler)
+        internal async Task RunUnitTestAsync(TestContext<World> context, IUnitTestEventHandler<World> unitTestEventHandler)
         {
-            context.TestRunName = Name;
+            context.UnitTest = Name;
 
             Visit(_notRunTestNodeVisitor);
             var testVisitor = new RunTestNodeVisitorAsync<World>(context);
 
-            if (testRunEventHandler != null)
+            if (unitTestEventHandler != null)
             {
-                await testRunEventHandler.RunStarts(context);
+                await unitTestEventHandler.UnitTestStarts(context);
             }
 
             await VisitAsync(testVisitor).ConfigureAwait(false);
             
-            if (testRunEventHandler != null)
+            if (unitTestEventHandler != null)
             {
                 var handlersContext = ContextForHandler(context);
                 if (handlersContext.TestResult != null && handlersContext.TestResult.Status == TestStatus.Failed)
                 {
-                    await testRunEventHandler.RunFailed(handlersContext);
+                    await unitTestEventHandler.UnitTestRunFailed(handlersContext);
                 }
                 else
                 {
-                    await testRunEventHandler.RunEnded(handlersContext);
+                    await unitTestEventHandler.UnitTestEnded(handlersContext);
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace Hit.Infrastructure
                 World = context.World,
                 EnvironmentType = context.EnvironmentType,
                 SuiteName = context.SuiteName,
-                TestRunName = context.TestRunName
+                UnitTest = context.UnitTest
             };
 
             foreach (var node in _testNodes)

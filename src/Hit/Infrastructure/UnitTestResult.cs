@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace Hit.Infrastructure
 {
-    internal class TestRunResult : ITestRunResult
+    internal class UnitTestResult : IUnitTestResult
     {
-        internal TestRunResult(string suiteName, string suiteDescription, string runName, ITestResultNode results)
+        internal UnitTestResult(string suiteName, string suiteDescription, string unitTest, ITestResultNode results)
         {
             SuiteName = suiteName;
             SuiteDescription = suiteDescription;
-            RunName = runName;
+            UnitTest = unitTest;
             Results = new ITestResultNode[] { results };
         }
 
         public string SuiteName { get; }
         public string SuiteDescription { get; }
-        public string RunName { get; }
+        public string UnitTest { get; }
         public IEnumerable<ITestResultNode> Results { get; }
 
         public bool Success()

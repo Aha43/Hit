@@ -1,5 +1,4 @@
 ﻿using Hit.Specification.Infrastructure;
-using System.Collections.Generic;
 
 namespace Hit.Infrastructure
 {

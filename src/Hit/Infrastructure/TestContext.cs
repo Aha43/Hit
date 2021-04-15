@@ -8,7 +8,7 @@ namespace Hit.Infrastructure
         public TheWorld World { get; set; }
         public string SuiteName { get; set; } 
         public string EnvironmentType { get; set; }
-        public string TestRunName { get; set; } 
+        public string UnitTest { get; set; } 
         public string ParentTestName { get; set; } 
         public string TestName { get; set; } 
         public ITestResult TestResult { get; set; } 
@@ -27,10 +27,10 @@ namespace Hit.Infrastructure
                 if (sb.Length > 0) sb.Append(", ");
                 sb.Append(nameof(EnvironmentType)).Append(" = ").Append(EnvironmentType);
             }
-            if (!string.IsNullOrWhiteSpace(TestRunName))
+            if (!string.IsNullOrWhiteSpace(UnitTest))
             {
                 if (sb.Length > 0) sb.Append(", ");
-                sb.Append(nameof(TestRunName)).Append(" = ").Append(TestRunName);
+                sb.Append(nameof(UnitTest)).Append(" = ").Append(UnitTest);
             }
             if (!string.IsNullOrWhiteSpace(ParentTestName))
             {

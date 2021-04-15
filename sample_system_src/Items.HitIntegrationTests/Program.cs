@@ -41,11 +41,11 @@ namespace Items.HitIntegrationTests
                     o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
                 });
 
-            var result = await repositoryTestSuites.RunTestRunAsync("rest_consuming_repository_test", "crud_test_run").ConfigureAwait(false);
+            var result = await repositoryTestSuites.RunUnitTestAsync("rest_consuming_repository_test", "crud_test_run").ConfigureAwait(false);
             var report = ResultsReporterUtil.Report(result);
             System.Console.WriteLine(report);
 
-            result = await repositoryTestSuites.RunTestRunAsync("in_memory_repository_test", "crud_test_run").ConfigureAwait(false);
+            result = await repositoryTestSuites.RunUnitTestAsync("in_memory_repository_test", "crud_test_run").ConfigureAwait(false);
             report = ResultsReporterUtil.Report(result);
             System.Console.WriteLine(report);
 

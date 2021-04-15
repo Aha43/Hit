@@ -37,10 +37,10 @@ namespace Hit.Infrastructure
             throw new SuiteNotFoundException(name);
         }
 
-        public async Task<ITestRunResult> RunTestRunAsync(string suiteName, string runName)
+        public async Task<IUnitTestResult> RunUnitTestAsync(string suiteName, string unitTest)
         {
             var suite = GetNamedSuite(suiteName);
-            var results = await suite.RunTestRunAsync(runName).ConfigureAwait(false);
+            var results = await suite.RunUnitTestAsync(unitTest).ConfigureAwait(false);
             return results;
         }
 

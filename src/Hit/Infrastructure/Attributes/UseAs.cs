@@ -12,11 +12,11 @@ namespace Hit.Infrastructure.Attributes
 
         public string Options { get; set; }
 
-        private string _testRun = string.Empty;
-        public string TestRun
+        private string _unitTest = string.Empty;
+        public string UnitTest
         {
-            get => (_testRun.Length == 0) ? null : (_testRun.Equals("!") ? Name : _testRun);
-            set => _testRun = (value == null) ? string.Empty : value.Trim();
+            get => (_unitTest.Length == 0) ? null : (_unitTest.Equals("!") ? Name : _unitTest);
+            set => _unitTest = (value == null) ? string.Empty : value.Trim();
         }
 
         public UseAs(string test)
