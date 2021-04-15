@@ -22,31 +22,33 @@ using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests.TestLogic
 {
-    [UseAs(test: "CreateItem")]
-    public class CreateItemTestLogic : TestLogicBase<ItemCrudWorld>
+    [UseAs(test: "ReadItemAfterCreate", followingTest: "CreateItem")]
+    [UseAs(test: "ReadItemAfterUpdate", followingTest: "UpdateItem")]
+    [UseAs(test: "ReadItemAfterDelete", followingTest: "DeleteItem", Options = "expectToFind = false", UnitTest = "crud_test_run")]
+    public class ReadItemTestLogic : TestLogicBase<ItemCrudWorld>
     {
         private readonly IItemsRepository _repository;
 
-        public CreateItemTestLogic(IItemsRepository repository) => _repository = repository;
+        public ReadItemTestLogic(IItemsRepository repository) => _repository = repository;
 
         public override async Task TestAsync(ITestContext<ItemCrudWorld> testContext)
         {
-            // arrange
-            var param = new CreateItemParam
+            var param = new ReadItemParam
             {
-                Name = "Dragon"
+                Id = testContext.World.Id
             };
 
-            // act
-            var created = await _repository.CreateAsync(param, CancellationToken.None).ConfigureAwait(false);
+            var read = await _repository.ReadAsync(param, CancellationToken.None).ConfigureAwait(false);
 
-            // assert
-            created.ShouldNotBe(null);
-            created.Name.ShouldBe("Dragon");
+            if (testContext.Options.GetAsBoolean("expectToFind", true))
+            {
+                read.ShouldNotBe(null);
+                read.Id.ShouldBe(testContext.World.Id);
+                read.Name.ShouldBe(testContext.World.Name);
+                return;   
+            }
 
-            // change world state
-            testContext.World.Id = created.Id;
-            testContext.World.Name = created.Name;
+            read.ShouldBeNull();
         }
 
     }
