@@ -148,8 +148,9 @@ What to notice in above example code:
 * `ResultsReporter` is an utility that generates an report of test runs, output in case all tests *green*:
 
 ```
-Suite: InMemoryRepository test
-Description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRepository
+Suite: in_memory_repository_test
+Suite description: Testing CRUD with Items.Infrastructure.Repository.InMemory.ItemsRepository
+Run name: crud_test_run
   Test: CreateItem Status: Success
     Test: ReadItemAfterCreate Status: Success
       Test: UpdateItem Status: Success
