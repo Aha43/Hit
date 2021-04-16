@@ -11,7 +11,7 @@ namespace Hit.Infrastructure.User
             return Task.CompletedTask;
         }
 
-        public virtual Task UnitTestRunFailed(ITestContext<World> context)
+        public virtual Task UnitTestFailed(ITestContext<World> context)
         {
             return Task.CompletedTask;
         }

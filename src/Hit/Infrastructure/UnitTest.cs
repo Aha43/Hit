@@ -71,7 +71,7 @@ namespace Hit.Infrastructure
                 var handlersContext = ContextForHandler(context);
                 if (handlersContext.TestResult != null && handlersContext.TestResult.Status == TestStatus.Failed)
                 {
-                    await unitTestEventHandler.UnitTestRunFailed(handlersContext);
+                    await unitTestEventHandler.UnitTestFailed(handlersContext);
                 }
                 else
                 {
