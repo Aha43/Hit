@@ -11,7 +11,7 @@ namespace Hit.Infrastructure
 {
     public class HitSuite<World> : IHitSuite<World>
     {
-        private IServiceProvider _serviceProvider;
+        private readonly IServiceProvider _serviceProvider;
 
         private readonly TestHierarchy<World> _testHierarchy;
 
@@ -23,10 +23,20 @@ namespace Hit.Infrastructure
         public string Description { get; }
         public string EnvironmentType { get; }
 
-        public HitSuite(Action<HitSuiteOptions> conf = null)
+        public HitSuite(Action<HitSuiteOptions> conf)
         {
+            if (conf == null)
+            {
+                throw new ArgumentNullException(nameof(conf));
+            }
+
             var opt = new HitSuiteOptions();
             conf?.Invoke(opt);
+
+            if (string.IsNullOrWhiteSpace(opt.Name))
+            {
+                throw new ArgumentException("Missing suite name");
+            }
 
             Name = opt.Name;
             Description = opt.Description;

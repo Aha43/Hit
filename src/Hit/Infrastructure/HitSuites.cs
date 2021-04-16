@@ -10,8 +10,13 @@ namespace Hit.Infrastructure
     {
         private readonly Dictionary<string, IHitSuite<World>> _suites = new Dictionary<string, IHitSuite<World>>();
 
-        public HitSuites<World> AddSuite(Action<HitSuiteOptions> conf = null)
+        public HitSuites<World> AddSuite(Action<HitSuiteOptions> conf)
         {
+            if (conf == null)
+            {
+                throw new ArgumentNullException(nameof(conf));
+            }
+
             var suite = new HitSuite<World>(conf);
 
             if (string.IsNullOrWhiteSpace(suite.Name))

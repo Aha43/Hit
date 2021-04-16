@@ -11,7 +11,7 @@ namespace HitUnitTests
         [Fact]
         public async Task AllTwoTestShouldAsync()
         {
-            var hit = new HitSuite<TrivialSyncTestWorld>();
+            var hit = new HitSuite<TrivialSyncTestWorld>(o => { o.Name = "TestSuite"; });
 
             var result = await hit.RunUnitTestAsync("TrivialSyncTestB").ConfigureAwait(false);
 
