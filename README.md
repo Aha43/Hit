@@ -2,6 +2,8 @@
 
 # HIT - Hierarchically Integration Test framework
 
+**Currently being rewritten to be true to next alpha version**
+
 A  dotnet / c# framework for integration testing where the work of one integration test can be the build up for the next integration. HIT is intended to be used with an unit testing framework: Sequences of HIT integration tests forms unit tests. This README file uses XUnit framework to run the example unit tests, a similar unit test framework should also work.
 
 * [Changelog](https://github.com/Aha43/Hit/blob/main/CHANGELOG.md)
@@ -144,9 +146,8 @@ public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCr
 
 What to notice in above example code:
 * The mandatory attribute `SysCon` is used to name the system configuration and a optional description may be given.
-* The method `ConfigureServices` configures the services of the system to be tested
-    * It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so       also for the sample system: If one examine the method in 
-      [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an                 `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
+* The method `ConfigureServices` configures the services of the system to be tested.
+    * The sample system tested provide an extension method to configure its services and is invoked (this will in effect 
 
 
 ```
