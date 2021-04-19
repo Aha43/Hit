@@ -127,13 +127,27 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 5. Delete the item (test named *DeleteItem*)
 6. Read the deleted item and expect not to find it (test named *ReadItemAfterDelete*)
 
+Before we can run our unit tests (sequences of HIT integration tests) we need to provide configuration for the system(s) to test. This is done by implementing the interface `ISystemConfiguration`, here is an implementation that configure the testing of an item repository that stores items in memory:
 
+```
+[SysCon(name: "in_memory_repository_test", Description = "Testing CRUD with database repository")]
+public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
+{
+    public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
+    {
+        return services.ConfigureInMemoryRepositoryServices(); ;
+    }
+
+}
+```
 
 
 What to notice in above example code:
-* It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
-* Suite can be given a name and a description, optional but nice to have.
-* `ResultsReporter` is an utility that generates an report of test runs, output in case all tests *green*:
+* The mandatory attribute `SysCon` is used to name the system configuration and a optional description may be given.
+* The method `ConfigureServices` configures the services of the system to be tested
+    * It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so       also for the sample system: If one examine the method in 
+      [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an                 `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
+
 
 ```
 Suite: in_memory_repository_test
