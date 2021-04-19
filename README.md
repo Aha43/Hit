@@ -2,14 +2,14 @@
 
 # HIT - Hierarchically Integration Test framework
 
-A  dotnet / c# framework for integration testing where the work of one integration test can be the build up for the next integration. HIT is intended to be used with an unit testing framework: Sequences of HIT integration tests forms unit tests 
+A  dotnet / c# framework for integration testing where the work of one integration test can be the build up for the next integration. HIT is intended to be used with an unit testing framework: Sequences of HIT integration tests forms unit tests. This README file uses XUnit framework to run the example unit tests, a similar unit test framework should also work.
 
 * [Changelog](https://github.com/Aha43/Hit/blob/main/CHANGELOG.md)
 * [NuGet Package](https://www.nuget.org/packages/Hit/)
 
 ### Example of testing CRUD operations using HIT
 
-HIT tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test logic implementation that test the creating an item given a repository of items:
+HIT integration tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test logic implementation that test the creating an item given a repository of items:
 ```csharp
 using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
@@ -57,14 +57,14 @@ namespace Items.HitIntegrationTests.TestLogic
 ```
 What to notice in above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
-* Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a least one *test run*.
+* Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a least one *unit test*.
 * Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implementation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestLogic) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
 * Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
     * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
     * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
 * HIT does not provide a generally assert API, that's been done..
     * ... I like [Shouldly](https://github.com/shouldly/shouldly).
-    * ... also if you working within a unit test project (it makes sense, see section [Using unit test frameworks to run HIT integration tests](https://github.com/Aha43/Hit/blob/main/README.md#using-unit-test-frameworks-to-run-hit-integration-tests)) you can use the assertion API it comes with. 
+    * ... also if the HIT integration tests are implemented in the unit test project used to run the unit tests defined (see section [Using unit test frameworks to run HIT integration tests](https://github.com/Aha43/Hit/blob/main/README.md#using-unit-test-frameworks-to-run-hit-integration-tests)) you can use the assertion API the choosen unit test framework implement. 
 
 The next code snippet shows implementation of tests that test reading of items from repositories:
 ```csharp
@@ -119,7 +119,7 @@ What to notice in above example code:
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 * The `UnitTest` parameter to the `UseAs` names a *unit test* that ends at that test, here ends at the test named *ReadItemAfterDelete* and the *unit test* is named *crud_test_run* (if is is ok to name the *unit test* the same as the last test in the sequence this can be done by giving the `UnitTest` parameter the value `'!'`).
 
-See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define a test run (tests that run in sequence) named *crud_test_run* that
+See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/UpdateItemTestLogic.cs) and [DeleteItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/TestLogic/DeleteItemTestLogic.cs) for the complete set of test implementations in this integration test example. Examining all the `UseAs` attributes one finds that they define an unit test (tests that run in sequence independently of other unit tests) named *crud_unit_test* that
 1. Create an item (test named *CreateItem*).
 2. Read created item (test named *ReadItemAfterCreate*)
 3. Update the item (test named *UpdateItem*)
@@ -127,19 +127,9 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 5. Delete the item (test named *DeleteItem*)
 6. Read the deleted item and expect not to find it (test named *ReadItemAfterDelete*)
 
-The next code snippet show how to test a system configuration with the defined test run:
-```csharp
-var inMemoryRepositoryTestSuite = new HitSuite<ItemCrudWorld>(o => {
-    o.Services.ConfigureInMemoryRepositoryServices();
-    o.Name = "in_memory_repository_test";
-    o.Description = "Testing CRUD with " + typeof(Infrastructure.Repository.InMemory.ItemsRepository).FullName;
-});
 
-var result = await inMemoryRepositoryTestSuite.RunTestRunAsync("crud_test_run").ConfigureAwait(false);
-var report = ResultsReporterUtil.Report(result);
-System.Console.WriteLine(report);
-System.Console.ReadLine();
-```
+
+
 What to notice in above example code:
 * It is common for system that is using dependency injection for configuration to provide extension methods to `IServiceCollection` for registrering sub systems services, so also for the sample system: If one examine the method in [IoCConfig.cs](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.Infrastructure.Repository.InMemory/IoCConfig.cs) one will see that it registers an `Items.Infrastructure.Repository.InMemory.ItemsRepositoy` as `IItemRepository` so that is the repository implementation this suite will test.
 * Suite can be given a name and a description, optional but nice to have.
