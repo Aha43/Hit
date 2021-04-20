@@ -6,7 +6,7 @@ namespace Hit.Infrastructure
 {
     internal class TestNode<World>
     {
-        internal Type TestImplementationType { get; }
+        internal Type TestLogicImplementationType { get; }
 
         internal ITestOptions TestOptions { get; }
 
@@ -27,7 +27,7 @@ namespace Hit.Infrastructure
             string testOptionsSpec,
             string unitTest)
         {
-            TestImplementationType = testImplementationType;
+            TestLogicImplementationType = testImplementationType;
             TestName = testName;
             ParentTestName = parentTestName;
             TestResult = new TestResult(TestName);
@@ -37,7 +37,7 @@ namespace Hit.Infrastructure
 
         internal TestNode(TestNode<World> other)
         {
-            TestImplementationType = other.TestImplementationType;
+            TestLogicImplementationType = other.TestLogicImplementationType;
             TestName = other.TestName;
             ParentTestName = other.ParentTestName;
             TestResult = new TestResult(TestName);

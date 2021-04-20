@@ -7,7 +7,7 @@ namespace Hit.Specification.Infrastructure
         TheWorld World { get; }
         ITestOptions Options { get; }
         ITestResult TestResult { get; }
-        string SuiteName { get; }
+        string UnitTestsName { get; }
         string UnitTest { get; }
         string ParentTestName { get; }
         string TestName { get; }

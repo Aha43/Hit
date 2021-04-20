@@ -4,8 +4,8 @@ namespace Hit.Specification.Infrastructure
 {
     public interface IUnitTestResult
     {
-        string SuiteName { get; }
-        string SuiteDescription { get; }
+        string UnitTestsName { get; }
+        string UnitTestsDescription { get; }
         string UnitTest { get; }
         IEnumerable<ITestResultNode> Results { get; }
         bool Success();

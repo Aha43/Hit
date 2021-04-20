@@ -131,6 +131,14 @@ namespace Hit.Infrastructure
             return retVal;
         }
 
+        internal string[] UnitTestsNames
+        {
+            get
+            {
+                return _unitTestNodes.Select(e => e.Key).ToArray();
+            }
+        }
+
     }
 
 }

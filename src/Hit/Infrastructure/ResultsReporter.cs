@@ -9,15 +9,15 @@ namespace Hit.Infrastructure
         {
             var sb = new StringBuilder();
 
-            if (!string.IsNullOrWhiteSpace(results.SuiteName))
+            if (!string.IsNullOrWhiteSpace(results.UnitTestsName))
             {
-                sb.Append("Suite: ")
-                  .AppendLine(results.SuiteName);
+                sb.Append("Unit tests: ")
+                  .AppendLine(results.UnitTestsName);
             }
-            if (!string.IsNullOrWhiteSpace(results.SuiteDescription))
+            if (!string.IsNullOrWhiteSpace(results.UnitTestsDescription))
             {
-                sb.Append("Suite description: ")
-                  .AppendLine(results.SuiteDescription);
+                sb.Append("Unit tests description: ")
+                  .AppendLine(results.UnitTestsDescription);
             }
             if (!string.IsNullOrWhiteSpace(results.UnitTest))
             {

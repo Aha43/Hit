@@ -6,7 +6,7 @@ namespace Hit.Infrastructure
     public class TestContext<TheWorld> : ITestContext<TheWorld>
     {
         public TheWorld World { get; set; }
-        public string SuiteName { get; set; } 
+        public string UnitTestsName { get; set; } 
         public string EnvironmentType { get; set; }
         public string UnitTest { get; set; } 
         public string ParentTestName { get; set; } 
@@ -18,9 +18,9 @@ namespace Hit.Infrastructure
         {
             var sb = new StringBuilder();
 
-            if (!string.IsNullOrWhiteSpace(SuiteName))
+            if (!string.IsNullOrWhiteSpace(UnitTestsName))
             {
-                sb.Append(nameof(SuiteName)).Append(" = ").Append(SuiteName);
+                sb.Append(nameof(UnitTestsName)).Append(" = ").Append(UnitTestsName);
             }
             if (!string.IsNullOrWhiteSpace(EnvironmentType))
             {

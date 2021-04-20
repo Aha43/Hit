@@ -17,16 +17,16 @@ namespace Hit.Infrastructure.Visitors
         {
             try
             {
-                node.Test = _serviceProvider.GetService(node.TestImplementationType) as ITestLogic<World>;
+                node.Test = _serviceProvider.GetService(node.TestLogicImplementationType) as ITestLogic<World>;
             }
             catch (Exception ex)
             {
-                throw new FailedToCreateTestInstanceException(node.TestImplementationType, ex);
+                throw new FailedToCreateTestLogicInstanceException(node.TestLogicImplementationType, ex);
             }
 
             if (node.Test == null)
             {
-                throw new FailedToCreateTestInstanceException(node.TestImplementationType);
+                throw new FailedToCreateTestLogicInstanceException(node.TestLogicImplementationType);
             }
         }
 

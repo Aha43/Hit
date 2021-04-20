@@ -2,11 +2,12 @@
 using Hit.Specification.Infrastructure;
 using Hit.Specification.User;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
 {
-    internal class UnitTest<World>
+    public class UnitTest<World>
     {
         private readonly TestNode<World>[] _testNodes;
 
@@ -86,7 +87,7 @@ namespace Hit.Infrastructure
             {
                 World = context.World,
                 EnvironmentType = context.EnvironmentType,
-                SuiteName = context.SuiteName,
+                UnitTestsName = context.UnitTestsName,
                 UnitTest = context.UnitTest
             };
 
@@ -119,6 +120,23 @@ namespace Hit.Infrastructure
                 parent = current;
             }
             return retVal;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append(Name).Append(": ");
+            for (var i = 0; i < _testNodes.Length; i++)
+            {
+                if (i > 0)
+                {
+                    sb.Append(" -> ");
+                }
+                sb.Append(_testNodes[i].TestName);
+            }
+
+            return sb.ToString();
         }
 
     }
