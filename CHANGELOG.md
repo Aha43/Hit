@@ -1,6 +1,15 @@
 
 # Changelog
 
+## 6.0.0-alpha
+
+### Changes
+
+* Interface that defines a Configuration with option that give name, optional description and optional test system (before given in option given when creating HitSuite)
+* Got away with suite names, now we have IUnitTests (used to be IHitSuite) and IUnitTestsSet (IHitSuites)
+* No longer support running unit tests in any way other than with a unit test framework 
+* Make it mandatory for IUnitTests (used to be IHitSuite) to have name. Needed because now a IUnitTests is always indexed by name in a IUnitTestsSet
+
 ## 5.0.0-alpha
 
 ### Changes
