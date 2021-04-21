@@ -114,7 +114,7 @@ namespace Items.HitIntegrationTests.TestLogic
 
 }
 ```
-What to notice in above example code:
+What to notice in above example code is:
 * The implementation is used to realize three tests all following another test (use of the `UseAs` attribute's `followingTest` argument):
     * First (reading attributes from top to bottom) to follow the test that creates an item. It expects to read the created item. Test is named appropriately *ReadItemAfterCreate*
     * Second to follow a test that updates an item. It expects to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
