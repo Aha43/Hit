@@ -1,6 +1,16 @@
 
 # Changelog
 
+## 6.1.0-alpha
+
+### New
+
+* Possible to say a system is not available for testing: New method in `ISystemConfiguration` : `Task<bool> AvailableAsync()`. Integration tests will not run and unit tests will not fail for system configured if returns false.
+
+### Fix
+
+* Fix so can read user secret for project using HIT when using DefaultSystemConfigurationAdapter
+
 ## 6.0.0-alpha
 
 ### Changes
