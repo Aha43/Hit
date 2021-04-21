@@ -6,17 +6,17 @@ namespace Hit.Infrastructure.Assertions
 {
     public static class Assertions
     {
-        public static void ShouldBeenSuccessful(this IUnitTestResult results, Action<string> logIfSuccessful = null)
+        public static void ShouldBeenSuccessful(this IUnitTestResult results, Action<string> log = null)
         {
-            if (!results.Success())
+            if (!results.Success() && results.SystemAvailable)
             {
-                var report = ResultsReporterUtil.Report(results);
+                var report = ResultsReporterUtil.Report(results);   
                 throw new UnitTestFailedException(report);   
             }
-            if (logIfSuccessful != null)
+            if (log != null)
             {
                 var report = ResultsReporterUtil.Report(results);
-                logIfSuccessful.Invoke(report);
+                log.Invoke(report);
             }
         }
 

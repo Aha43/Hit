@@ -4,22 +4,35 @@ using Items.Infrastructure.Repository.Rest;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
-
-
 
 namespace Items.HitIntegrationTests.Configurations
 {
     [SysCon(name: "rest_consuming_repository_test", Description = "Testing CRUD with Rest")]
     public class RestRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
     {
+        private readonly string _uri = "https://localhost:44356/";
+
         public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            return services.ConfigureRestRepositoryServices("https://localhost:44356/");
+            return services.ConfigureRestRepositoryServices(_uri);
         }
+
+        public override async Task<bool> AvailableAsync()
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(_uri + "api/info");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 
 }

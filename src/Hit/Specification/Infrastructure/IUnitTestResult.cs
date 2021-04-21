@@ -9,5 +9,6 @@ namespace Hit.Specification.Infrastructure
         string UnitTest { get; }
         IEnumerable<ITestResultNode> Results { get; }
         bool Success();
+        bool SystemAvailable { get; }
     }
 }

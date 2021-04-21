@@ -24,6 +24,15 @@ namespace Hit.Infrastructure
                 sb.Append("Unit test name: ")
                   .AppendLine(results.UnitTest);
             }
+            
+            if (results.SystemAvailable)
+            {
+                sb.AppendLine("System available");
+            }
+            else
+            {
+                sb.AppendLine("System NOT available");
+            }
 
             foreach (var resultNode in results.Results)
             {

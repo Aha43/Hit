@@ -5,18 +5,21 @@ namespace Hit.Infrastructure
 {
     internal class UnitTestResult : IUnitTestResult
     {
-        internal UnitTestResult(string unitTestsName, string unitTestsDescription, string unitTest, ITestResultNode results)
+        internal UnitTestResult(string unitTestsName, string unitTestsDescription, string unitTest, ITestResultNode results, bool systemAvailable)
         {
             UnitTestsName = unitTestsName;
             UnitTestsDescription = unitTestsDescription;
             UnitTest = unitTest;
             Results = new ITestResultNode[] { results };
+            SystemAvailable = systemAvailable;
         }
 
         public string UnitTestsName { get; }
         public string UnitTestsDescription { get; }
         public string UnitTest { get; }
         public IEnumerable<ITestResultNode> Results { get; }
+
+        public bool SystemAvailable { get; }
 
         public bool Success()
         {

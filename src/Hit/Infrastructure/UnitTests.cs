@@ -20,6 +20,8 @@ namespace Hit.Infrastructure
 
         private readonly IUnitTestEventHandler<World> _unitTestEventHandler;
 
+        private readonly ISystemConfiguration<World> _systemConfiguration;
+
         public string Name { get; }
         public string Description { get; }
         public string EnvironmentType { get; }
@@ -28,6 +30,8 @@ namespace Hit.Infrastructure
 
         internal UnitTests(ISystemConfiguration<World> configuration, HitTypesFromAssemblies<World> types)
         {
+            _systemConfiguration = configuration;
+
             var configAttr = configuration.GetType().SysConAttribute<World>();
             if (configAttr == null)
             {
@@ -96,11 +100,16 @@ namespace Hit.Infrastructure
 
             var testContext = CreateContextForUnitTests();
 
-            await unitTest.RunUnitTestAsync(testContext, _unitTestEventHandler);
+            var systemAvailable = await _systemConfiguration.AvailableAsync();
+
+            if (systemAvailable)
+            {
+                await unitTest.RunUnitTestAsync(testContext, _unitTestEventHandler);
+            }
 
             var results = unitTest.GetTestResult();
 
-            return new UnitTestResult(Name, Description, unitTestName, results);
+            return new UnitTestResult(Name, Description, unitTestName, results, systemAvailable);
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
