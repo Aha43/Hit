@@ -12,21 +12,44 @@ namespace Hit.Infrastructure.User
 
         protected void LoadFromJsonFile(string path) => _jsonPath = path;
 
-        public override IConfiguration GetConfiguration()
+        public override IConfiguration GetConfiguration() => GetPartConfiguration(null);
+
+        protected IConfiguration GetPartConfiguration(params string[] sections)
         {
-            var builder = new ConfigurationBuilder();
-                
+            var builder1 = new ConfigurationBuilder();
+            var builder2 = default(ConfigurationBuilder);
+
             if (!string.IsNullOrWhiteSpace(_jsonPath))
             {
-                builder.AddJsonFile(_jsonPath, true);
+                builder1.AddJsonFile(_jsonPath, true);
             }
 
-            if (_assembly != null)
+            if (_assembly != default)
             {
-                builder.AddUserSecrets(_assembly, true);
+                builder1.AddUserSecrets(_assembly, true);
             }
 
-            var retVal = builder.Build();
+            if (sections != null && sections.Length > 0)
+            {
+                var configuration1 = builder1.Build();
+                foreach (var section in sections)
+                {
+                    if (!string.IsNullOrWhiteSpace(section))
+                    {
+                        var sectionConfiguration = configuration1.GetSection(section);
+                        if (sectionConfiguration != default)
+                        {
+                            if (builder2 == default)
+                            {
+                                builder2 = new ConfigurationBuilder();
+                            }
+                            builder2.AddConfiguration(sectionConfiguration);
+                        }
+                    }
+                }
+            }
+            
+            var retVal = (builder2 != default) ? builder2.Build() : builder1.Build();
             return retVal;
         }
 
