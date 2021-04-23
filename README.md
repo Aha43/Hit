@@ -2,7 +2,7 @@
 
 # HIT - Hierarchically Integration Test framework
 
-**Currently being rewritten to be true to next alpha version**
+**Currently being rewritten to be true to current alpha version**
 
 A  dotnet / c# framework for integration testing where the work of one integration test can be the build up for the next integration test. HIT is intended to be used with an unit testing framework: Sequences of HIT integration tests forms unit tests. This README file uses XUnit framework to run the example unit tests, a similar unit test framework should also work.
 
