@@ -12,7 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>testing test-framework integration-testing hierarchically-testing</PackageTags>
-    <Version>6.1.0-alpha</Version>
+    <Version>6.2.0-alpha</Version>
     <PackageIcon>logo.png</PackageIcon>
     <Copyright>Copyright © Arne Halvorsen 2021</Copyright>
   </PropertyGroup>
