@@ -1,4 +1,5 @@
 ﻿using Hit.Specification.User;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hit.Specification.Infrastructure
@@ -11,6 +12,6 @@ namespace Hit.Specification.Infrastructure
         string[] UnitTestsNames { get; }
         Task<IUnitTestResult> RunUnitTestAsync(string name);
         ITestLogic<World> GetTest(string name);
-        
+        IEnumerable<string> UnitTestNames { get; }
     }
 }

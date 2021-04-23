@@ -90,6 +90,8 @@ namespace Hit.Infrastructure
             throw new UnknownNamedUnitTestException(unitTest);
         }
 
+        internal IEnumerable<string> UnitTestNames => _unitTestNodes.Keys.ToArray();
+
         internal void Dfs(AbstractTestNodeVisitor<World> visitor)
         {
             foreach (var root in _rootNodes)

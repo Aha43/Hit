@@ -5,6 +5,7 @@ using Hit.Specification.Infrastructure;
 using Hit.Specification.User;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -113,6 +114,8 @@ namespace Hit.Infrastructure
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;
+
+        public IEnumerable<string> UnitTestNames => _testHierarchy.UnitTestNames;
 
         public override string ToString()
         {
