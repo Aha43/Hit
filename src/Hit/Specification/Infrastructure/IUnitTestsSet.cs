@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hit.Specification.Infrastructure
 {
@@ -6,5 +7,6 @@ namespace Hit.Specification.Infrastructure
     {
         IUnitTests<World> GetNamedUnitTests(string name);
         Task<IUnitTestResult> RunUnitTestAsync(string unitTestsName, string unitTest);
+        IEnumerable<string> UnitTestsNames { get; }
     }
 }

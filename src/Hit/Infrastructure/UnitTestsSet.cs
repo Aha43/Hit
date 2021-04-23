@@ -3,6 +3,7 @@ using Hit.Specification.Infrastructure;
 using Hit.Specification.User;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hit.Infrastructure
@@ -50,6 +51,8 @@ namespace Hit.Infrastructure
             var results = await unitTests.RunUnitTestAsync(unitTest).ConfigureAwait(false);
             return results;
         }
+
+        public IEnumerable<string> UnitTestsNames => _unitTests.Keys.ToArray();
 
     }
 
