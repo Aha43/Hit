@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 6.2.0
+
+### New
+
+* `ISystemConfiguration` implementations that extends `DefaultSystemConfigurationAdapter` can now pick sections from appsettings that is required for the configuration by invoking `GetPartConfiguration`.
+
 ## 6.1.0-alpha
 
 ### New
