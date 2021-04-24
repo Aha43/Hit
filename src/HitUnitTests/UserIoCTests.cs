@@ -10,6 +10,7 @@ namespace HitUnitTests
         [Fact]
         public void UserServiceShouldBeenInjected()
         {
+            
             // Arrange & act
             //var hit = new HitSuite<TestWorld>(o =>
             //{

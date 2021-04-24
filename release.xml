@@ -2,10 +2,10 @@
 <release>
     <devProjectFile>D:\\rep\\Hit\\src\\Hit\\Hit.csproj</devProjectFile>
     <repoProjectFileUri>https://raw.githubusercontent.com/Aha43/Hit/main/src/Hit/Hit.csproj</repoProjectFileUri>
-    <releaseIssue>80</releaseIssue>
+    <releaseIssue>71</releaseIssue>
     <issues>
-        <issue>20</issue>
-        <issue>50</issue>
-        <issue>60</issue>
+        <issue>49</issue>
+        <issue>51</issue>
+        <issue>72</issue>
     </issues>
 </release>

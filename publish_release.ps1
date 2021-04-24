@@ -1,24 +1,54 @@
 $go = $args[0]
 
+$wdir = Get-Item .
+Write-Host 
+Write-Host ("Starting continous integration for '" + $wdir.Name + "'") -ForegroundColor Yellow
+Write-Host
+
 [string]$gitStatus = (git status --porcelain)
 if ($gitStatus) {
     Write-Host
-    Write-Host 'Preparing a release...'
+    Write-Host 'Preparing a release...' -ForegroundColor Yellow
 }
 else {
     Write-Error 'Nothing to commit as a release!' -ErrorAction Stop
 }
 
 Write-Host
-Write-Host 'Doing a git pull...'
+Write-Host 'Doing a git pull...' -ForegroundColor Yellow
 git pull
 
 Write-Host
-Write-Host 'Doing a build'
+Write-Host 'Doing a build...' -ForegroundColor Yellow
+$buildResult = (dotnet build *>&1)
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Build ok!" -ForegroundColor Green
+}
+else {
+    Write-Host 
+    $buildResult = $buildResult -join [System.Environment]::NewLine
+    Write-Error $buildResult -ErrorAction Stop
+    Write-Host
+    Write-Host 'NO GO: Build failed!' -ForegroundColor Magenta
+}
 
 Write-Host
-Write-Host 'Running tests'
+Write-Host 'Running tests...' -ForegroundColor Yellow
+$testResult = (dotnet test *>&1)
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "Tests ok!" -ForegroundColor Green
+}
+else {
+    Write-Host 
+    $testResult = $testResult -join [System.Environment]::NewLine
+    Write-Error $testResult
+    Write-Host
+    Write-Host 'NO GO: Tests failed!' -ForegroundColor Magenta
+    Write-Host
+    exit
+}
 
+Write-Host
 $releaseFile = Get-ChildItem -Path '.\release.xml'
 if ($releaseFile) {
     [XML]$relaseXml = Get-Content $releaseFile
@@ -29,14 +59,17 @@ if ($releaseFile) {
         [XML]$devXml = Get-Content $devProjectFile
         [string]$devVersion = $devXml.Project.PropertyGroup.Version
 
-        [XML]$repoXml = (New-Object System.Net.WebClient).DownloadString($relaseXml.release.repoProjectFileUri)
+        [string]$repoTxt = (New-Object System.Net.WebClient).DownloadString($relaseXml.release.repoProjectFileUri) 
+        if (-not $repoTxt) {
+            Write-Error 'Failed to read repo project file' -ErrorAction Stop
+        }
+        [XML]$repoXml = $repoTxt
+
         [string]$repoVersion = $repoXml.Project.PropertyGroup.Version
 
-        $devVersion = '7.2.1-alpha' # sim hack
-
         Write-Host
-        Write-Host ("Previous release is '" + $repoVersion + "'");
-        Write-Host ("New release is '" + $devVersion + "'");
+        Write-Host ("Previous release is '" + $repoVersion + "'") -ForegroundColor Yellow
+        Write-Host ("New release is '" + $devVersion + "'") -ForegroundColor Yellow
         
         if ($devVersion -gt $repoVersion)
         {
@@ -51,67 +84,32 @@ if ($releaseFile) {
                 }
 
                 Write-Host
-                Write-Host ("Will do release with the following commit message if given the go signal: '" + $commitMessage + "'")
+                Write-Host ("Will do release with the following commit message if given the GO signal: '" + $commitMessage + "'") -ForegroundColor Yellow
                 if ($go -and ($go -eq 'GO')) {
                     Write-Host
-                    Write-Host ("GO signal given... doing release '" + $devVersion + "'")
+                    Write-Host ("GO signal given... doing release '" + $devVersion + "'") -ForegroundColor Yellow #tested
+                    Write-Host
+                    git add .
+                    git commit -m $commitMessage
                 }
                 else {
                     Write-Host
-                    Write-Host ("GO signal NOT given... '" + $devVersion + "' NOT released")
-                }
-                # Modify [CmdletBinding()] to [CmdletBinding(SupportsShouldProcess=$true, DefaultParameterSetName='Path')]
-                $paths = @()
-                if ($psCmdlet.ParameterSetName -eq 'Path') {
-                    foreach ($aPath in $Path) {
-                        if (!(Test-Path -Path $aPath)) {
-                            $ex = New-Object System.Management.Automation.ItemNotFoundException "Cannot find path '$aPath' because it does not exist."
-                            $category = [System.Management.Automation.ErrorCategory]::ObjectNotFound
-                            $errRecord = New-Object System.Management.Automation.ErrorRecord $ex,'PathNotFound',$category,$aPath
-                            $psCmdlet.WriteError($errRecord)
-                            continue
-                        }
-                    
-                        # Resolve any wildcards that might be in the path
-                        $provider = $null
-                        $paths += $psCmdlet.SessionState.Path.GetResolvedProviderPathFromPSPath($aPath, [ref]$provider)
-                    }
-                }
-                else {
-                    foreach ($aPath in $LiteralPath) {
-                        if (!(Test-Path -LiteralPath $aPath)) {
-                            $ex = New-Object System.Management.Automation.ItemNotFoundException "Cannot find path '$aPath' because it does not exist."
-                            $category = [System.Management.Automation.ErrorCategory]::ObjectNotFound
-                            $errRecord = New-Object System.Management.Automation.ErrorRecord $ex,'PathNotFound',$category,$aPath
-                            $psCmdlet.WriteError($errRecord)
-                            continue
-                        }
-                    
-                        # Resolve any relative paths
-                        $paths += $psCmdlet.SessionState.Path.GetUnresolvedProviderPathFromPSPath($aPath)
-                    }
-                }
-                
-                foreach ($aPath in $paths) {
-                    if ($pscmdlet.ShouldProcess($aPath, 'Operation')) {
-                        # Process each path
-                        
-                    }
+                    Write-Host ("GO signal NOT given (this is a dry run)... '" + $devVersion + "' NOT released") -ForegroundColor Yellow #tested
                 }
             }
             else {
-                Write-Error 'Missing release issue'
+                Write-Error 'Missing release issue' #tested
             }
         }
         else {
-            Write-Error ('Dev version (' + $devVersion + ') not greater than repo version (' + $repoVersion + ')')
+            Write-Error ('Dev version (' + $devVersion + ') not greater than repo version (' + $repoVersion + ')') #tested
         }
     }
     else {
-        Write-Error 'Missing dev project file'
+        Write-Error 'Missing dev project file' #tested
     }
 }
 else {
-    Write-Error 'Missing release.xml in current dir'
+    Write-Error 'Missing release.xml in current dir' #tested
 }
 Write-Host
