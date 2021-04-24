@@ -91,6 +91,7 @@ if ($releaseFile) {
                     Write-Host
                     git add .
                     git commit -m $commitMessage
+                    git push
                 }
                 else {
                     Write-Host
