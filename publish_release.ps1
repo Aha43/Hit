@@ -2,11 +2,22 @@ $go = $args[0]
 
 [string]$gitStatus = (git status --porcelain)
 if ($gitStatus) {
-    Write-Error 'Working dir is not git clean, commit before doing a release!' -ErrorAction Stop
+    Write-Host
+    Write-Host 'Preparing a release...'
+}
+else {
+    Write-Error 'Nothing to commit as a release!' -ErrorAction Stop
 }
 
+Write-Host
 Write-Host 'Doing a git pull...'
 git pull
+
+Write-Host
+Write-Host 'Doing a build'
+
+Write-Host
+Write-Host 'Running tests'
 
 $releaseFile = Get-ChildItem -Path '.\release.xml'
 if ($releaseFile) {
