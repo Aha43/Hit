@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<release>
+    <devProjectFile>D:\\rep\\Hit\\src\\Hit\\Hit.csproj</devProjectFile>
+    <repoProjectFileUri>https://raw.githubusercontent.com/Aha43/Hit/main/src/Hit/Hit.csproj</repoProjectFileUri>
+    <releaseIssue>80</releaseIssue>
+    <issues>
+        <issue>20</issue>
+        <issue>50</issue>
+        <issue>60</issue>
+    </issues>
+</release>
