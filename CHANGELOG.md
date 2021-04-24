@@ -1,6 +1,17 @@
 
 # Changelog
 
+## 6.2.1
+
+### New
+
+* Property on `IUnitTests` to get names of all unit tests
+* Property on `IUnitTestsSet` to get names of all sets.
+
+### DevOps
+
+* Using ps1 script to push release (`publish_release.ps1`)
+
 ## 6.2.0-alpha
 
 ### New
