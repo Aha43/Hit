@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hit.Infrastructure.Attributes;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
 using System.Reflection;
 
 namespace Hit.Infrastructure.User
@@ -12,9 +14,9 @@ namespace Hit.Infrastructure.User
 
         protected void LoadFromJsonFile(string path) => _jsonPath = path;
 
-        public override IConfiguration GetConfiguration() => GetPartConfiguration(null);
+        public override IConfiguration GetConfiguration(SysCon meta) => GetPartConfiguration(meta);
 
-        protected IConfiguration GetPartConfiguration(params string[] sections)
+        private IConfiguration GetPartConfiguration(SysCon meta)
         {
             var builder1 = new ConfigurationBuilder();
             var builder2 = default(ConfigurationBuilder);
@@ -29,21 +31,26 @@ namespace Hit.Infrastructure.User
                 builder1.AddUserSecrets(_assembly, true);
             }
 
-            if (sections != null && sections.Length > 0)
+            if (!string.IsNullOrWhiteSpace(meta.ConfigurationSections))
             {
-                var configuration1 = builder1.Build();
-                foreach (var section in sections)
+                var sections = meta.ConfigurationSections.Split(',').Select(s => s.Trim()).ToArray();
+
+                if (sections != null && sections.Length > 0)
                 {
-                    if (!string.IsNullOrWhiteSpace(section))
+                    var configuration1 = builder1.Build();
+                    foreach (var section in sections)
                     {
-                        var sectionConfiguration = configuration1.GetSection(section);
-                        if (sectionConfiguration != default)
+                        if (!string.IsNullOrWhiteSpace(section))
                         {
-                            if (builder2 == default)
+                            var sectionConfiguration = configuration1.GetSection(section);
+                            if (sectionConfiguration != default)
                             {
-                                builder2 = new ConfigurationBuilder();
+                                if (builder2 == default)
+                                {
+                                    builder2 = new ConfigurationBuilder();
+                                }
+                                builder2.AddConfiguration(sectionConfiguration);
                             }
-                            builder2.AddConfiguration(sectionConfiguration);
                         }
                     }
                 }

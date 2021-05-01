@@ -6,7 +6,8 @@ namespace Hit.Specification.Infrastructure
 {
     public interface IUnitTests<World> : IHitType<World>
     {
-        string Name { get; }
+        string System { get; }
+        string Layer { get; }
         string Description { get; }
         string EnvironmentType { get; }
         string[] UnitTestsNames { get; }

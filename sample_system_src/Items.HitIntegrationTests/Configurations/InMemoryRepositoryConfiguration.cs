@@ -9,7 +9,7 @@ namespace Items.HitIntegrationTests.Configurations
     [SysCon(name: "in_memory_repository_test", Description = "Testing CRUD with database repository")]
     public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
     {
-        public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration, SysCon meta, string currentLayer)
         {
             return services.ConfigureInMemoryRepositoryServices(); ;
         }

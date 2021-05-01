@@ -9,10 +9,10 @@ namespace Hit.Infrastructure
         {
             var sb = new StringBuilder();
 
-            if (!string.IsNullOrWhiteSpace(results.UnitTestsName))
+            if (!string.IsNullOrWhiteSpace(results.System))
             {
-                sb.Append("Unit tests: ")
-                  .AppendLine(results.UnitTestsName);
+                sb.Append("System: ")
+                  .AppendLine(results.System);
             }
             if (!string.IsNullOrWhiteSpace(results.UnitTestsDescription))
             {

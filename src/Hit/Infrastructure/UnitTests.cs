@@ -23,34 +23,35 @@ namespace Hit.Infrastructure
 
         private readonly ISystemConfiguration<World> _systemConfiguration;
 
-        public string Name { get; }
+        internal Action<string> TestLogicLogger { get; set; }
+
+        public string System { get; }
+        public string Layer { get; }
         public string Description { get; }
         public string EnvironmentType { get; }
 
         public string[] UnitTestsNames => _testHierarchy.UnitTestsNames;
 
-        internal UnitTests(ISystemConfiguration<World> configuration, HitTypesFromAssemblies<World> types)
+        internal UnitTests(ISystemConfiguration<World> configuration, 
+            SysCon meta, 
+            string currentLayer, 
+            HitTypesFromAssemblies<World> types)
         {
             _systemConfiguration = configuration;
 
-            var configAttr = configuration.GetType().SysConAttribute<World>();
-            if (configAttr == null)
-            {
-                throw new Exception("Configuration class " + configuration.GetType().FullName + " missing " + nameof(SysCon) + " attribute");
-            }
-
-            if (string.IsNullOrWhiteSpace(configAttr.Name))
+            if (string.IsNullOrWhiteSpace(meta.System))
             {
                 throw new MissingUnitTestsNameException();
             }
 
-            Name = configAttr.Name;
-            Description = configAttr.Description;
-            EnvironmentType = configAttr.EnvironmentType;
+            System = meta.System;
+            Layer = string.IsNullOrWhiteSpace(currentLayer) ? string.Empty : currentLayer;
+            Description = meta.Description;
+            EnvironmentType = meta.EnvironmentType;
 
             var services = new ServiceCollection();
 
-            configuration.ConfigureServices(services, configuration.GetConfiguration());
+            configuration.ConfigureServices(services, configuration.GetConfiguration(meta), meta, currentLayer);
 
             _serviceProvider = ConfigureUnitTestsServices(services, types);
 
@@ -89,9 +90,11 @@ namespace Hit.Infrastructure
         {
             return new TestContext<World>
             {
-                UnitTestsName = Name,
+                System = System,
+                Layer = Layer,
                 EnvironmentType = EnvironmentType,
-                World = _worldProvider.Get()
+                World = _worldProvider.Get(),
+                TestLogicLogger = TestLogicLogger
             };
         }
 
@@ -110,7 +113,7 @@ namespace Hit.Infrastructure
 
             var results = unitTest.GetTestResult();
 
-            return new UnitTestResult(Name, Description, unitTestName, results, systemAvailable);
+            return new UnitTestResult(System, Description, unitTestName, results, systemAvailable);
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;

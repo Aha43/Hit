@@ -87,7 +87,7 @@ namespace Hit.Infrastructure
             {
                 World = context.World,
                 EnvironmentType = context.EnvironmentType,
-                UnitTestsName = context.UnitTestsName,
+                System = context.System,
                 UnitTest = context.UnitTest
             };
 

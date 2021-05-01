@@ -2,12 +2,14 @@
 
 namespace Hit.Infrastructure.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class SysCon : Attribute
     {
-        public string Name { get; }
+        public string System { get; }
+        public string Layers { get; set; }
         public string Description { get; set; }
         public string EnvironmentType { get; set; }
+        public string ConfigurationSections { get; set; }
         public SysCon(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -15,7 +17,7 @@ namespace Hit.Infrastructure.Attributes
                 throw new ArgumentException("missing " + nameof(name));
             }
 
-            Name = name;
+            System = name;
         }
 
     }

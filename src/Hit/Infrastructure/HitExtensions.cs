@@ -19,7 +19,7 @@ namespace Hit.Infrastructure
             return retVal;
         }
 
-        internal static SysCon SysConAttribute<World>(this Type type)
+        internal static SysCon[] SysConAttribute<World>(this Type type)
         {
             if (!type.IsConfigurationType<World>())
             {
@@ -28,7 +28,7 @@ namespace Hit.Infrastructure
 
             return Attribute.GetCustomAttributes(type)
                 .Where(e => e is SysCon)
-                .Select(e => e as SysCon).FirstOrDefault();
+                .Select(e => e as SysCon).ToArray();
         }
 
         internal static UseAs[] UsAsAttributes<World>(this Type type)
