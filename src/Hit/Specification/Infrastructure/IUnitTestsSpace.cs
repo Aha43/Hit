@@ -5,8 +5,12 @@ namespace Hit.Specification.Infrastructure
 {
     public interface IUnitTestsSpace<World>
     {
-        IEnumerable<string> SystemNames();
-        IEnumerable<string> LayerNames(string system);
+        int Dimension { get; }
+        int SystemCount { get; }
+        int LayerCount { get; }
+        IEnumerable<string> SystemNames { get; }
+        IEnumerable<string> LayerNames { get; }
+        IUnitTests<World> GetUnitTests();
         IUnitTests<World> GetUnitTests(string system);
         IUnitTests<World> GetUnitTests(string system, string layer);
         Task<IUnitTestResult> RunUnitTestAsync(string system, string unitTest);

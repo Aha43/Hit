@@ -12,7 +12,10 @@ namespace Hit.Infrastructure
     public class UnitTestsSpace<World> : IUnitTestsSpace<World>
     {
         private readonly List<UnitTests<World>> _flatLand = new List<UnitTests<World>>(); // all tests for easy some coding
+
         private readonly Dictionary<string, Dictionary<string, IUnitTests<World>>> _space = new Dictionary<string, Dictionary<string, IUnitTests<World>>>();
+
+        private readonly HashSet<string> _systemNames = new HashSet<string>();
 
         public UnitTestsSpace()
         {
@@ -70,15 +73,28 @@ namespace Hit.Infrastructure
             {
                 layeredTests.Add(tests.System, tests);
                 _flatLand.Add(tests);
-                return;
             }
-
-            _space[layer] = new Dictionary<string, IUnitTests<World>>
+            else
+            {
+                _space[layer] = new Dictionary<string, IUnitTests<World>>
             {
                 { tests.System, tests }
             };
 
-            _flatLand.Add(tests);
+                _flatLand.Add(tests);
+            }
+
+            _systemNames.Add(tests.System);
+        }
+
+        public IUnitTests<World> GetUnitTests()
+        {
+            if (Dimension == 1)
+            {
+                return GetUnitTests(_systemNames.First());
+            }
+
+            throw new UnitTestsSpaceIsNotOneDimensional();
         }
 
         public IUnitTests<World> GetUnitTests(string system) => GetUnitTests(system, string.Empty);
@@ -110,17 +126,9 @@ namespace Hit.Infrastructure
             return results;
         }
 
-        public IEnumerable<string> SystemNames() => _space.Keys.ToArray();
+        public IEnumerable<string> SystemNames => _systemNames.ToArray();
 
-        public IEnumerable<string> LayerNames(string system)
-        {
-            if (_space.TryGetValue(system, out Dictionary<string, IUnitTests<World>> dict))
-            {
-                return dict.Keys.ToArray();
-            }
-
-            return new string[] { };
-        }
+        public IEnumerable<string> LayerNames => _space.Keys.ToArray();
 
         public void SetTestLogicLogger(Action<string> testLogicLogger)
         {
@@ -130,6 +138,34 @@ namespace Hit.Infrastructure
             }
         }
 
+        public int Dimension
+        {
+            get
+            {
+                var systemCount = SystemCount;
+                var layerCount = LayerCount;
+
+                if (systemCount == 1)
+                {
+                    if (layerCount == 1)
+                    {
+                        return 1;
+                    }
+                    return 2;
+                }
+                if (layerCount == 1)
+                {
+                    return 2;
+                }
+
+                return 3;
+            }
+        }
+
+        public int SystemCount => _space.Count;
+
+        public int LayerCount => _systemNames.Count;
+        
     }
 
 }

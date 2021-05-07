@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HitUnitTests.TestData
+namespace HitUnitTests.Worlds
 {
-    public class TestWorld
+    public class World1
     {
     }
 }

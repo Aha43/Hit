@@ -14,5 +14,6 @@ namespace Hit.Specification.Infrastructure
         Task<IUnitTestResult> RunUnitTestAsync(string name);
         ITestLogic<World> GetTest(string name);
         IEnumerable<string> UnitTestNames { get; }
+        int UnitTestCount { get; }
     }
 }
