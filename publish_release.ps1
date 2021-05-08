@@ -30,6 +30,7 @@ else {
     Write-Error $buildResult -ErrorAction Stop
     Write-Host
     Write-Host 'NO GO: Build failed!' -ForegroundColor Magenta
+    exit
 }
 
 Write-Host
