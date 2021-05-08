@@ -14,6 +14,10 @@ namespace HitUnitTests
     [UseAs("TestA_1_2", followingTest: "TestA_1")]
 
     [UseAs("TestA_3_1", followingTest: "TestA_3", UnitTest = "testA_3_1")]
+
+    [UseAs("TestB", Options = "fail=true")]
+    [UseAs("TestB_1", followingTest: "TestB")]
+    [UseAs("TestB_2", followingTest: "TestB_1", UnitTest = "testB_2")]
     public class TestLogicImpl : UnitAsyncTestLogic<World1>
     {
     }

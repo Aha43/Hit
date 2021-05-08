@@ -86,6 +86,28 @@ namespace HitUnitTests
             .NoNextNode();
         }
 
+        [Fact]
+        public async Task SuccessResultStructureShouldBeAsExpected_testB_2_Async()
+        {
+            var result = await _unitTestsSpace.RunUnitTestAsync("testB_2");
+            result.ResultHead.NodeGotTestResult(result =>
+            {
+                result.IsForTest("TestB")
+                    .HasStatus(TestStatus.Failed);
+            })
+            .GotNextNode().NodeGotTestResult(result =>
+            {
+                result.IsForTest("TestB_1")
+                    .HasStatus(TestStatus.NotReached);
+            })
+            .GotNextNode().NodeGotTestResult(result =>
+            {
+                result.IsForTest("TestB_2")
+                    .HasStatus(TestStatus.NotReached);
+            })
+            .NoNextNode();
+        }
+
     }
 
 }
