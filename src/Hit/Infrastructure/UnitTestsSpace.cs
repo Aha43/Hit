@@ -11,11 +11,13 @@ namespace Hit.Infrastructure
 {
     public class UnitTestsSpace<World> : IUnitTestsSpace<World>
     {
-        private readonly List<UnitTests<World>> _flatLand = new List<UnitTests<World>>(); // all tests for easy some coding
+        private readonly List<UnitTests<World>> _flatLand = new List<UnitTests<World>>(); // all tests to ease some coding
 
         private readonly Dictionary<string, Dictionary<string, IUnitTests<World>>> _space = new Dictionary<string, Dictionary<string, IUnitTests<World>>>();
 
         private readonly HashSet<string> _systemNames = new HashSet<string>();
+
+        private readonly SortedSet<(string system, string layer, string unitTest)> _tupples = new SortedSet<(string system, string layer, string unitTest)>();
 
         public UnitTestsSpace()
         {
@@ -85,6 +87,18 @@ namespace Hit.Infrastructure
             }
 
             _systemNames.Add(tests.System);
+
+            AddTupples(tests);
+        }
+
+        private void AddTupples(UnitTests<World> tests)
+        {
+            var system = tests.System;
+            var layer = tests.Layer;
+            foreach (var unitTest in tests.UnitTestNames)
+            {
+                _tupples.Add((system, layer, unitTest));
+            }
         }
 
         public IUnitTests<World> GetUnitTests()
@@ -101,6 +115,11 @@ namespace Hit.Infrastructure
 
         public IUnitTests<World> GetUnitTests(string system, string layer)
         {
+            if (string.IsNullOrWhiteSpace(system) && string.IsNullOrWhiteSpace(layer))
+            {
+                return GetUnitTests();
+            }
+
             if (_space.TryGetValue(layer, out Dictionary<string, IUnitTests<World>> dict))
             {
                 if (dict.TryGetValue(system, out IUnitTests<World> retVal))
@@ -165,7 +184,9 @@ namespace Hit.Infrastructure
         public int SystemCount => _space.Count;
 
         public int LayerCount => _systemNames.Count;
-        
+
+        public IEnumerable<(string system, string layer, string unitTests)> UnitTestCoordinates => _tupples.ToArray();
+
     }
 
 }

@@ -10,6 +10,7 @@ namespace Hit.Specification.Infrastructure
         int LayerCount { get; }
         IEnumerable<string> SystemNames { get; }
         IEnumerable<string> LayerNames { get; }
+        IEnumerable<(string system, string layer, string unitTests)> UnitTestCoordinates { get; }
         IUnitTests<World> GetUnitTests();
         IUnitTests<World> GetUnitTests(string system);
         IUnitTests<World> GetUnitTests(string system, string layer);

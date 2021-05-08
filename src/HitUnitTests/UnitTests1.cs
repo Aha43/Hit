@@ -25,10 +25,30 @@ namespace HitUnitTests
         [Fact]
         public void LayerNameShouldBeDefaultTheEmptyString() => Assert.Equal(string.Empty, _unitTestsSpace.LayerNames.First());
         [Fact]
+        public void ShouldBeAbleToGetUnitTests1() => Assert.NotNull(_unitTestsSpace.GetUnitTests("System1"));
+        [Fact]
+        public void ShouldBeAbleToGetUnitTests2() => Assert.NotNull(_unitTestsSpace.GetUnitTests(""));
+        [Fact]
+        public void ShouldBeAbleToGetUnitTests3() => Assert.NotNull(_unitTestsSpace.GetUnitTests(null));
+        [Fact]
+        public void ShouldBeAbleToGetUnitTests4() => Assert.NotNull(_unitTestsSpace.GetUnitTests(null, null));
+        [Fact]
+        public void ShouldBeAbleToGetUnitTests5() => Assert.NotNull(_unitTestsSpace.GetUnitTests("", ""));
+        [Fact]
         public void OneDimensionalSystemShouldBeNamedSystem1() => Assert.True(_unitTestsSpace.GetUnitTests() == _unitTestsSpace.GetUnitTests("System1"));
         [Fact]
         public void NumberOfUnitTestsShouldBeThree() => Assert.Equal(3, _unitTestsSpace.GetUnitTests().UnitTestCount);
-
+        [Fact]
+        public void NumberOfUnitTestCoordinatesShouldBeThree() => Assert.Equal(3, _unitTestsSpace.UnitTestCoordinates.Count());
+        [Theory]
+        [InlineData("System1", "", "testA_3")]
+        [InlineData("System1", "", "testA_1_1")]
+        [InlineData("System1", "", "testA_3_1")]
+        public void CoordinateForUnitTestShouldBeFound(string system, string layer, string unitTest) => Assert.Contains((system, layer, unitTest), _unitTestsSpace.UnitTestCoordinates);
+        [Theory]
+        [InlineData("System", "", "testA_3")]
+        [InlineData("System1", "allo", "testA_1_1")]
+        [InlineData("System1", "", "hi")]
+        public void CoordinateForUnitTestShouldNotBeFound(string system, string layer, string unitTest) => Assert.DoesNotContain((system, layer, unitTest), _unitTestsSpace.UnitTestCoordinates);
     }
-
 }
