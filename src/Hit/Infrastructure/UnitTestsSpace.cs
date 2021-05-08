@@ -131,9 +131,9 @@ namespace Hit.Infrastructure
             throw new UnitTestsNotFoundException(system);
         }
 
-        public async Task<IUnitTestResult> RunUnitTestAsync(string system, string layer, string unitTest)
+        public async Task<IUnitTestResult> RunUnitTestAsync(string unitTest)
         {
-            var unitTests = GetUnitTests(system, layer);
+            var unitTests = GetUnitTests();
             var results = await unitTests.RunUnitTestAsync(unitTest).ConfigureAwait(false);
             return results;
         }
@@ -141,6 +141,13 @@ namespace Hit.Infrastructure
         public async Task<IUnitTestResult> RunUnitTestAsync(string system, string unitTest)
         {
             var unitTests = GetUnitTests(system);
+            var results = await unitTests.RunUnitTestAsync(unitTest).ConfigureAwait(false);
+            return results;
+        }
+
+        public async Task<IUnitTestResult> RunUnitTestAsync(string system, string layer, string unitTest)
+        {
+            var unitTests = GetUnitTests(system, layer);
             var results = await unitTests.RunUnitTestAsync(unitTest).ConfigureAwait(false);
             return results;
         }

@@ -14,6 +14,7 @@ namespace Hit.Specification.Infrastructure
         IUnitTests<World> GetUnitTests();
         IUnitTests<World> GetUnitTests(string system);
         IUnitTests<World> GetUnitTests(string system, string layer);
+        Task<IUnitTestResult> RunUnitTestAsync(string unitTest);
         Task<IUnitTestResult> RunUnitTestAsync(string system, string unitTest);
         Task<IUnitTestResult> RunUnitTestAsync(string system, string layer, string unitTest);
     }

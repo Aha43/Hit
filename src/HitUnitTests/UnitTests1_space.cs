@@ -1,16 +1,12 @@
 ﻿using Hit.Infrastructure;
 using Hit.Specification.Infrastructure;
 using HitUnitTests.Worlds;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace HitUnitTests
 {
-    public class UnitTests1
+    public class UnitTests1_space
     {
         private static IUnitTestsSpace<World1> _unitTestsSpace = new UnitTestsSpace<World1>();
 

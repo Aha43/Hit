@@ -34,10 +34,7 @@ namespace Hit.Infrastructure
                 sb.AppendLine("System NOT available");
             }
 
-            foreach (var resultNode in results.Results)
-            {
-                Report(resultNode, 1, sb);
-            }
+            Report(results.ResultHead, 1, sb);
 
             return sb.ToString();
         }

@@ -10,27 +10,20 @@ namespace Hit.Infrastructure
             System = system;
             UnitTestsDescription = unitTestsDescription;
             UnitTest = unitTest;
-            Results = new ITestResultNode[] { results };
+            ResultHead = results;
             SystemAvailable = systemAvailable;
         }
 
         public string System { get; }
         public string UnitTestsDescription { get; }
         public string UnitTest { get; }
-        public IEnumerable<ITestResultNode> Results { get; }
-
+        
         public bool SystemAvailable { get; }
 
-        public bool Success()
-        {
-            foreach (var node in Results)
-            {
-                if (!Success(node)) return false;
-            }
+        public ITestResultNode ResultHead { get; }
 
-            return true;
-        }
-
+        public bool Success() => Success(ResultHead);
+        
         private bool Success(ITestResultNode node)
         {
             if (node.TestResult.Status != TestStatus.Success)

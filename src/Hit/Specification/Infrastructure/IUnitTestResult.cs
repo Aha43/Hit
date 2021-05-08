@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Hit.Specification.Infrastructure
+﻿namespace Hit.Specification.Infrastructure
 {
     public interface IUnitTestResult
     {
         string System { get; }
         string UnitTestsDescription { get; }
         string UnitTest { get; }
-        IEnumerable<ITestResultNode> Results { get; }
+        ITestResultNode ResultHead { get; }
         bool Success();
         bool SystemAvailable { get; }
     }
