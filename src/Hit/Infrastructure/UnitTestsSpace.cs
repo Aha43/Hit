@@ -188,9 +188,9 @@ namespace Hit.Infrastructure
             }
         }
 
-        public int SystemCount => _space.Count;
+        public int SystemCount => _systemNames.Count;
 
-        public int LayerCount => _systemNames.Count;
+        public int LayerCount => _space.Count;
 
         public IEnumerable<(string system, string layer, string unitTests)> UnitTestCoordinates => _tupples.ToArray();
 

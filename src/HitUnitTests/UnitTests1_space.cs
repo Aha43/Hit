@@ -33,9 +33,9 @@ namespace HitUnitTests
         [Fact]
         public void OneDimensionalSystemShouldBeNamedSystem1() => Assert.True(_unitTestsSpace.GetUnitTests() == _unitTestsSpace.GetUnitTests("System1"));
         [Fact]
-        public void NumberOfUnitTestsShouldBeFour() => Assert.Equal(5, _unitTestsSpace.GetUnitTests().UnitTestCount);
+        public void NumberOfUnitTestsShouldBeFive() => Assert.Equal(5, _unitTestsSpace.GetUnitTests().UnitTestCount);
         [Fact]
-        public void NumberOfUnitTestCoordinatesShouldBeFour() => Assert.Equal(5, _unitTestsSpace.UnitTestCoordinates.Count());
+        public void NumberOfUnitTestCoordinatesShouldBeFive() => Assert.Equal(5, _unitTestsSpace.UnitTestCoordinates.Count());
         [Theory]
         [InlineData("System1", "", "testA_3")]
         [InlineData("System1", "", "testA_1_1")]
