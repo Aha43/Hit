@@ -1,5 +1,7 @@
 ![](images/logo.png?raw=true)
 
+[![.NET](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml)
+
 # HIT - Hierarchically Integration Test framework
 
 **Currently being rewritten to be true to current alpha version**
