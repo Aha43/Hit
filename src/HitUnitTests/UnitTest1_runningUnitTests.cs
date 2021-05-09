@@ -25,6 +25,18 @@ namespace HitUnitTests
             Assert.Equal("System1", result.System);
         }
 
+        [Theory]
+        [InlineData("testB_2")]
+        [InlineData("testC_2")]
+        public async Task UnitTestShouldFailAsync(string unitTest)
+        {
+            var result = await _unitTestsSpace.RunUnitTestAsync(unitTest);
+            Assert.NotNull(result);
+            Assert.False(result.Success());
+            Assert.Equal(unitTest, result.UnitTest);
+            Assert.Equal("System1", result.System);
+        }
+
         [Fact]
         public async Task SuccessResultStructureShouldBeAsExpected_testA_3_Async()
         {
