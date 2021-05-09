@@ -43,4 +43,6 @@ else {
     exit
 }
 
+Write-Host
+Write-Host 'Doing the push' -ForegroundColor Yellow
 git push
