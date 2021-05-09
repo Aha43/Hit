@@ -2,15 +2,14 @@
 using Hit.Specification.Infrastructure;
 using HitUnitTests.Assertions;
 using HitUnitTests.Worlds;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace HitUnitTests
 {
-    public class UnitTest1_runningUnitTests
+    public class UnitTest2_runningSyncUnitTests
     {
-        private static IUnitTestsSpace<World1> _unitTestsSpace = new UnitTestsSpace<World1>();
+        private static IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
 
         [Theory]
         [InlineData("testA_3")]
