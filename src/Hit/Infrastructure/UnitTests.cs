@@ -114,7 +114,7 @@ namespace Hit.Infrastructure
 
             var results = unitTest.GetTestResult();
 
-            return new UnitTestResult(System, Description, unitTestName, results, systemAvailable);
+            return new UnitTestResult(System, Layer, Description, unitTestName, results, systemAvailable);
         }
 
         public ITestLogic<World> GetTest(string name) => _testHierarchy.GetNode(name)?.Test;

@@ -2,7 +2,6 @@
 using Hit.Specification.Infrastructure;
 using HitUnitTests.Assertions;
 using HitUnitTests.Worlds;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,6 +22,7 @@ namespace HitUnitTests
             Assert.True(result.Success());
             Assert.Equal(unitTest, result.UnitTest);
             Assert.Equal("System1", result.System);
+            Assert.Equal(string.Empty, result.Layer);
         }
 
         [Theory]
@@ -35,6 +35,7 @@ namespace HitUnitTests
             Assert.False(result.Success());
             Assert.Equal(unitTest, result.UnitTest);
             Assert.Equal("System1", result.System);
+            Assert.Equal(string.Empty, result.Layer);
         }
 
         [Fact]

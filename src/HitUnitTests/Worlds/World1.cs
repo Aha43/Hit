@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hit.Specification.User;
 
 namespace HitUnitTests.Worlds
 {
-    public class World1
+    public class World1 : IWorldProvider<World1>
     {
+        public World1 Get() => new();
     }
 }

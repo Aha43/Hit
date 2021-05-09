@@ -2,8 +2,9 @@
 {
     public interface IUnitTestResult
     {
-        string System { get; }
         string UnitTestsDescription { get; }
+        string System { get; }
+        string Layer { get; }
         string UnitTest { get; }
         ITestResultNode ResultHead { get; }
         bool Success();

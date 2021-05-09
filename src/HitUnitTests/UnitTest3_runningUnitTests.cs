@@ -7,48 +7,58 @@ using Xunit;
 
 namespace HitUnitTests
 {
-    public class UnitTest2_runningSyncUnitTests
+    public class UnitTest3_runningSyncUnitTests
     {
-        private static IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
+        private static IUnitTestsSpace<World3> _unitTestsSpace = new UnitTestsSpace<World3>();
 
         [Theory]
-        [InlineData("System2_1", "testA_3")]
-        [InlineData("System2_1", "testA_1_1")]
-        [InlineData("System2_1", "testA_3_1")]
-        [InlineData("System2_2", "testA_3")]
-        [InlineData("System2_2", "testA_1_1")]
-        [InlineData("System2_2", "testA_3_1")]
-        public async Task UnitTestShouldNotFailAsync(string system, string unitTest)
+        [InlineData("System3_1", "Layer2", "testA_3")]
+        [InlineData("System3_1", "Layer2", "testA_1_1")]
+        [InlineData("System3_1", "Layer2", "testA_3_1")]
+        
+        [InlineData("System3_1", "Layer3", "testA_3")]
+        [InlineData("System3_1", "Layer3", "testA_1_1")]
+        [InlineData("System3_1", "Layer3", "testA_3_1")]
+        
+        [InlineData("System3_2", "Layer1", "testA_3")]
+        [InlineData("System3_2", "Layer1", "testA_1_1")]
+        [InlineData("System3_2", "Layer1", "testA_3_1")]
+        public async Task UnitTestShouldNotFailAsync(string system, string layer, string unitTest)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, unitTest);
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, unitTest);
             Assert.NotNull(result);
             Assert.True(result.Success());
             Assert.Equal(unitTest, result.UnitTest);
             Assert.Equal(system, result.System);
-            Assert.Equal(string.Empty, result.Layer);
+            Assert.Equal(layer, result.Layer);
         }
 
         [Theory]
-        [InlineData("System2_1", "testB_2")]
-        [InlineData("System2_1", "testC_2")]
-        [InlineData("System2_2", "testB_2")]
-        [InlineData("System2_2", "testC_2")]
-        public async Task UnitTestShouldFailAsync(string system, string unitTest)
+        [InlineData("System3_1", "Layer2", "testB_2")]
+        [InlineData("System3_1", "Layer2", "testC_2")]
+        
+        [InlineData("System3_1", "Layer3", "testB_2")]
+        [InlineData("System3_1", "Layer3", "testC_2")]
+        
+        [InlineData("System3_2", "Layer1", "testB_2")]
+        [InlineData("System3_2", "Layer1", "testC_2")]
+        public async Task UnitTestShouldFailAsync(string system, string layer, string unitTest)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, unitTest);
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, unitTest);
             Assert.NotNull(result);
             Assert.False(result.Success());
             Assert.Equal(unitTest, result.UnitTest);
             Assert.Equal(system, result.System);
-            Assert.Equal(string.Empty, result.Layer);
+            Assert.Equal(layer, result.Layer);
         }
 
         [Theory]
-        [InlineData("System2_1")]
-        [InlineData("System2_2")]
-        public async Task SuccessResultStructureShouldBeAsExpected_testA_3_Async(string system)
+        [InlineData("System3_1", "Layer2")]
+        [InlineData("System3_1", "Layer3")]
+        [InlineData("System3_2", "Layer1")]
+        public async Task SuccessResultStructureShouldBeAsExpected_testA_3_Async(string system, string layer)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, "testA_3");
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, "testA_3");
             result.ResultHead.NodeGotTestResult(result => 
             {
                 result.IsForTest("TestA")
@@ -63,11 +73,12 @@ namespace HitUnitTests
         }
 
         [Theory]
-        [InlineData("System2_1")]
-        [InlineData("System2_2")]
-        public async Task SuccessResultStructureShouldBeAsExpected_testA_1_1_Async(string system)
+        [InlineData("System3_1", "Layer2")]
+        [InlineData("System3_1", "Layer3")]
+        [InlineData("System3_2", "Layer1")]
+        public async Task SuccessResultStructureShouldBeAsExpected_testA_1_1_Async(string system, string layer)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, "testA_1_1");
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, "testA_1_1");
             result.ResultHead.NodeGotTestResult(result =>
             {
                 result.IsForTest("TestA")
@@ -87,11 +98,12 @@ namespace HitUnitTests
         }
 
         [Theory]
-        [InlineData("System2_1")]
-        [InlineData("System2_2")]
-        public async Task SuccessResultStructureShouldBeAsExpected_testA_3_1_Async(string system)
+        [InlineData("System3_1", "Layer2")]
+        [InlineData("System3_1", "Layer3")]
+        [InlineData("System3_2", "Layer1")]
+        public async Task SuccessResultStructureShouldBeAsExpected_testA_3_1_Async(string system, string layer)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, "testA_3_1");
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, "testA_3_1");
             result.ResultHead.NodeGotTestResult(result =>
             {
                 result.IsForTest("TestA")
@@ -111,11 +123,12 @@ namespace HitUnitTests
         }
 
         [Theory]
-        [InlineData("System2_1")]
-        [InlineData("System2_2")]
-        public async Task SuccessResultStructureShouldBeAsExpected_testB_2_Async(string system)
+        [InlineData("System3_1", "Layer2")]
+        [InlineData("System3_1", "Layer3")]
+        [InlineData("System3_2", "Layer1")]
+        public async Task SuccessResultStructureShouldBeAsExpected_testB_2_Async(string system, string layer)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, "testB_2");
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, "testB_2");
             result.ResultHead.NodeGotTestResult(result =>
             {
                 result.IsForTest("TestB")
@@ -135,11 +148,12 @@ namespace HitUnitTests
         }
 
         [Theory]
-        [InlineData("System2_1")]
-        [InlineData("System2_2")]
-        public async Task SuccessResultStructureShouldBeAsExpected_testC_2_Async(string system)
+        [InlineData("System3_1", "Layer2")]
+        [InlineData("System3_1", "Layer3")]
+        [InlineData("System3_2", "Layer1")]
+        public async Task SuccessResultStructureShouldBeAsExpected_testC_2_Async(string system, string layer)
         {
-            var result = await _unitTestsSpace.RunUnitTestAsync(system, "testC_2");
+            var result = await _unitTestsSpace.RunUnitTestAsync(system, layer, "testC_2");
             result.ResultHead.NodeGotTestResult(result =>
             {
                 result.IsForTest("TestC")

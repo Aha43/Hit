@@ -5,17 +5,26 @@ namespace Hit.Infrastructure
 {
     internal class UnitTestResult : IUnitTestResult
     {
-        internal UnitTestResult(string system, string unitTestsDescription, string unitTest, ITestResultNode results, bool systemAvailable)
+        internal UnitTestResult(
+            string system,
+            string layer,
+            string unitTestsDescription, 
+            string unitTest, 
+            ITestResultNode results, 
+            bool systemAvailable)
         {
             System = system;
+            Layer = layer;
             UnitTestsDescription = unitTestsDescription;
             UnitTest = unitTest;
             ResultHead = results;
             SystemAvailable = systemAvailable;
         }
 
-        public string System { get; }
         public string UnitTestsDescription { get; }
+
+        public string System { get; }
+        public string Layer { get; }
         public string UnitTest { get; }
         
         public bool SystemAvailable { get; }
