@@ -40,6 +40,8 @@ namespace HitUnitTests
         [InlineData("System1", "", "testA_3")]
         [InlineData("System1", "", "testA_1_1")]
         [InlineData("System1", "", "testA_3_1")]
+        [InlineData("System1", "", "testB_2")]
+        [InlineData("System1", "", "testC_2")]
         public void CoordinateForUnitTestShouldBeFound(string system, string layer, string unitTest) => Assert.Contains((system, layer, unitTest), _unitTestsSpace.UnitTestCoordinates);
         [Theory]
         [InlineData("System", "", "testA_3")]
