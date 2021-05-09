@@ -11,7 +11,7 @@ namespace HitUnitTests
         private static IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
 
         [Fact]
-        public void ShouldHaveDimension2() => Assert.Equal(2, _unitTestsSpace.Dimension);
+        public void ShouldHaveDimensionTwo() => Assert.Equal(2, _unitTestsSpace.Dimension);
         [Fact]
         public void NumberOfSystemsShouldBeTwo() => Assert.Equal(2, _unitTestsSpace.SystemCount);
         [Fact]
@@ -20,10 +20,10 @@ namespace HitUnitTests
         [Theory]
         [InlineData("System2_1")]
         [InlineData("System2_2")]
-        public void SystemNameShouldContainSystem(string system) => Assert.Contains(system, _unitTestsSpace.SystemNames);
+        public void SystemNamesShouldContainSystem(string system) => Assert.Contains(system, _unitTestsSpace.SystemNames);
         
         [Fact]
-        public void LayerNameShouldBeDefaultTheEmptyString() => Assert.Equal(string.Empty, _unitTestsSpace.LayerNames.First());
+        public void LayerNamesShouldBeDefaultTheEmptyString() => Assert.Equal(string.Empty, _unitTestsSpace.LayerNames.First());
 
         [Theory]
         [InlineData("System2_1")]

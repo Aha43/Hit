@@ -11,7 +11,7 @@ namespace HitUnitTests
         private static IUnitTestsSpace<World1> _unitTestsSpace = new UnitTestsSpace<World1>();
 
         [Fact]
-        public void ShouldHaveDimension1() => Assert.Equal(1, _unitTestsSpace.Dimension);
+        public void ShouldHaveDimensionOne() => Assert.Equal(1, _unitTestsSpace.Dimension);
         [Fact]
         public void NumberOfSystemsShouldBeOne() => Assert.Equal(1, _unitTestsSpace.SystemCount);
         [Fact]
