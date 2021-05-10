@@ -1,7 +1,25 @@
 
 # Changelog
 
-## 6.2.1
+## 7.0.0-alpha
+
+### New
+
+* Major breaking changes related to focus on the one, two or three dimensional aspect 'unit test space'
+  * Configuration classes can now have multiple `SysCon` attributes and the attribute have new optional parameter `Layer` adding the *third dimension* (the first being *unit tests* and the second being *systems*).
+  * Types `IUnitTestsSet` and `UnitTestsSet` to `IUnitTestsSpace` and `UnitTestsSpace`.
+  * Configuration classes can now pick sections from a common appsetting using new `SysCon` attribute parameter `ConfigurationSections`. 
+  * Utility to format log message
+  * `IUnitTestsSpace.Dimension` property to tell dimension of the *unit tests space*
+  * `IUnitTestsSpace.UnitTestCoordinates` method to get all unit tests coordinate tupples `(system, layer, unit-test)` 
+  * Above is most important but not only changes and additions in order for API to be true to the dimensional aspect of *unit tests space*
+  * *A lot of unit tests implemented, hopefully this mean api is getting stable 😀*
+
+### DevOps
+
+* Using ps1 script to push commits between releases (`push.ps1`)
+
+## 6.2.1-alpha
 
 ### New
 
