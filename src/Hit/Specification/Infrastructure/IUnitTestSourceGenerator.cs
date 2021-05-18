@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hit.Specification.Infrastructure
+﻿namespace Hit.Specification.Infrastructure
 {
-    public interface IUnitTestSourceGenerator
+    public interface IUnitTestSourceGenerator<World>
     {
-        //string GenerateCode()
+        string GenerateCode(IUnitTestsSpace<World> space);
     }
 }
