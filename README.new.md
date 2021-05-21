@@ -73,6 +73,6 @@ What to notice in above example code:
 * Tests communicate state through a *world* object. In this example tests read from the *world* what is to be expected before the test and write what to be expected after the test to the *world* object.
     * This example uses [ItemCrudWorld](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorld.cs) as the *world* type.
     * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/sample_system_src/Items.HitIntegrationTests/ItemCrudWorldProvider.cs)
-* HIT does not provide a generally assert API, that's been done:
+* Hit does not provide a generally assertion API, that's been done:
     * As stated Hit is intended to be used with an Unit test framework so the *host unit test framework*'s assertion API can be used.
     * Also independent assertion API exist, I like [Shouldly](https://github.com/shouldly/shouldly) used in examples here.
