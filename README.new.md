@@ -129,3 +129,32 @@ What to notice in above example code is:
     * Second to follow a test that updates an item. It expects to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 * The `UnitTest` parameter to the `UseAs` names a *unit test* that ends at that test, here ends at the test named *ReadItemAfterDelete* and the *unit test* is named *crud_test_run* (if is is ok to name the *unit test* the same as the last test in the sequence this can be done by giving the `UnitTest` parameter the value `'!'`).
+
+Before we can run our unit tests (sequences of Hit integration tests) we need to provide configuration for the system(s) to test. This is done by implementing the interface `ISystemConfiguration`, here is an implementation that configure the testing of an item repository that stores items in memory:
+
+```csharp
+using Hit.Infrastructure.Attributes;
+using Hit.Infrastructure.User;
+using Items.Infrastructure.Repository.InMemory;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Items.HitIntegrationTests.Configurations
+{
+    [SysCon(name: "in_memory_repository_test", Description = "Testing CRUD with database repository")]
+    public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
+    {
+        public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration, SysCon meta, string currentLayer)
+        {
+            return services.ConfigureInMemoryRepositoryServices(); ;
+        }
+
+    }
+
+}
+```
+What to notice in above example code:
+* The mandatory attribute `SysCon` is used to name the system configuration and an optional description may be given.
+* The method `ConfigureServices` configures the services of the system to be tested.
+
+In the very simple systems used in these examples the only configuration needed is to call a method to configure the system's services. In real applications one will need to use information for appsetting configuration see the wiki article ConfiguringSystemToRunUnitTestsOn.
