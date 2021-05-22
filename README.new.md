@@ -163,6 +163,8 @@ In the very simple systems used in these examples the only configuration needed 
 
 ### Running unit tests using Xunit
 
+As stated Hit defined unit tests are intended to be run with a unit test framework, here is how it can be done using the Xunit framework: 
+
 ```csharp
 using Hit.Infrastructure;
 using Hit.Infrastructure.Assertions;
@@ -198,3 +200,5 @@ namespace Items.AutomaticHitIntegrationTests
 
 }
 ```
+What to notice in the above example code:
+* An static instance of the type `UnitTestsSpace` is created. It uses reflection to find test implementation classes, configuration classes and read attribute information to build an internal structure of the unit tests realized so we can run them by invoking it's `RunUnitTestAsync` methods.
