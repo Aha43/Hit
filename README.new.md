@@ -216,4 +216,9 @@ number of unit tests one can run with relatively few lines of test code. This is
 
 This is how all green test run then look in visual studio's test explorer: 
 
+![](images/test-explorer-output.png?raw=true)
+
+A nice thing with how Xunit tests show `inline` data is that each unit test's '*position*' is shown.
+
+
 
