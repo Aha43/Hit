@@ -7,13 +7,13 @@ using Xunit.Abstractions;
 
 namespace Items.AutomaticHitIntegrationTests
 {
-    public class CrudTests
+    public class UnitTests
     {
         private static readonly UnitTestsSpace<ItemCrudWorld> _testSpace = new();
 
         private readonly ITestOutputHelper _testOutput;
 
-        public CrudTests(ITestOutputHelper testOutput)
+        public UnitTests(ITestOutputHelper testOutput)
         {
             _testOutput = testOutput;
             _testSpace.SetTestLogicLogger(_testOutput.WriteLine);
