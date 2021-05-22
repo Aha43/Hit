@@ -58,6 +58,8 @@ namespace Items.HitIntegrationTests.TestLogic
         }
 
     }
+    
+    
 
 }
 ```
@@ -135,7 +137,7 @@ See [UpdateItemTestImpl](https://github.com/Aha43/Hit/blob/main/sample_system_sr
 
 Before we can run our unit tests (sequences of HIT integration tests) we need to provide configuration for the system(s) to test. This is done by implementing the interface `ISystemConfiguration`, here is an implementation that configure the testing of an item repository that stores items in memory:
 
-```
+```csharp=
 [SysCon(name: "in_memory_repository_test", Description = "Testing CRUD with database repository")]
 public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
 {
