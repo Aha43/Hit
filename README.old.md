@@ -2,6 +2,8 @@
 
 [![.NET](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml)
 
+# Old README kept temporarily...
+
 # HIT - Hierarchically Integration Test framework
 
 **Currently being rewritten to be true to current alpha version**
