@@ -153,8 +153,8 @@ namespace Items.HitIntegrationTests.Configurations
 
 }
 ```
-What to notice in above example code:
+What to notice in the above example code:
 * The mandatory attribute `SysCon` is used to name the system configuration and an optional description may be given.
 * The method `ConfigureServices` configures the services of the system to be tested.
 
-In the very simple systems used in these examples the only configuration needed is to call a method to configure the system's services. In real applications one will need to use information for appsetting configuration see the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On).
+In the very simple systems used in these examples the only configuration needed is to call an extension to `IServiceCollection` method provided by the system to configure the system's services. In real applications one will need to use information from appsetting configuration (notice an IConfiguration object is accepted by the `ConfigureServices` method. See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for complete details on configuring system to run unit tests on.
