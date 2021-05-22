@@ -66,7 +66,7 @@ namespace Items.HitIntegrationTests.TestLogic
 
 }
 ```
-What to notice in above example code:
+What to notice in the above example code:
 * The `UseAs` attribute says this test implementation is used to realize a test named *CreateItem*.
 * Since a `followingTest` argument is not passed to the `UseAs` attribute (next code snippet will show use of this) the test named *CreateItem* will be the first test in a least one *unit test*.
 * Dependency injection pattern can be used to inject parts of the system being tested. Here the repository implementation specified by the interface `IItemRepository` is injected. It is the case for all the [test classes](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests/TestLogic) in this example [integration test project](https://github.com/Aha43/Hit/tree/main/sample_system_src/Items.HitIntegrationTests) that they get injected the repository to test like this.
@@ -123,7 +123,7 @@ namespace Items.HitIntegrationTests.TestLogic
 
 }
 ```
-What to notice in above example code is:
+What to notice in the above example code is:
 * The implementation is used to realize three tests all following another test (use of the `UseAs` attribute's `followingTest` argument):
     * First (reading attributes from top to bottom) to follow the test that creates an item. It expects to read the created item. Test is named appropriately *ReadItemAfterCreate*
     * Second to follow a test that updates an item. It expects to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
@@ -157,4 +157,4 @@ What to notice in the above example code:
 * The mandatory attribute `SysCon` is used to name the system configuration and an optional description may be given.
 * The method `ConfigureServices` configures the services of the system to be tested.
 
-In the very simple systems used in these examples the only configuration needed is to call an extension to `IServiceCollection` method provided by the system to configure the system's services. In real applications one will need to use information from appsetting configuration (notice an IConfiguration object is accepted by the `ConfigureServices` method. See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for complete details on configuring system to run unit tests on.
+In the very simple systems used in these examples the only configuration needed is to call an extension to `IServiceCollection` method provided by the system to configure the system's services. In real applications one will need to use configuration data (notice an IConfiguration object is accepted by the `ConfigureServices` method). See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for complete details on configuring system to run unit tests on.
