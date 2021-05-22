@@ -222,6 +222,6 @@ A nice thing with how Xunit tests show `inline` data is that each unit test's '*
 
 The Xunit test also take advantage of Xunit feature for tests to add additional output and this reveal the hierarchial nature of an Hit unit test:
 
-
+![](images/additional-test-output-green.png?raw=true)
 
 
