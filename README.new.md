@@ -162,3 +162,39 @@ What to notice in the above example code:
 In the very simple systems used in these examples the only configuration needed is to call an extension to `IServiceCollection` method provided by the system to configure the system's services. In real applications one will need to use configuration data (notice an IConfiguration object is accepted by the `ConfigureServices` method). See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for complete details on configuring system to run unit tests on.
 
 ### Running unit tests using Xunit
+
+```csharp
+using Hit.Infrastructure;
+using Hit.Infrastructure.Assertions;
+using Items.HitIntegrationTests;
+using System.Threading.Tasks;
+using Xunit;
+using Xunit.Abstractions;
+
+namespace Items.AutomaticHitIntegrationTests
+{
+    public class UnitTests
+    {
+        private static readonly UnitTestsSpace<ItemCrudWorld> _testSpace = new();
+
+        private readonly ITestOutputHelper _testOutput;
+
+        public UnitTests(ITestOutputHelper testOutput)
+        {
+            _testOutput = testOutput;
+            _testSpace.SetTestLogicLogger(_testOutput.WriteLine);
+        }
+
+        [Theory]
+        [InlineData("rest_consuming_repository_test", "crud_test_run")]
+        [InlineData("in_memory_repository_test", "crud_test_run")]
+        public async Task UnitTest(string system, string unitTest)
+        {
+            var result = await _testSpace.RunUnitTestAsync(system, unitTest);
+            result.ShouldBeenSuccessful(_testOutput.WriteLine);
+        }
+
+    }
+
+}
+```
