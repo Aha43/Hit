@@ -214,3 +214,6 @@ It must be noticed that this multi dimensional aspect of Hit poses a luxury prob
 
 number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write. The actually number may be less since there may not be a unit test at all positions (i.e a unit test do not apply for a certain layer). Now running of unit tests must be hand coded, I hope future version of Hit will provide tooling to improve the ease to cover all unit tests.
 
+This is how all green test run then look in visual studio's test explorer: 
+
+
