@@ -208,4 +208,9 @@ What to notice in the above example code:
     * If more than one system is configured (the case of the example here) the space of unit tests are two dimensional and the method `UnitTestSpace.RunUnitTest(string, string)` can be used to run a test.
     * There is also a third dimension we can add called *layer* that is out of scope of this *getting started* introduction: See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for details on this. If *layers* been used to create a three dimensional unit test space the method `UnitTestSpace.RunUnitTest(string, string, string)` can be used to run a test.
 
-It must be noticed that this multi dimensional aspect of Hit poses a luxury problem: One get the potential of *number of named unit tests* **times** *number of configured systems* **times** *number of layers* **=** number of unit tests one can run with relatively few lines of test code.  
+It must be noticed that this multi dimensional aspect of Hit poses a luxury problem: One get the potential of 
+
+`number_of_named_unit_tests * number_of_configured_systems * number_of_layers`
+
+number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write. The actually number may be less since there may not be a unit test at all positions (i.e a unit test do not apply for a certain layer). Now running of unit tests must be hand coded, I hope future version of Hit will provide tooling to improve the ease to cover all unit tests.
+
