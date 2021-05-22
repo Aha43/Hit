@@ -224,4 +224,10 @@ The Xunit test also take advantage of Xunit feature for tests to add additional 
 
 ![](images/additional-test-output-green.png?raw=true)
 
+This is how the output in the test explorer look for a Hit unit tests that failed:
+
+![](images/test-explorer-output.png?raw=true)
+
+
+
 
