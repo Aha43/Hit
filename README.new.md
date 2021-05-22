@@ -11,7 +11,7 @@ A  dotnet c# framework for integration testing where the work of one integration
 
 ## Getting started
 
-### Example of testing CRUD operations using Hit
+### Implementing unit tests for integration testing with Hit
 
 Hit integration tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test logic implementation that test the creating an item given a repository of items:
 ```csharp
@@ -130,6 +130,8 @@ What to notice in the above example code is:
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
 * The `UnitTest` parameter to the `UseAs` names a *unit test* that ends at that test, here ends at the test named *ReadItemAfterDelete* and the *unit test* is named *crud_test_run* (if is is ok to name the *unit test* the same as the last test in the sequence this can be done by giving the `UnitTest` parameter the value `'!'`).
 
+### Configuring systems to run the unit tests
+
 Before we can run our unit tests (sequences of Hit integration tests) we need to provide configuration for the system(s) to test. This is done by implementing the interface `ISystemConfiguration`, here is an implementation that configure the testing of an item repository that stores items in memory:
 
 ```csharp
@@ -158,3 +160,5 @@ What to notice in the above example code:
 * The method `ConfigureServices` configures the services of the system to be tested.
 
 In the very simple systems used in these examples the only configuration needed is to call an extension to `IServiceCollection` method provided by the system to configure the system's services. In real applications one will need to use configuration data (notice an IConfiguration object is accepted by the `ConfigureServices` method). See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for complete details on configuring system to run unit tests on.
+
+### Running unit tests using Xunit
