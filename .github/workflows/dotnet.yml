@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - '**/README*'
       - '**/CHANGELOG.md'
+      - '**/images/*'
   pull_request:
     branches: [ main ]
 
