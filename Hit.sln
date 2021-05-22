@@ -7,23 +7,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hit", "src\Hit\Hit.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HitUnitTests", "src\HitUnitTests\HitUnitTests.csproj", "{2277C0E4-4BC7-4468-A6B2-EE4814656BAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Domain", "sample_system_src\Items.Domain\Items.Domain.csproj", "{8E5B82C4-F667-4091-9775-1A250B0F0823}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Domain", "src\sample_system_src\Items.Domain\Items.Domain.csproj", "{8E5B82C4-F667-4091-9775-1A250B0F0823}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleSystem", "SampleSystem", "{884D3A3B-B5BA-41FF-A58E-64E055545377}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Specification", "sample_system_src\Items.Specification\Items.Specification.csproj", "{A192518C-277B-4684-B91D-0D5263B868C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Specification", "src\sample_system_src\Items.Specification\Items.Specification.csproj", "{A192518C-277B-4684-B91D-0D5263B868C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Infrastructure.Repository.InMemory", "sample_system_src\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj", "{FC7F0E6F-37AF-4690-BA01-118A201E3678}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Infrastructure.Repository.InMemory", "src\sample_system_src\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj", "{FC7F0E6F-37AF-4690-BA01-118A201E3678}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Application", "sample_system_src\Items.Application\Items.Application.csproj", "{3DB4B7EE-0529-4EF2-9354-D969E50C286C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Application", "src\sample_system_src\Items.Application\Items.Application.csproj", "{3DB4B7EE-0529-4EF2-9354-D969E50C286C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Infrastructure.Repository.Rest", "sample_system_src\Items.Infrastructure.Repository.Rest\Items.Infrastructure.Repository.Rest.csproj", "{16EE5565-562B-4BE7-AA55-0ED206B299C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Infrastructure.Repository.Rest", "src\sample_system_src\Items.Infrastructure.Repository.Rest\Items.Infrastructure.Repository.Rest.csproj", "{16EE5565-562B-4BE7-AA55-0ED206B299C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HitIntegrationTests", "HitIntegrationTests", "{0C677B15-B38D-42FA-9648-5818E49BDD8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{271AFA08-AF10-4C89-9E00-857172C49DA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items.IntegrationTests", "sample_system_src\Items.IntegrationTests\Items.IntegrationTests.csproj", "{0886E433-046C-46E2-8D80-FBC1D79E8243}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items.IntegrationTests", "src\sample_system_src\Items.IntegrationTests\Items.IntegrationTests.csproj", "{0886E433-046C-46E2-8D80-FBC1D79E8243}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
