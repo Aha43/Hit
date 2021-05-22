@@ -157,4 +157,4 @@ What to notice in above example code:
 * The mandatory attribute `SysCon` is used to name the system configuration and an optional description may be given.
 * The method `ConfigureServices` configures the services of the system to be tested.
 
-In the very simple systems used in these examples the only configuration needed is to call a method to configure the system's services. In real applications one will need to use information for appsetting configuration see the wiki article ConfiguringSystemToRunUnitTestsOn.
+In the very simple systems used in these examples the only configuration needed is to call a method to configure the system's services. In real applications one will need to use information for appsetting configuration see the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On).
