@@ -4,7 +4,7 @@
 
 # Hit - Hierarchically Integration Test framework
 
-A  dotnet c# framework for integration testing where the work of one integration test can be the build up for the next integration test. Hit is intended to be used with an unit testing framework: Sequences of Hit integration tests forms unit tests. Examples here uses the XUnit framework to run the example unit tests, a similar unit test framework should also work.
+A  dotnet c# framework for integration testing where the work of one integration test can be the build up for the next integration test. Hit is intended to be used with an unit testing framework: Sequences of Hit integration tests forms unit tests. Examples here uses the Xunit framework to run the example unit tests, a similar unit test framework should also work.
 
 * [Changelog](https://github.com/Aha43/Hit/blob/main/CHANGELOG.md)
 * [NuGet Package](https://www.nuget.org/packages/Hit/)
@@ -13,7 +13,7 @@ A  dotnet c# framework for integration testing where the work of one integration
 
 ### Implementing unit tests for integration testing with Hit
 
-Hit integration tests are defined by `UseAs` attributes that decorate the classes that implements the tests logic. Here is a test logic implementation that test the creating an item given a repository of items:
+Hit integration tests are defined by `UseAs` attributes that decorate the classes that implements test logic. Here is a test logic implementation that test the creating an item given a repository of items:
 ```csharp
 using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
@@ -124,7 +124,7 @@ namespace Items.HitIntegrationTests.TestLogic
 }
 ```
 What to notice in the above example code is:
-* The implementation is used to realize three tests all following another test (use of the `UseAs` attribute's `followingTest` argument):
+* The test logic implementation is used to realize three tests all following another test (use of the `UseAs` attribute's `followingTest` argument):
     * First (reading attributes from top to bottom) to follow the test that creates an item. It expects to read the created item. Test is named appropriately *ReadItemAfterCreate*
     * Second to follow a test that updates an item. It expects to read the updated item. Test is named appropriately *ReadItemAfterUpdate*.
     * Third to follow a test that deletes an item. It expects to not find the item. Test is named appropriately *ReadItemAfterDelete*. This shows how the `UseAs` attribute argument `Option` parameter can be used to alter the test logic from the default.
@@ -163,7 +163,7 @@ In the very simple systems used in these examples the only configuration needed 
 
 ### Running unit tests using Xunit
 
-As stated Hit defined unit tests are intended to be run with a unit test framework, here is how it can be done using the Xunit framework: 
+As stated Hit defines unit tests are intended to be run with a unit test framework, here is how it can be done using the Xunit framework: 
 
 ```csharp
 using Hit.Infrastructure;
@@ -205,14 +205,14 @@ What to notice in the above example code:
 * Using Xunit's `Theory` and `InlineData` attributes only one Xunit test method is needed.
 * We see here the multi dimensional aspect of Hit:
     * We must provide at least one unit test and one system configures to have unit tests to run. If we have one system configured the space of unit tests is one dimensional and the method `UnitTestSpace.RunUnitTest(string)` can be used to run a test.
-    * If more than one system is configured (the case of the example here) the space of unit tests are two dimensional and the method `UnitTestSpace.RunUnitTest(string, string)` can be used to run a test.
+    * If more than one system is configured (the case of the example here) the space of unit tests is two dimensional and the method `UnitTestSpace.RunUnitTest(string, string)` can be used to run a test.
     * There is also a third dimension we can add called *layer* that is out of scope of this *getting started* introduction: See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for details on this. If *layers* been used to create a three dimensional unit test space the method `UnitTestSpace.RunUnitTest(string, string, string)` can be used to run a test.
 
-It must be noticed that this multi dimensional aspect of Hit poses a luxury problem: One get the potential of 
+It must be noticed that this multi dimensional aspect of Hit poses a (luxury) problem: One get the potential of 
 
 `number_of_named_unit_tests * number_of_configured_systems * number_of_layers`
 
-number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write. The actually number may be less since there may not be a unit test at all positions (i.e a unit test do not apply for a certain layer). Now running of unit tests must be hand coded, I hope future version of Hit will provide tooling to improve the ease to cover all unit tests.
+number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write if using Xunit. The actually number may be less since there may not be a unit test at all positions (i.e a unit test do not apply for a certain layer). Now running of unit tests must be hand coded, I hope future version of Hit will provide tooling to improve the ease to cover all unit tests.
 
 This is how all green test run then look in visual studio's test explorer: 
 
@@ -220,7 +220,7 @@ This is how all green test run then look in visual studio's test explorer:
 
 A nice thing with how Xunit tests show `inline` data is that each unit test's '*position*' is shown.
 
-The Xunit test also take advantage of Xunit feature for tests to add additional output and this reveal the hierarchial nature of an Hit unit test:
+The Xunit test also take advantage of Xunit feature for tests to add additional output and this reveal the *hierarchial nature* of an Hit unit test:
 
 ![](images/additional-test-output-green.png?raw=true)
 
