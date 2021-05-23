@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Hit\Hit.csproj" />
+    <ProjectReference Include="..\..\Hit\Hit.csproj" />
     <ProjectReference Include="..\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj" />
     <ProjectReference Include="..\Items.Infrastructure.Repository.Rest\Items.Infrastructure.Repository.Rest.csproj" />
   </ItemGroup>
