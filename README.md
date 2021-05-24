@@ -13,7 +13,7 @@ A  dotnet c# framework for integration testing where the work of one integration
 
 ### Implementing unit tests for integration testing with Hit
 
-Hit integration tests are defined by `UseAs` attributes that decorate the classes that implements test logic. Here is a test logic implementation that test the creating an item given a repository of items:
+Hit integration tests are defined by `UseAs` attributes that decorate the classes that implement test logic. Here is a test logic implementation that test the creating an item given a repository of items:
 ```csharp
 using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
