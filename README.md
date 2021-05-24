@@ -75,7 +75,7 @@ What to notice in the above example code:
     * Test implementers must implement an `IWorldProvider` to provide *world* instances to the test framework, the sample system's integration test uses [ItemCrudWorldProvider](https://github.com/Aha43/Hit/blob/main/src/SampleSystem/Items.IntegrationTests/ItemCrudWorldProvider.cs)
 * Hit does not provide a generally assertion API, that's been done:
     * As stated Hit is intended to be used with an unit test framework so the *host unit test framework*'s assertion API can be used.
-    * Also independent assertion API exist, I like [Shouldly](https://github.com/shouldly/shouldly) used in examples here.
+    * Also independent assertion API exists, I like [Shouldly](https://github.com/shouldly/shouldly) used in examples here.
 
 The next code snippet shows implementation of tests that test reading of items from repositories:
 ```csharp
