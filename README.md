@@ -204,15 +204,15 @@ What to notice in the above example code:
 * An static instance of the type `UnitTestsSpace` is created. It uses reflection to find test implementation classes, configuration classes and read attribute information to build an internal structure of the unit tests realized so we can run them by invoking it's `RunUnitTestAsync` methods.
 * Using Xunit's `Theory` and `InlineData` attributes only one Xunit test method is needed.
 * We see here the multi dimensional aspect of Hit:
-    * We must provide at least one unit test and one system configures to have unit tests to run. If we have one system configured the space of unit tests is one dimensional and the method `UnitTestSpace.RunUnitTest(string)` can be used to run a test.
+    * We must provide at least one unit test and one system configured to have unit tests to run. If we have one system configured the space of unit tests is one dimensional and the method `UnitTestSpace.RunUnitTest(string)` can be used to run a test.
     * If more than one system is configured (the case of the example here) the space of unit tests is two dimensional and the method `UnitTestSpace.RunUnitTest(string, string)` can be used to run a test.
-    * There is also a third dimension we can add called *layer* that is out of scope of this *getting started* introduction: See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for details on this. If *layers* been used to create a three dimensional unit test space the method `UnitTestSpace.RunUnitTest(string, string, string)` can be used to run a test.
+    * There is also a third dimension we can add called *layer* that is out of scope of this *getting started* introduction: See the wiki article [Configuring Systems To Run Unit Tests On](https://github.com/Aha43/Hit/wiki/Configuring-Systems-To-Run-Unit-Tests-On) for details on this. If *layers* have been used to create a three dimensional unit test space the method `UnitTestSpace.RunUnitTest(string, string, string)` can be used to run a test.
 
 It must be noticed that this multi dimensional aspect of Hit poses a (luxury) problem: One get the potential of 
 
 `number_of_named_unit_tests * number_of_configured_systems * number_of_layers`
 
-number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write if using Xunit. The actually number may be less since there may not be a unit test at all positions (i.e a unit test do not apply for a certain layer). Now running of unit tests must be hand coded, I hope future version of Hit will provide tooling to improve the ease to cover all unit tests.
+number of unit tests one can run with relatively few lines of test code. This is the max number of `Inline` attributes one may have to write if using Xunit. The actual number may be less since there may not be a unit test at all positions (i.e a unit test does not apply for a certain layer). Now running of unit tests must be hand coded, I hope a future version of Hit will provide tooling to improve the ease to cover all unit tests.
 
 This is how all green test run then look in visual studio's test explorer: 
 
