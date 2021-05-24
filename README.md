@@ -220,7 +220,7 @@ This is how all green test run then look in visual studio's test explorer:
 
 A nice thing with how Xunit tests show `inline` data is that each unit test's '*position*' is shown.
 
-The Xunit test also take advantage of Xunit feature for tests to add additional output and this reveal the *hierarchial nature* of an Hit unit test:
+The Xunit test also take advantage of Xunit feature for tests to add additional output and this reveal the *hierarchical nature* of an Hit unit test:
 
 ![](images/additional-test-output-green.png?raw=true)
 
