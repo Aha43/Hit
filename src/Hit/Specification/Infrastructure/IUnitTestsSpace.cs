@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hit.Specification.Infrastructure
@@ -17,5 +18,6 @@ namespace Hit.Specification.Infrastructure
         Task<IUnitTestResult> RunUnitTestAsync(string unitTest);
         Task<IUnitTestResult> RunUnitTestAsync(string system, string unitTest);
         Task<IUnitTestResult> RunUnitTestAsync(string system, string layer, string unitTest);
+        void SetTestLogicLogger(Action<string> testLogicLogger);
     }
 }

@@ -101,6 +101,7 @@ namespace Hit.Infrastructure
             }
         }
 
+        #region Interface
         public IUnitTests<World> GetUnitTests()
         {
             if (Dimension == 1)
@@ -193,6 +194,7 @@ namespace Hit.Infrastructure
         public int LayerCount => _space.Count;
 
         public IEnumerable<(string system, string layer, string unitTests)> UnitTestCoordinates => _tupples.ToArray();
+        #endregion
 
     }
 
