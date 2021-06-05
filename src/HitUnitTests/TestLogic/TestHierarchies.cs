@@ -79,8 +79,10 @@ namespace HitUnitTests.TestLogic
     }
     #endregion
 
-    [UseAs("AppSettingTest1", Options = "name = conficuration-no-section-1", UnitTest = "!")]
-    [UseAs("AppSettingTest2", Options = "name = conficuration-no-section-2", UnitTest = "!")]
+    [UseAs("AppSettingTest1", Options = "name = conficuration-no-sections-1", UnitTest = "!")]
+    [UseAs("AppSettingTest2", Options = "name = conficuration-no-sections-2", UnitTest = "!")]
+    [UseAs("AppSettingTest3", Options = "name = conficuration-sections-part-1", UnitTest = "!")]
+    [UseAs("AppSettingTest4", Options = "name = conficuration-sections-part-2", UnitTest = "!")]
     public class TestLogicImpl4 : TestLogicBase<World4>
     {
         private readonly ConfSetting _setting;

@@ -25,10 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="configuration-no-section-2.json">
+    <None Update="configuration-sections.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="configuration-no-section-1.json">
+    <None Update="configuration-no-sections-2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="configuration-no-sections-1.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

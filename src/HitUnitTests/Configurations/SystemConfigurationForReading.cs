@@ -6,9 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HitUnitTests.Configurations
 {
-    [SysCon("system-with-configuration-no-section-1", JsonPath = "configuration-no-section-1.json")]
-    [SysCon("system-with-configuration-no-section-2", JsonPath = "configuration-no-section-2.json")]
-    public class SystemConfigurationForReading_ConfigurationNoSection : DefaultSystemConfigurationAdapter<World4>
+    [SysCon("system-with-configuration-no-sections-1", JsonPath = "configuration-no-sections-1.json")]
+    [SysCon("system-with-configuration-no-sections-2", JsonPath = "configuration-no-sections-2.json")]
+    [SysCon("system-with-configuration-sections-part1", JsonPath = "configuration-sections.json", ConfigurationSections = "Part1")]
+    [SysCon("system-with-configuration-sections-part2", JsonPath = "configuration-sections.json", ConfigurationSections = "Part2")]
+    public class SystemConfigurationForReading : DefaultSystemConfigurationAdapter<World4>
     {
         public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration, SysCon meta, string currentLayer)
         {
