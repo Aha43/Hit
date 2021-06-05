@@ -9,6 +9,7 @@ namespace Hit.Infrastructure.Attributes
         public string Layers { get; set; }
         public string Description { get; set; }
         public string EnvironmentType { get; set; }
+        public string JsonPath { get; set; }
         public string ConfigurationSections { get; set; }
         public SysCon(string name)
         {
@@ -20,6 +21,9 @@ namespace Hit.Infrastructure.Attributes
             System = name;
         }
 
+        public SysCon()
+        {
+        }
     }
 
 }

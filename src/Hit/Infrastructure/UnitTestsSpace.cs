@@ -129,7 +129,7 @@ namespace Hit.Infrastructure
                 }
             }
 
-            throw new UnitTestsNotFoundException(system);
+            throw new UnitTestsNotFoundException(system, layer);
         }
 
         public async Task<IUnitTestResult> RunUnitTestAsync(string unitTest)

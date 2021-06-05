@@ -8,7 +8,7 @@ namespace HitUnitTests
 {
     public class UnitTests2_space
     {
-        private static IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
+        private static readonly IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
 
         [Fact]
         public void ShouldHaveDimensionTwo() => Assert.Equal(2, _unitTestsSpace.Dimension);

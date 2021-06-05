@@ -80,14 +80,14 @@ namespace Hit.Infrastructure
         internal IEnumerable<TestNode<World>> GetChildren(TestNode<World> parent) => 
             _childNodes.TryGetValue(parent.TestName, out List<TestNode<World>> children) ? children.AsReadOnly() : EmptyTestNodeList;
 
-        internal UnitTest<World> GetUnitTest(string unitTest)
+        internal UnitTest<World> GetUnitTest(string system, string layer, string unitTest)
         {
             if (_unitTestNodes.TryGetValue(unitTest, out TestNode<World> lastNode))
             {
                 return new UnitTest<World>(this, lastNode);
             }
 
-            throw new UnknownNamedUnitTestException(unitTest);
+            throw new UnitTestNotFoundException(system, layer, unitTest);
         }
 
         internal IEnumerable<string> UnitTestNames => _unitTestNodes.Keys.ToArray();

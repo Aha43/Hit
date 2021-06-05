@@ -1,8 +1,11 @@
 ﻿using Hit.Infrastructure.Attributes;
-using HitUnitTests.TestLogic;
+using Hit.Infrastructure.User;
+using Hit.Specification.Infrastructure;
+using HitUnitTests.Configurations;
 using HitUnitTests.Worlds;
+using Xunit;
 
-namespace HitUnitTests
+namespace HitUnitTests.TestLogic
 {
     #region hierarchy1
     [UseAs("TestA")]
@@ -75,5 +78,24 @@ namespace HitUnitTests
     {
     }
     #endregion
+
+    [UseAs("AppSettingTest1", Options = "name = conficuration-no-section-1", UnitTest = "!")]
+    [UseAs("AppSettingTest2", Options = "name = conficuration-no-section-2", UnitTest = "!")]
+    public class TestLogicImpl4 : TestLogicBase<World4>
+    {
+        private readonly ConfSetting _setting;
+
+        public TestLogicImpl4(ConfSetting setting) => _setting = setting;
+
+        public override void Test(ITestContext<World4> context)
+        {
+            Assert.NotNull(_setting);
+            var expected = context.Options.Get("name");
+            Assert.Equal(expected, _setting.Name);
+        }
+
+    }
+
+    
 
 }

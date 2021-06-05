@@ -9,7 +9,7 @@ namespace HitUnitTests
 {
     public class UnitTest2_runningSyncUnitTests
     {
-        private static IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
+        private static readonly IUnitTestsSpace<World2> _unitTestsSpace = new UnitTestsSpace<World2>();
 
         [Theory]
         [InlineData("System2_1", "testA_3")]

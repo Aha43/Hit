@@ -101,7 +101,7 @@ namespace Hit.Infrastructure
 
         public async Task<IUnitTestResult> RunUnitTestAsync(string unitTestName)
         {
-            var unitTest = _testHierarchy.GetUnitTest(unitTestName);
+            var unitTest = _testHierarchy.GetUnitTest(System, Layer, unitTestName);
 
             var testContext = CreateContextForUnitTests();
 
@@ -128,7 +128,7 @@ namespace Hit.Infrastructure
             var sb = new StringBuilder();
             foreach (var unitTestName in UnitTestsNames)
             {
-                var unitTest = _testHierarchy.GetUnitTest(unitTestName);
+                var unitTest = _testHierarchy.GetUnitTest(System, Layer, unitTestName);
                 sb.AppendLine(unitTest.ToString());
             }
             return sb.ToString();

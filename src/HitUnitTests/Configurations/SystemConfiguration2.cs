@@ -4,8 +4,9 @@ using HitUnitTests.Worlds;
 
 namespace HitUnitTests.Configurations
 {
-    [SysCon("System1")]
-    public class Configuration1 : SystemConfigurationAdapter<World1>
+    [SysCon("System2_1")]
+    [SysCon("System2_2")]
+    public class SystemConfiguration2 : SystemConfigurationAdapter<World2>
     {
     }
 }

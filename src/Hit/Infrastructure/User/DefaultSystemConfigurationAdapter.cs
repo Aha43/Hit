@@ -1,5 +1,7 @@
 ﻿using Hit.Infrastructure.Attributes;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -7,23 +9,26 @@ namespace Hit.Infrastructure.User
 {
     public abstract class DefaultSystemConfigurationAdapter<World> : SystemConfigurationAdapter<World>
     {
-        private string _jsonPath;
         private Assembly _assembly;
 
         protected void UserSecretForClient(object client) => _assembly = client?.GetType().Assembly;
-
-        protected void LoadFromJsonFile(string path) => _jsonPath = path;
 
         public override IConfiguration GetConfiguration(SysCon meta) => GetPartConfiguration(meta);
 
         private IConfiguration GetPartConfiguration(SysCon meta)
         {
+            var jsonPath = meta.JsonPath;
+
             var builder1 = new ConfigurationBuilder();
             var builder2 = default(ConfigurationBuilder);
 
-            if (!string.IsNullOrWhiteSpace(_jsonPath))
+            if (!string.IsNullOrWhiteSpace(jsonPath))
             {
-                builder1.AddJsonFile(_jsonPath, true);
+                if (!File.Exists(jsonPath))
+                {
+                    throw new Exception($"Configuration file {jsonPath} do not exists");
+                }
+                builder1.AddJsonFile(jsonPath);
             }
 
             if (_assembly != default)
