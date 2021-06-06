@@ -6,7 +6,7 @@ using Xunit;
 
 namespace HitUnitTests
 {
-    public class UnitTests4_runningUnitTests
+    public class UnitTests4
     {
         private static readonly IUnitTestsSpace<World4> _unitTestsSpace = new UnitTestsSpace<World4>();
 
@@ -18,21 +18,7 @@ namespace HitUnitTests
         public async Task UnitTestShouldNotFailAsync(string system, string unitTest)
         {
             var result = await _unitTestsSpace.RunUnitTestAsync(system, unitTest);
-            Assert.NotNull(result);
-            Assert.True(result.Success());
-            Assert.Equal(unitTest, result.UnitTest);
-            Assert.Equal(system, result.System);
+            UnitTestsUtil.AssertResult(result, system, string.Empty, unitTest);
         }
-
-        [Theory(Skip = "only in dev")]
-        [InlineData("system-with-configuration-user-secret", "AppSettingTest5")]
-        [InlineData("system-with-configuration-user-secret-part1", "AppSettingTest6")]
-        [InlineData("system-with-configuration-user-secret-part2", "AppSettingTest7")]
-        public async Task UnitTestShouldUsingUserSecretNotFailAsync(string system, string unitTest)
-        {
-            await UnitTestShouldNotFailAsync(system, unitTest);
-        }
-
     }
-
 }

@@ -83,9 +83,6 @@ namespace HitUnitTests.TestLogic
     [UseAs("AppSettingTest2", Options = "name = configuration-no-sections-2", UnitTest = "!")]
     [UseAs("AppSettingTest3", Options = "name = configuration-sections-part-1", UnitTest = "!")]
     [UseAs("AppSettingTest4", Options = "name = configuration-sections-part-2", UnitTest = "!")]
-    [UseAs("AppSettingTest5", Options = "name = configuration-user-secret", UnitTest = "!")]
-    [UseAs("AppSettingTest6", Options = "name = configuration-user-secret-sections-part-1", UnitTest = "!")]
-    [UseAs("AppSettingTest7", Options = "name = configuration-user-secret-sections-part-2", UnitTest = "!")]
     public class TestLogicImpl4 : TestLogicBase<World4>
     {
         private readonly ConfSetting _setting;
@@ -101,6 +98,22 @@ namespace HitUnitTests.TestLogic
 
     }
 
-    
+    [UseAs("AppSettingUserSecretTest1", Options = "name = configuration-user-secret", UnitTest = "!")]
+    [UseAs("AppSettingUserSecretTest2", Options = "name = configuration-user-secret-sections-part-1", UnitTest = "!")]
+    [UseAs("AppSettingUserSecretTest3", Options = "name = configuration-user-secret-sections-part-2", UnitTest = "!")]
+    public class TestLogicImpl5 : TestLogicBase<World5>
+    {
+        private readonly ConfSetting _setting;
+
+        public TestLogicImpl5(ConfSetting setting) => _setting = setting;
+
+        public override void Test(ITestContext<World5> context)
+        {
+            Assert.NotNull(_setting);
+            var expected = context.Options.Get("name");
+            Assert.Equal(expected, _setting.Name);
+        }
+
+    }
 
 }
