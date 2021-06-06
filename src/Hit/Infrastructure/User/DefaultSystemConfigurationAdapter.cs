@@ -26,7 +26,7 @@ namespace Hit.Infrastructure.User
 
             if (meta.UserSecrets)
             {
-                builder1.AddUserSecrets(GetType().Assembly, true);
+                builder1.AddUserSecrets(GetType().Assembly, false);
             }
 
             if (!string.IsNullOrWhiteSpace(meta.ConfigurationSections))
