@@ -26,27 +26,7 @@ namespace HitUnitTests
             Assert.Equal(unitTest, result.UnitTest);
         }
 
-        public static bool InDevelopment
-        {
-            get
-            {
-                return File.Exists("HitDev.txt");
-                //var env = Environment.GetEnvironmentVariable("HitDev");
-                //if (env == null)
-                //{
-                //    env = Environment.GetEnvironmentVariable("HitDev", EnvironmentVariableTarget.User);
-                //    if (env == null)
-                //    {
-                //        env = Environment.GetEnvironmentVariable("HitDev", EnvironmentVariableTarget.Process);
-                //        if (env == null)
-                //        {
-                //            env = Environment.GetEnvironmentVariable("HitDev", EnvironmentVariableTarget.Machine);
-                //        }
-                //    }
-                //}
-                //return env != null && env.Equals("true");
-            }
-        }
+        public static bool InDevelopment => File.Exists("HitDev.txt");
 
     }
 
