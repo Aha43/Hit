@@ -29,20 +29,21 @@ else {
 
 Write-Host
 Write-Host 'Running tests...' -ForegroundColor Yellow
-$testResult = (dotnet test *>&1)
+$testResult = (dotnet test *>&1) -join [System.Environment]::NewLine
+Write-Host $testResult
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Tests ok!" -ForegroundColor Green
 }
 else {
     Write-Host 
-    $testResult = $testResult -join [System.Environment]::NewLine
-    Write-Error $testResult
+    #$testResult = $testResult -join [System.Environment]::NewLine
+    #Write-Error $testResult
     Write-Host
     Write-Host 'NO GO: Tests failed!' -ForegroundColor Magenta
     Write-Host
     exit
 }
 
-Write-Host
-Write-Host 'Doing the push' -ForegroundColor Yellow
-git push
+# Write-Host
+# Write-Host 'Doing the push' -ForegroundColor Yellow
+# git push
