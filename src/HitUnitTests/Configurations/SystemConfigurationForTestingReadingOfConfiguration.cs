@@ -19,7 +19,12 @@ namespace HitUnitTests.Configurations
         {
             var section = configuration.GetSection("ConfSetting");
             var confSetting = section.Get<ConfSetting>();
-            return services.AddSingleton(confSetting);
+            if (confSetting != null)
+            {
+                services.AddSingleton(confSetting);
+            }
+
+            return services;
         }
 
     }
