@@ -29,7 +29,7 @@ else {
 
 Write-Host
 Write-Host 'Running tests...' -ForegroundColor Yellow
-$testResult = (dotnet test *>&1) -join [System.Environment]::NewLine
+$testResult = (dotnet test -v normal *>&1) -join [System.Environment]::NewLine
 Write-Host $testResult
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Tests ok!" -ForegroundColor Green
