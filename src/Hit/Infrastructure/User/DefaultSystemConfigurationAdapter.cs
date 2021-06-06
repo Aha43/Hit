@@ -3,19 +3,12 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Hit.Infrastructure.User
 {
     public abstract class DefaultSystemConfigurationAdapter<World> : SystemConfigurationAdapter<World>
     {
-        private Assembly _assembly;
-
-        protected void UserSecretForClient(object client) => _assembly = client?.GetType().Assembly;
-
-        public override IConfiguration GetConfiguration(SysCon meta) => GetPartConfiguration(meta);
-
-        private IConfiguration GetPartConfiguration(SysCon meta)
+        public override IConfiguration GetConfiguration(SysCon meta)
         {
             var jsonPath = meta.JsonPath;
 
@@ -31,9 +24,9 @@ namespace Hit.Infrastructure.User
                 builder1.AddJsonFile(jsonPath);
             }
 
-            if (_assembly != default)
+            if (meta.UserSecrets)
             {
-                builder1.AddUserSecrets(_assembly, true);
+                builder1.AddUserSecrets(GetType().Assembly, true);
             }
 
             if (!string.IsNullOrWhiteSpace(meta.ConfigurationSections))

@@ -10,6 +10,7 @@ namespace Hit.Infrastructure.Attributes
         public string Description { get; set; }
         public string EnvironmentType { get; set; }
         public string JsonPath { get; set; }
+        public bool UserSecrets { get; set; }
         public string ConfigurationSections { get; set; }
         public SysCon(string name)
         {
