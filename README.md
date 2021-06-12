@@ -1,6 +1,7 @@
 ![](images/logo.png?raw=true)
 
 [![.NET](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Aha43/Hit/actions/workflows/dotnet.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Nuget](https://img.shields.io/nuget/v/Hit)](https://www.nuget.org/packages/Hit/)
 
 # Hit - Hierarchically Integration Test framework
