@@ -1,3 +1,5 @@
+## Unit testing of Hit
+
 A few unit tests is testing reading configuration data from user secrets. Since these can not be run at GitHub using actions they are only run if a file named `HitDev.txt`
 that is not under source controll is present in unit tests root directory. To run all unit tests in a development environment do:
 
