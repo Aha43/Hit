@@ -1,6 +1,5 @@
 ﻿using Hit.Infrastructure;
 using Hit.Specification.Infrastructure;
-using HitUnitTests.Worlds;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,6 +17,7 @@ namespace HitUnitTests
         public async Task UnitTestShouldNotFailAsync(string system, string unitTest)
         {
             var result = await _unitTestsSpace.RunUnitTestAsync(system, unitTest);
+            UnitTestsUtil.AssertResult(result, system, string.Empty, unitTest);
             UnitTestsUtil.AssertResult(result, system, string.Empty, unitTest);
         }
     }

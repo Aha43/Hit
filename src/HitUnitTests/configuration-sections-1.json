@@ -1,11 +1,11 @@
 ﻿{
   "Part1": {
-    "ConfSetting": {
+    "ConfSetting1": {
       "Name": "configuration-sections-part-1"
     }
   },
   "Part2": {
-    "ConfSetting": {
+    "ConfSetting1": {
       "Name": "configuration-sections-part-2"
     }
   }

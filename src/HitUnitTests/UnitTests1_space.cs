@@ -1,6 +1,5 @@
 ﻿using Hit.Infrastructure;
 using Hit.Specification.Infrastructure;
-using HitUnitTests.Worlds;
 using System.Linq;
 using Xunit;
 

@@ -1,0 +1,12 @@
+﻿{
+  "Part1": {
+    "ConfSetting1": {
+      "Name": "config1"
+    }
+  },
+  "Part2": {
+    "ConfSetting2": {
+      "Name": "config2"
+    }
+  }
+}

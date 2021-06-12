@@ -1,6 +1,5 @@
 ﻿using Hit.Infrastructure.Attributes;
 using Hit.Infrastructure.User;
-using HitUnitTests.Worlds;
 
 namespace HitUnitTests.Configurations
 {

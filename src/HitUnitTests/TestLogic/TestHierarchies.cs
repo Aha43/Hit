@@ -2,7 +2,6 @@
 using Hit.Infrastructure.User;
 using Hit.Specification.Infrastructure;
 using HitUnitTests.Configurations;
-using HitUnitTests.Worlds;
 using Xunit;
 
 namespace HitUnitTests.TestLogic
@@ -85,9 +84,9 @@ namespace HitUnitTests.TestLogic
     [UseAs("AppSettingTest4", Options = "name = configuration-sections-part-2", UnitTest = "!")]
     public class TestLogicImpl4 : TestLogicBase<World4>
     {
-        private readonly ConfSetting _setting;
+        private readonly ConfSetting1 _setting;
 
-        public TestLogicImpl4(ConfSetting setting) => _setting = setting;
+        public TestLogicImpl4(ConfSetting1 setting) => _setting = setting;
 
         public override void Test(ITestContext<World4> context)
         {
@@ -103,15 +102,67 @@ namespace HitUnitTests.TestLogic
     [UseAs("AppSettingUserSecretTest3", Options = "name = configuration-user-secret-sections-part-2", UnitTest = "!")]
     public class TestLogicImpl5 : TestLogicBase<World5>
     {
-        private readonly ConfSetting _setting;
+        private readonly ConfSetting1 _setting;
 
-        public TestLogicImpl5(ConfSetting setting) => _setting = setting;
+        public TestLogicImpl5(ConfSetting1 setting) => _setting = setting;
 
         public override void Test(ITestContext<World5> context)
         {
             Assert.NotNull(_setting);
             var expected = context.Options.Get("name");
             Assert.Equal(expected, _setting.Name);
+        }
+
+    }
+
+    [UseAs("AppSettingTest1", Options = "name1 = config1, name2 = config2", UnitTest = "!")]
+    public class TestLogicImpl6 : TestLogicBase<World6>
+    {
+        private readonly ConfSetting1 _setting1;
+        private readonly ConfSetting2 _setting2;
+
+        public TestLogicImpl6(ConfSetting1 setting1,
+            ConfSetting2 setting2)
+        {
+            _setting1 = setting1;
+            _setting2 = setting2;
+        }
+
+        public override void Test(ITestContext<World6> context)
+        {
+            Assert.NotNull(_setting1);
+            Assert.NotNull(_setting2);
+
+            var expected1 = context.Options.Get("name1");
+            Assert.Equal(expected1, _setting1.Name);
+            var expected2 = context.Options.Get("name2");
+            Assert.Equal(expected2, _setting2.Name);
+        }
+
+    }
+
+    [UseAs("AppSettingTest1", Options = "name2 = config2, name3 = config3", UnitTest = "!")]
+    public class TestLogicImpl7 : TestLogicBase<World7>
+    {
+        private readonly ConfSetting2 _setting2;
+        private readonly ConfSetting3 _setting3;
+
+        public TestLogicImpl7(ConfSetting2 setting2,
+            ConfSetting3 setting3)
+        {
+            _setting2 = setting2;
+            _setting3 = setting3;
+        }
+
+        public override void Test(ITestContext<World7> context)
+        {
+            Assert.NotNull(_setting2);
+            Assert.NotNull(_setting3);
+
+            var expected2 = context.Options.Get("name2");
+            Assert.Equal(expected2, _setting2.Name);
+            var expected3 = context.Options.Get("name3");
+            Assert.Equal(expected3, _setting3.Name);
         }
 
     }

@@ -1,7 +1,6 @@
 ﻿using Hit.Infrastructure;
 using Hit.Specification.Infrastructure;
 using HitUnitTests.Assertions;
-using HitUnitTests.Worlds;
 using System.Threading.Tasks;
 using Xunit;
 
