@@ -1,6 +1,13 @@
 
 # Changelog
 
+## 8.0.0-alpha
+
+### New
+
+* Moved spcification of which appsetting json file to use from code to `SysCon` attribute (`JsonPath` parameter)
+* Moved specification of if to read user secret from code to `SysCon` attribute (`UserSecrets` parameter)
+
 ## 7.0.0-alpha
 
 ### New
