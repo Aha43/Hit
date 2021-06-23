@@ -1,3 +1,5 @@
+$go = $args[0]
+
 $wdir = Get-Item .
 Write-Host 
 Write-Host ("Starting push for '" + $wdir.Name + "'") -ForegroundColor Yellow
@@ -41,6 +43,12 @@ else {
     exit
 }
 
-Write-Host
-Write-Host 'Doing the push' -ForegroundColor Yellow
-git push
+if ($go -and ($go -eq 'GO')) {
+    Write-Host
+    Write-Host 'Doing the push' -ForegroundColor Yellow
+    git push
+}
+else {
+    Write-Host
+    Write-Host ("GO signal NOT given (this is a dry run)... did not push :)") -ForegroundColor Yellow
+}

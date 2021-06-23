@@ -88,7 +88,7 @@ if ($releaseFile) {
                 Write-Host ("Will do release with the following commit message if given the GO signal: '" + $commitMessage + "'") -ForegroundColor Yellow
                 if ($go -and ($go -eq 'GO')) {
                     Write-Host
-                    Write-Host ("GO signal given... doing release '" + $devVersion + "'") -ForegroundColor Yellow #tested
+                    Write-Host ("GO signal given... doing release '" + $devVersion + "'") -ForegroundColor Yellow
                     Write-Host
                     git add .
                     git commit -m $commitMessage
@@ -100,18 +100,18 @@ if ($releaseFile) {
                 }
             }
             else {
-                Write-Error 'Missing release issue' #tested
+                Write-Error 'Missing release issue'
             }
         }
         else {
-            Write-Error ('Dev version (' + $devVersion + ') not greater than repo version (' + $repoVersion + ')') #tested
+            Write-Error ('Dev version (' + $devVersion + ') not greater than repo version (' + $repoVersion + ')')
         }
     }
     else {
-        Write-Error 'Missing dev project file' #tested
+        Write-Error 'Missing dev project file'
     }
 }
 else {
-    Write-Error 'Missing release.xml in current dir' #tested
+    Write-Error 'Missing release.xml in current dir'
 }
 Write-Host
