@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\HitXunitCodeGenerator\HitXunitCodeGenerator.csproj"
+					  OutputItemType="Analyzer"
+					  ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\Hit\Hit.csproj" />
     <ProjectReference Include="..\Items.Infrastructure.Repository.InMemory\Items.Infrastructure.Repository.InMemory.csproj" />
     <ProjectReference Include="..\Items.Infrastructure.Repository.Rest\Items.Infrastructure.Repository.Rest.csproj" />

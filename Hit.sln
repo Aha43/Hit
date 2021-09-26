@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Infrastructure.Reposi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items.Specification", "src\SampleSystem\Items.Specification\Items.Specification.csproj", "{A48EAD65-8054-43BE-9B60-4ED474C96371}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitXunitCodeGenerator", "HitXunitCodeGenerator\HitXunitCodeGenerator.csproj", "{87651EFC-BCA5-489A-B502-E5B49B26CCEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{A48EAD65-8054-43BE-9B60-4ED474C96371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A48EAD65-8054-43BE-9B60-4ED474C96371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A48EAD65-8054-43BE-9B60-4ED474C96371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87651EFC-BCA5-489A-B502-E5B49B26CCEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87651EFC-BCA5-489A-B502-E5B49B26CCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87651EFC-BCA5-489A-B502-E5B49B26CCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87651EFC-BCA5-489A-B502-E5B49B26CCEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

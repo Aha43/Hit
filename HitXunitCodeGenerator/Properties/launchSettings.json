@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HitXunitCodeGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\src\\SampleSystem\\Items.IntegrationTests\\Items.IntegrationTests.csproj"
+    }
+  }
+}
