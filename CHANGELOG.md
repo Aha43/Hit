@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 8.0.2-alpha
+
+* Depends Upgrades
+
 ## 8.0.0-alpha
 
 ### New

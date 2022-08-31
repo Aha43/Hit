@@ -12,7 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>testing test-framework integration-testing hierarchically-testing unit-testing xunit test-automation testing-tools</PackageTags>
-    <Version>8.0.1-alpha</Version>
+    <Version>8.0.2-alpha</Version>
     <PackageIcon>logo.png</PackageIcon>
     <Copyright>Copyright © Arne Halvorsen 2021</Copyright>
   </PropertyGroup>
