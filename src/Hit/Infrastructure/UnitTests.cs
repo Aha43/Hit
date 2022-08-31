@@ -42,7 +42,7 @@ namespace Hit.Infrastructure
 
             if (string.IsNullOrWhiteSpace(meta.System))
             {
-                throw new MissingUnitTestsNameException();
+                throw new SysConAttributeMissingSystemPropertyException();
             }
 
             System = meta.System;

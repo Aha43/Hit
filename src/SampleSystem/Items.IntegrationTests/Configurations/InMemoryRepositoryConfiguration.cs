@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Items.HitIntegrationTests.Configurations
 {
-    [SysCon(name: "in_memory_repository_test", Description = "Testing CRUD with in-memory repository")]
+    [SysCon("in_memory_repository_test", Description = "Testing CRUD with in-memory repository")]
     public class InMemoryRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
     {
         public override IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration, SysCon meta, string currentLayer)

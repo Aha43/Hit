@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Items.HitIntegrationTests.Configurations
 {
-    [SysCon(name: "rest_consuming_repository_test", Description = "Testing CRUD with Rest")]
+    [SysCon("rest_consuming_repository_test", Description = "Testing CRUD with Rest")]
     public class RestRepositoryConfiguration : SystemConfigurationAdapter<ItemCrudWorld>
     {
         private readonly string _uri = "https://localhost:44356/";
@@ -24,7 +24,7 @@ namespace Items.HitIntegrationTests.Configurations
             try
             {
                 using var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync(_uri + "api/info");
+                var response = await httpClient.GetAsync(_uri + "api/info").ConfigureAwait(false);
                 return true;
             }
 #pragma warning disable IDE0059 // Unnecessary assignment of a value

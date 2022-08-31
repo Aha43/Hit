@@ -12,18 +12,14 @@ namespace Hit.Infrastructure.Attributes
         public string JsonPath { get; set; }
         public bool UserSecrets { get; set; }
         public string ConfigurationSections { get; set; }
-        public SysCon(string name)
+        public SysCon(string system)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(system))
             {
-                throw new ArgumentException("missing " + nameof(name));
+                throw new ArgumentException("missing " + nameof(system));
             }
 
-            System = name;
-        }
-
-        public SysCon()
-        {
+            System = system;
         }
     }
 
