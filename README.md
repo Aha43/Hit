@@ -4,6 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Nuget](https://img.shields.io/nuget/v/Hit)](https://www.nuget.org/packages/Hit/)
 
+NOT DEVELOPED, ARCHIVED. I used it with success in some projects. But the attribute way to specify the test hierarchy proved to complicated to use.
+
+
 # Hit - Hierarchically Integration Test framework
 
 A  dotnet c# framework for integration testing where the work of one integration test can be the build up for the next integration test. Hit is intended to be used with an unit testing framework: Sequences of Hit integration tests form unit tests. Examples here use the Xunit framework to run the example unit tests, a similar unit test framework should also work.
